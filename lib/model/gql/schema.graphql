@@ -1,0 +1,173 @@
+# GraphQL scalars
+
+scalar Time
+scalar Upload
+
+# GraphQL schema
+
+type User {
+  id: Int!
+  loginName: String!
+  nickname: String
+  password: String
+  email: String
+  about: String
+
+  post: [Post]
+  comment: [Comment]
+}
+
+type Post {
+  id: Int!
+  title: String
+  content: String
+  view: Int
+  like: Int
+  createdAt: Time
+  updatedAt: Time
+
+  user: User
+  comment: [Comment]
+  attachment: [Attachment]
+}
+
+type Comment {
+  id: Int!
+  content: String
+  like: Int
+  createdAt: Time
+  updatedAt: Time
+  
+  user: User
+  post: Post
+  attachment: [Attachment]
+}
+
+
+input NewUser {
+  loginName: String!
+  password: String!
+}
+
+input NewPost {
+  userId: Int!
+  title: String
+  content: String
+}
+
+input NewComment {
+  userId: Int!
+  postId: Int!
+  content: String
+}
+
+input UpdatePost {
+  postId: Int!
+  title: String
+  content: String
+}
+
+input UpdateComment {
+  commentId: Int!
+  content: String
+}
+
+input LoginSession {
+  loginName: String!
+  password: String!
+}
+
+enum AttachmentParent {
+  post
+  comment
+}
+
+type Attachment {
+  parentId: Int!
+  parentType: AttachmentParent!
+  fileName: String!
+}
+
+input PostUpload {
+  upload: Upload!
+  parentId: Int!
+  parentType: AttachmentParent!
+}
+
+type Mutation {
+  createUser (input: NewUser!): User!
+  createPost(input: NewPost!): Post!                     
+  createComment(input: NewComment!): Comment!            
+
+  deleteUser(input: Int!): Boolean!                      
+  deletePost(input: Int!): Boolean!                      
+  deleteComment(input: Int!): Boolean!                   
+
+  updatePost(input: UpdatePost!): Post!                  
+  updateComment(input: UpdateComment!): Comment!         
+  likePost(input: Int!): Boolean!                        
+  likeComment(input: Int!): Boolean!
+
+  login(input: LoginSession!): String!
+  logout: Boolean!   
+
+  fileUpload(input: PostUpload): Boolean!                
+}
+
+enum UserOrderBy {
+  user_id
+  nickname
+}
+
+enum PostOrderBy {
+  post_id
+  title
+  content
+  view
+  like
+  userId
+  created_at
+  updated_at
+}
+
+enum CommentOrderBy {
+  comment_id
+  content
+  like
+  created_at
+  updated_at
+}
+
+enum Order {
+  ASC
+  DESC
+}
+
+input GetUserInput {
+  limit: Int! = 10
+  offset: Int! = 0
+  orderBy: UserOrderBy! = user_id
+  order: Order! = ASC
+}
+
+input GetPostInput {
+  limit: Int! = 10
+  offset: Int! = 0
+  orderBy: PostOrderBy! = post_id
+  order: Order! = ASC
+}
+
+input GetCommentInput {
+  limit: Int! = 10
+  offset: Int! = 0
+  orderBy: CommentOrderBy! = comment_id
+  order: Order! = ASC
+}
+
+
+type Query {
+  users(input: GetUserInput!): [User!]!
+  posts(input: GetPostInput!): [Post!]!
+  postDetail(input: Int!): Post!
+  comment(input: GetCommentInput!): [Comment!]!
+}

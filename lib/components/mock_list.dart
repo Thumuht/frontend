@@ -1,6 +1,5 @@
 // haha, not a real list...
 import 'package:flutter/material.dart';
-import 'package:thumuht/model/post.dart';
 import 'package:thumuht/pages/detail.dart';
 
 Widget mockList(BuildContext context) => _buildList(context);
@@ -39,7 +38,10 @@ ListTile _tile(String title, String subtitle, BuildContext context) => ListTile(
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DetailPage(p: Post(title, subtitle)),
+              builder: (context) => DetailPage(
+                title: title,
+                content: subtitle,
+              ),
             ));
       },
     );

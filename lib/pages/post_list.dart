@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thumuht/components/mock_list.dart';
+import 'package:thumuht/components/post_list.dart';
 
 class PostListPage extends StatefulWidget {
   const PostListPage({super.key});
@@ -10,5 +10,5 @@ class PostListPage extends StatefulWidget {
 
 class _PostListPageState extends State<PostListPage> {
   @override
-  Widget build(BuildContext context) => mockList(context);
+  Widget build(BuildContext context) => trueList(context);
 }

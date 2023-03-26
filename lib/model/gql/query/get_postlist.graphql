@@ -1,0 +1,11 @@
+query getPostLists{
+  posts(input: {
+			limit: 10
+			offset: 0
+			orderBy: title
+			order: ASC
+		}) {
+			title
+			content
+		}
+}
