@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:thumuht/pages/homepage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:thumuht/router.dart';
 
 void main() async {
   // Hive is a cache for graphql client.
@@ -32,11 +32,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GraphQLProvider(
       client: client,
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'thumuht',
         theme: ThemeData(
           primarySwatch: Colors.lightBlue,
         ),
-        home: const HomePage(title_: 'thumuht'),
+        routerConfig: router(),
       ));
 }

@@ -1,0 +1,9 @@
+mutation newPost($userId: Int!, $title: String, $content: String) {
+  createPost(input: {
+    userId: $userId
+    title: $title
+    content: $content
+  }) {
+    title
+  }
+}

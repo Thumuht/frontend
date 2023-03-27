@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:thumuht/model/post.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({super.key, required this.title, required this.content});
@@ -9,7 +8,7 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
+        appBar: AppBar( 
           title: const Text('thumuht'),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
