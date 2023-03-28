@@ -1,0 +1,9 @@
+mutation newComment($userId: Int!, $postId: Int!, $content: String) {
+  createPost(input: {
+    userId: $userId
+    postId: $postId
+    content: $content
+  }) {
+    content
+  }
+}

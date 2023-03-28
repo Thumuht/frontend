@@ -7,6 +7,36 @@ import 'package:gql/ast.dart';
 part 'graphql_api.graphql.g.dart';
 
 @JsonSerializable(explicitToJson: true)
+class NewComment$Mutation$Post extends JsonSerializable with EquatableMixin {
+  NewComment$Mutation$Post();
+
+  factory NewComment$Mutation$Post.fromJson(Map<String, dynamic> json) =>
+      _$NewComment$Mutation$PostFromJson(json);
+
+  String? content;
+
+  @override
+  List<Object?> get props => [content];
+  @override
+  Map<String, dynamic> toJson() => _$NewComment$Mutation$PostToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class NewComment$Mutation extends JsonSerializable with EquatableMixin {
+  NewComment$Mutation();
+
+  factory NewComment$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$NewComment$MutationFromJson(json);
+
+  late NewComment$Mutation$Post createPost;
+
+  @override
+  List<Object?> get props => [createPost];
+  @override
+  Map<String, dynamic> toJson() => _$NewComment$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class NewPost$Mutation$Post extends JsonSerializable with EquatableMixin {
   NewPost$Mutation$Post();
 
@@ -113,6 +143,138 @@ class GetPostLists$Query extends JsonSerializable with EquatableMixin {
   List<Object?> get props => [posts];
   @override
   Map<String, dynamic> toJson() => _$GetPostLists$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Logout$Mutation extends JsonSerializable with EquatableMixin {
+  Logout$Mutation();
+
+  factory Logout$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$Logout$MutationFromJson(json);
+
+  late bool logout;
+
+  @override
+  List<Object?> get props => [logout];
+  @override
+  Map<String, dynamic> toJson() => _$Logout$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class NewCommentArguments extends JsonSerializable with EquatableMixin {
+  NewCommentArguments({
+    required this.userId,
+    required this.postId,
+    this.content,
+  });
+
+  @override
+  factory NewCommentArguments.fromJson(Map<String, dynamic> json) =>
+      _$NewCommentArgumentsFromJson(json);
+
+  late int userId;
+
+  late int postId;
+
+  final String? content;
+
+  @override
+  List<Object?> get props => [userId, postId, content];
+  @override
+  Map<String, dynamic> toJson() => _$NewCommentArgumentsToJson(this);
+}
+
+final NEW_COMMENT_MUTATION_DOCUMENT_OPERATION_NAME = 'newComment';
+final NEW_COMMENT_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'newComment'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'userId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'postId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'content')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'createPost'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'userId'),
+                value: VariableNode(name: NameNode(value: 'userId')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'postId'),
+                value: VariableNode(name: NameNode(value: 'postId')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'content'),
+                value: VariableNode(name: NameNode(value: 'content')),
+              ),
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'content'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      )
+    ]),
+  )
+]);
+
+class NewCommentMutation
+    extends GraphQLQuery<NewComment$Mutation, NewCommentArguments> {
+  NewCommentMutation({required this.variables});
+
+  @override
+  final DocumentNode document = NEW_COMMENT_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName = NEW_COMMENT_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final NewCommentArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  NewComment$Mutation parse(Map<String, dynamic> json) =>
+      NewComment$Mutation.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -502,4 +664,39 @@ class GetPostListsQuery
   @override
   GetPostLists$Query parse(Map<String, dynamic> json) =>
       GetPostLists$Query.fromJson(json);
+}
+
+final LOGOUT_MUTATION_DOCUMENT_OPERATION_NAME = 'logout';
+final LOGOUT_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'logout'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'logout'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  )
+]);
+
+class LogoutMutation extends GraphQLQuery<Logout$Mutation, JsonSerializable> {
+  LogoutMutation();
+
+  @override
+  final DocumentNode document = LOGOUT_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName = LOGOUT_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  List<Object?> get props => [document, operationName];
+  @override
+  Logout$Mutation parse(Map<String, dynamic> json) =>
+      Logout$Mutation.fromJson(json);
 }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:thumuht/model/gql/graphql_api.dart';
+import 'package:thumuht/model/session.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -9,6 +13,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String? loginName_;
+  String? password_;
+
+  bool _checkParams() => (loginName_ != null) && (password_ != null);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +47,11 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
           const SizedBox(height: 40.0),
-          const TextField(
-            decoration: InputDecoration(
+          TextField(
+            onChanged: (value) {
+              loginName_ = value;
+            },
+            decoration: const InputDecoration(
               filled: true,
               labelText: 'Username',
             ),
@@ -47,8 +59,11 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(
             height: 12.0,
           ),
-          const TextField(
-            decoration: InputDecoration(
+          TextField(
+            onChanged: (value) {
+              password_ = value;
+            },
+            decoration: const InputDecoration(
               filled: true,
               labelText: 'Password',
             ),
@@ -66,7 +81,27 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Text('Cancel'),
                 onPressed: () => {},
               ),
-              ElevatedButton(onPressed: () => {}, child: const Text("Login"))
+              Mutation(
+                options: MutationOptions(
+                  document: LOGIN_MUTATION_DOCUMENT,
+                  onCompleted: (data) {
+                    Provider.of<Session>(context, listen: false)
+                        .login(data!['login']);
+                  },
+                ),
+                builder: (runMutation, result) => ElevatedButton(
+                  onPressed: () {
+                    if (_checkParams()) {
+                      runMutation({
+                        'loginName': loginName_,
+                        'password': password_,
+                      });
+                    }
+                    // context.pop();
+                  },
+                  child: const Text('Login'),
+                ),
+              ),
             ],
           )
         ],

@@ -6,6 +6,27 @@ part of 'graphql_api.graphql.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+NewComment$Mutation$Post _$NewComment$Mutation$PostFromJson(
+        Map<String, dynamic> json) =>
+    NewComment$Mutation$Post()..content = json['content'] as String?;
+
+Map<String, dynamic> _$NewComment$Mutation$PostToJson(
+        NewComment$Mutation$Post instance) =>
+    <String, dynamic>{
+      'content': instance.content,
+    };
+
+NewComment$Mutation _$NewComment$MutationFromJson(Map<String, dynamic> json) =>
+    NewComment$Mutation()
+      ..createPost = NewComment$Mutation$Post.fromJson(
+          json['createPost'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$NewComment$MutationToJson(
+        NewComment$Mutation instance) =>
+    <String, dynamic>{
+      'createPost': instance.createPost.toJson(),
+    };
+
 NewPost$Mutation$Post _$NewPost$Mutation$PostFromJson(
         Map<String, dynamic> json) =>
     NewPost$Mutation$Post()..title = json['title'] as String?;
@@ -80,6 +101,29 @@ GetPostLists$Query _$GetPostLists$QueryFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$GetPostLists$QueryToJson(GetPostLists$Query instance) =>
     <String, dynamic>{
       'posts': instance.posts.map((e) => e.toJson()).toList(),
+    };
+
+Logout$Mutation _$Logout$MutationFromJson(Map<String, dynamic> json) =>
+    Logout$Mutation()..logout = json['logout'] as bool;
+
+Map<String, dynamic> _$Logout$MutationToJson(Logout$Mutation instance) =>
+    <String, dynamic>{
+      'logout': instance.logout,
+    };
+
+NewCommentArguments _$NewCommentArgumentsFromJson(Map<String, dynamic> json) =>
+    NewCommentArguments(
+      userId: json['userId'] as int,
+      postId: json['postId'] as int,
+      content: json['content'] as String?,
+    );
+
+Map<String, dynamic> _$NewCommentArgumentsToJson(
+        NewCommentArguments instance) =>
+    <String, dynamic>{
+      'userId': instance.userId,
+      'postId': instance.postId,
+      'content': instance.content,
     };
 
 NewPostArguments _$NewPostArgumentsFromJson(Map<String, dynamic> json) =>

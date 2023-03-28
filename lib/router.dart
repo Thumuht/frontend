@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:thumuht/pages/login.dart';
+import 'package:thumuht/pages/new_post.dart';
 import 'package:thumuht/pages/register.dart';
 import 'package:thumuht/pages/homepage.dart';
 
@@ -12,6 +13,10 @@ GoRouter router() {
     GoRoute(
       path: '/register',
       builder: (context, state) => const RegisterPage(),
+    ),
+    GoRoute(
+      path: '/newpost',
+      builder: (context, state) => const NewPostPage(),
     ),
     GoRoute(
       path: '/',

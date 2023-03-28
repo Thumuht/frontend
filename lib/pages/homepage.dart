@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:thumuht/pages/favorite.dart';
 import 'package:thumuht/pages/login.dart';
 import 'package:thumuht/pages/notification.dart';
@@ -51,21 +52,25 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constrains) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title_),
-        ),
-        body: Row(
-          children: [
-            Expanded(
-              child: page_,
-            ),
-          ],
-        ),
-        bottomNavigationBar: NavBottomBar(
-          onChanged: _handleBottomChanged,
-          selectedIndex: selectedIndex_,
-        ),
-      );
+          appBar: AppBar(
+            title: Text(widget.title_),
+          ),
+          body: Row(
+            children: [
+              Expanded(
+                child: page_,
+              ),
+            ],
+          ),
+          bottomNavigationBar: NavBottomBar(
+            onChanged: _handleBottomChanged,
+            selectedIndex: selectedIndex_,
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              context.push('/newpost');
+            },
+          ));
     });
   }
 }

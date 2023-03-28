@@ -1,42 +1,78 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:thumuht/model/session.dart';
 import 'package:thumuht/router.dart';
+import 'package:provider/provider.dart';
+
+final HttpLink httpLink = HttpLink(
+  'http://localhost:8899/query',
+);
 
 void main() async {
   // Hive is a cache for graphql client.
   await initHiveForFlutter();
 
-  // GraphQL Server address
-  final HttpLink httpLink = HttpLink(
-    'http://localhost:8899/query',
-  );
-
-  // Graphql client
-  //
-  // Value Notifier is a [ChangeNotifier] that holds a single value.
-  // When [value] is replaced with something that is not equal to the old value
-  // as evaluated by the equality operator ==, this class notifies its listeners.
-  ValueNotifier<GraphQLClient> client = ValueNotifier(
-      GraphQLClient(link: httpLink, cache: GraphQLCache(store: HiveStore())));
-
-  runApp(MyApp(client: client));
+  runApp(MyApp(
+    hstore: HiveStore(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.client});
+  const MyApp({super.key, required this.hstore});
 
-  final ValueNotifier<GraphQLClient> client;
-
+  final Store hstore;
   // This widget is the root of your application.
   // provider: https://www.freecodecamp.org/news/provider-pattern-in-flutter/
   @override
-  Widget build(BuildContext context) => GraphQLProvider(
-      client: client,
-      child: MaterialApp.router(
-        title: 'thumuht',
-        theme: ThemeData(
-          primarySwatch: Colors.lightBlue,
-        ),
-        routerConfig: router(),
-      ));
+  Widget build(BuildContext context) => MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (context) => Session(),
+            )
+          ],
+          child: Consumer<Session>(
+            builder: (context, value, child) {
+              final myLink = CustomAuthLink(value);
+              final Link link = myLink.concat(httpLink);
+              return GraphQLProvider(
+                  client: ValueNotifier(GraphQLClient(
+                      link: link, cache: GraphQLCache(store: hstore))),
+                  child: MaterialApp.router(
+                    title: 'thumuht',
+                    theme: ThemeData(
+                      primarySwatch: Colors.lightBlue,
+                    ),
+                    routerConfig: router(),
+                  ));
+            },
+          ));
+}
+
+// https://stackoverflow.com/questions/67195275/how-can-i-add-customised-header-on-http-request-for-authentication-when-using-fl
+class CustomAuthLink extends Link {
+  CustomAuthLink(this.userSession);
+  final Session userSession;
+
+  // https://stackoverflow.com/questions/55397023/whats-the-difference-between-async-and-async-in-dart
+  @override
+  Stream<Response> request(Request request, [NextLink? forward]) async* {
+    final String? token = userSession.token_;
+
+    // TIP: do not forget getting new Request instance!
+    final Request req = request.updateContextEntry<HttpLinkHeaders>(
+      (HttpLinkHeaders? headers) {
+        return HttpLinkHeaders(
+          headers: <String, String>{
+            // put oldest headers
+            ...headers?.headers ?? <String, String>{},
+            // and add a new headers
+            'Token': token ?? '',
+          },
+        );
+      },
+    );
+
+    // and "return" new Request with updated headers
+    yield* forward!(req);
+  }
 }
