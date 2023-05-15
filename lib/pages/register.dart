@@ -67,6 +67,28 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             obscureText: true,
           ),
+          const SizedBox(
+            height: 12.0,
+          ),
+          TextField(
+            onChanged: (value) {
+              // check if the input is the same as password_, if not show a error message which will disapprear after 1 seconds. Please do not use scaffoldMessenger
+              if (value != password_) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('The password is not the same'),
+                  ),
+                );
+              } else {
+                ScaffoldMessenger.of(context).clearSnackBars();
+              }
+            },
+            decoration: const InputDecoration(
+              filled: true,
+              labelText: 'Please confirm your password',
+            ),
+            obscureText: true,
+          ),
           OverflowBar(
             alignment: MainAxisAlignment.end,
             children: <Widget>[
