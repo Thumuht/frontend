@@ -12,9 +12,22 @@ type User {
   password: String
   email: String
   about: String
+  avatar: String
 
   post: [Post]
   comment: [Comment]
+  follow: [User]
+  follower: [User]
+  block: [User]
+  bookmarkList: [BookmarkList]
+}
+
+type Message {
+  messageId: Int!
+  userFrom: Int!
+  userTo: Int!
+  content: String!
+  createdAt: Time
 }
 
 type Post {
@@ -23,13 +36,43 @@ type Post {
   content: String
   view: Int
   like: Int
+  comments_num: Int
+  position: String
   createdAt: Time
   updatedAt: Time
 
   user: User
   comment: [Comment]
   attachment: [Attachment]
+  tag: [Tag]
 }
+
+type Tag {
+  tagId: Int!
+  tagName: String
+}
+
+type BookmarkList {
+  id: Int!
+  list: String
+  createdAt: Time
+  updatedAt: Time
+
+  user: User
+  post: [Post]
+}
+
+type myTime {
+  unixTime: Int!
+  timeStamp: String!
+}
+
+type Attachment {
+  parentId: Int!
+  parentType: AttachmentParent!
+  fileName: String!
+}
+
 
 type Comment {
   id: Int!
@@ -37,28 +80,58 @@ type Comment {
   like: Int
   createdAt: Time
   updatedAt: Time
-  
+
   user: User
   post: Post
   attachment: [Attachment]
 }
-
 
 input NewUser {
   loginName: String!
   password: String!
 }
 
+input UpdateUser {
+  nickname: String
+  email: String
+  about: String
+  avatar: String
+  password: String
+}
+
+input GetUserInput {
+  limit: Int! = 10
+  offset: Int! = 0
+  orderBy: UserOrderBy! = user_id
+  order: Order! = ASC
+}
+
+input LoginSession {
+  loginName: String!
+  password: String!
+}
+
+input MessageInput {
+  toId: Int!
+  content: String!
+}
+
 input NewPost {
   userId: Int!
   title: String
   content: String
+  tag: [String]
 }
 
 input NewComment {
   userId: Int!
   postId: Int!
   content: String
+}
+
+input NewMarkPost {
+  postId: Int!
+  bookmarkListId: Int!
 }
 
 input UpdatePost {
@@ -72,21 +145,17 @@ input UpdateComment {
   content: String
 }
 
-input LoginSession {
-  loginName: String!
-  password: String!
-}
 
 enum AttachmentParent {
   post
   comment
 }
 
-type Attachment {
-  parentId: Int!
-  parentType: AttachmentParent!
-  fileName: String!
+enum UserOrderBy {
+  user_id
+  nickname
 }
+
 
 input PostUpload {
   upload: Upload!
@@ -95,28 +164,49 @@ input PostUpload {
 }
 
 type Mutation {
+  """ 注册帐号，设置密码 """
   createUser (input: NewUser!): User!
-  createPost(input: NewPost!): Post!                     
-  createComment(input: NewComment!): Comment!            
 
-  deleteUser(input: Int!): Boolean!                      
-  deletePost(input: Int!): Boolean!                      
-  deleteComment(input: Int!): Boolean!                   
+  """ 对用户进行关注和取消关注 """
+  followUser(input: Int!): Boolean!
+  unfollowUser(input: Int!): Boolean!
 
-  updatePost(input: UpdatePost!): Post!                  
-  updateComment(input: UpdateComment!): Comment!         
-  likePost(input: Int!): Boolean!                        
-  likeComment(input: Int!): Boolean!
+  """ 删除用户 """
+  deleteUser(input: Int!): Boolean!
+  """ 修改用户名，头像，简介，密码  """
+  updateUser(input: UpdateUser!): User!
 
+  """屏蔽用户"""
+  blockUser(input: Int!): Boolean!
+  unblockUser(input: Int!): Boolean!
+
+  """ 私信 """
+  sendMessage(input: MessageInput!): Boolean!
+
+
+  """ 登录 """
   login(input: LoginSession!): String!
-  logout: Boolean!   
+  logout: Boolean!
 
-  fileUpload(input: PostUpload): Boolean!                
-}
 
-enum UserOrderBy {
-  user_id
-  nickname
+  createPost(input: NewPost!): Post!
+  createComment(input: NewComment!): Comment!
+
+  deletePost(input: Int!): Boolean!
+  deleteComment(input: Int!): Boolean!
+
+  updatePost(input: UpdatePost!): Post!
+  likePost(input: Int!): Boolean!
+  dislikePost(input: Int!): Boolean!
+  newBookmarkList(input: String!): BookmarkList!
+  markPost(input: NewMarkPost!): Boolean!
+  unmarkPost(input: NewMarkPost!): Boolean!
+
+  updateComment(input: UpdateComment!): Comment!
+  likeComment(input: Int!): Boolean!
+  dislikeComment(input: Int!): Boolean!
+
+  fileUpload(input: PostUpload): Boolean!
 }
 
 enum PostOrderBy {
@@ -128,6 +218,7 @@ enum PostOrderBy {
   userId
   created_at
   updated_at
+  comments_num
 }
 
 enum CommentOrderBy {
@@ -143,18 +234,15 @@ enum Order {
   DESC
 }
 
-input GetUserInput {
-  limit: Int! = 10
-  offset: Int! = 0
-  orderBy: UserOrderBy! = user_id
-  order: Order! = ASC
-}
-
 input GetPostInput {
   limit: Int! = 10
   offset: Int! = 0
   orderBy: PostOrderBy! = post_id
   order: Order! = ASC
+  followed: Boolean = false
+  """all = true 意味着不用 tags"""
+  all: Boolean = true
+  tags: [String]
 }
 
 input GetCommentInput {
@@ -166,8 +254,26 @@ input GetCommentInput {
 
 
 type Query {
+   """ 查询用户 """
   users(input: GetUserInput!): [User!]!
-  posts(input: GetPostInput!): [Post!]!
-  postDetail(input: Int!): Post!
+  """ 查询用户 """
+  getUserById(input: Int!): User!
+
+  """ 获取本人信息 """
+  me: User!
+  """ 获取本人的私信 """
+  myMessage(from: Int, offset: Int = 0, limit: Int = 10): [Message!]!
+  """获取和我私信的用户"""
+  myMessageUser: [User!]!
+
+  globalSearch(query: String!): [Post]
+
+  posts(input: GetPostInput!): [Post]
+  postDetail(input: Int!): Post
   comment(input: GetCommentInput!): [Comment!]!
+}
+
+type Subscription {
+    currentTime: myTime!
+    messageToMe: Message!
 }

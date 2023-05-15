@@ -93,14 +93,15 @@ Map<String, dynamic> _$GetPostLists$Query$PostToJson(
 
 GetPostLists$Query _$GetPostLists$QueryFromJson(Map<String, dynamic> json) =>
     GetPostLists$Query()
-      ..posts = (json['posts'] as List<dynamic>)
-          .map((e) =>
-              GetPostLists$Query$Post.fromJson(e as Map<String, dynamic>))
+      ..posts = (json['posts'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : GetPostLists$Query$Post.fromJson(e as Map<String, dynamic>))
           .toList();
 
 Map<String, dynamic> _$GetPostLists$QueryToJson(GetPostLists$Query instance) =>
     <String, dynamic>{
-      'posts': instance.posts.map((e) => e.toJson()).toList(),
+      'posts': instance.posts?.map((e) => e?.toJson()).toList(),
     };
 
 Logout$Mutation _$Logout$MutationFromJson(Map<String, dynamic> json) =>

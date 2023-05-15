@@ -137,7 +137,7 @@ class GetPostLists$Query extends JsonSerializable with EquatableMixin {
   factory GetPostLists$Query.fromJson(Map<String, dynamic> json) =>
       _$GetPostLists$QueryFromJson(json);
 
-  late List<GetPostLists$Query$Post> posts;
+  List<GetPostLists$Query$Post?>? posts;
 
   @override
   List<Object?> get props => [posts];

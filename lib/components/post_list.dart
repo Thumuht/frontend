@@ -21,9 +21,9 @@ Widget _buildList(BuildContext context) => Query(
         return ListView.builder(
           itemBuilder: (context, index) {
             return _tile(
-                postlists[index].title!, postlists[index].content!, context);
+                postlists![index]!.title!, postlists[index]!.content!, context);
           },
-          itemCount: postlists.length,
+          itemCount: postlists?.length ?? 0, // this guarantees no null for above two lines.
         );
       },
     );
