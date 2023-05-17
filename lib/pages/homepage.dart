@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:thumuht/model/session.dart';
 import 'package:thumuht/pages/favorite.dart';
 import 'package:thumuht/pages/login.dart';
 import 'package:thumuht/pages/notification.dart';
 import 'package:thumuht/pages/post_list.dart';
 import 'package:thumuht/components/navigation_bottombar.dart';
+import 'package:thumuht/pages/profile.dart';
 
 // Homepage of thumuht
 // This screen manages 4 distinct pages
@@ -24,11 +27,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var selectedIndex_ = 0;
   late Widget page_ = const PostListPage();
+  bool login_ = false;
 
   // this function is called when user clicks an icon in bottom navigation bar.
   void _handleBottomChanged(int newValue) {
     setState(() {
       selectedIndex_ = newValue;
+      login_ = Provider.of<Session>(context, listen: false).login_;
       switch (selectedIndex_) {
         case 0:
           page_ = const PostListPage();
@@ -37,7 +42,7 @@ class _HomePageState extends State<HomePage> {
           page_ = const FavoritePage();
           break;
         case 2:
-          page_ = const LoginPage();
+          page_ = login_ ? const ProfilePage() : const LoginPage();
           break;
         case 3:
           page_ = const NotificationPage();
