@@ -70,6 +70,8 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               context.push('/newpost');
             },
+            tooltip: 'New Post',
+            child: const Icon(Icons.add),
           ));
     });
   }

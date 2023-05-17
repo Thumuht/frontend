@@ -44,7 +44,6 @@ class _NewPostPageState extends State<NewPostPage> {
               filled: true,
               labelText: 'content',
             ),
-            obscureText: true,
           ),
           OverflowBar(
             alignment: MainAxisAlignment.end,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({super.key, required this.title, required this.content});
@@ -8,7 +9,7 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar( 
+        appBar: AppBar(
           title: const Text('thumuht'),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -25,14 +26,10 @@ class DetailPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                content,
-                style: const TextStyle(
-                  fontSize: 20,
-                ),
-              ),
+            Markdown(
+              shrinkWrap: true,
+              data: content,
+              imageDirectory: "http://localhost:8899/fs/",
             ),
           ],
         ),
