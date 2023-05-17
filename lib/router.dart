@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:thumuht/pages/login.dart';
 import 'package:thumuht/pages/new_post.dart';
+import 'package:thumuht/pages/profile.dart';
 import 'package:thumuht/pages/register.dart';
 import 'package:thumuht/pages/homepage.dart';
 
@@ -21,6 +22,10 @@ GoRouter router() {
     GoRoute(
       path: '/',
       builder: (context, state) => const HomePage(title_: 'thumuht'),
+    ),
+    GoRoute(
+      path: '/profile',
+      builder: (context, state) => const ProfilePage(),
     )
   ]);
 }
