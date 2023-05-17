@@ -13,10 +13,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String? loginName_;
-  String? password_;
+  final loginNameController = TextEditingController();
+  final passwordController = TextEditingController();
 
-  bool _checkParams() => (loginName_ != null) && (password_ != null);
+  @override
+  void dispose() {
+    loginNameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +53,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           const SizedBox(height: 40.0),
           TextField(
-            onChanged: (value) {
-              loginName_ = value;
-            },
+            controller: loginNameController,
             decoration: const InputDecoration(
               filled: true,
               labelText: 'Username',
@@ -60,9 +63,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 12.0,
           ),
           TextField(
-            onChanged: (value) {
-              password_ = value;
-            },
+            controller: passwordController,
             decoration: const InputDecoration(
               filled: true,
               labelText: 'Password',
@@ -73,8 +74,10 @@ class _LoginPageState extends State<LoginPage> {
             alignment: MainAxisAlignment.end,
             children: <Widget>[
               TextButton(
-                  onPressed: () {
-                    context.push('/register');
+                  onPressed: () async {
+                    var res = await context.push<List<String>>('/register');
+                    loginNameController.text = res![0];
+                    passwordController.text = res[1];
                   },
                   child: const Text('Register')),
               TextButton(
@@ -91,12 +94,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 builder: (runMutation, result) => ElevatedButton(
                   onPressed: () {
-                    if (_checkParams()) {
-                      runMutation({
-                        'loginName': loginName_,
-                        'password': password_,
-                      });
-                    }
+                    runMutation({
+                      'loginName': loginNameController.text,
+                      'password': passwordController.text,
+                    });
                     // context.pop();
                   },
                   child: const Text('Login'),

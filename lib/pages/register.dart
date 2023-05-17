@@ -105,8 +105,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         'loginName': loginName_,
                         'password': password_,
                       });
+                      List<String> args = [loginName_!, password_!];
+                      context.pop(args);
                     }
-                    context.pop();
                   },
                   child: const Text('Register'),
                 ),
