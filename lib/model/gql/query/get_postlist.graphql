@@ -1,11 +1,14 @@
-query getPostLists{
+query getPostLists($offset: Int!){
   posts(input: {
 			limit: 10
-			offset: 0
+			offset: $offset
 			orderBy: title
 			order: ASC
 		}) {
 			title
 			content
+			view
+			like
+			comments_num
 		}
 }

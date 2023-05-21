@@ -89,6 +89,9 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             obscureText: true,
           ),
+          const SizedBox(
+            height: 12.0,
+          ),
           OverflowBar(
             alignment: MainAxisAlignment.end,
             children: <Widget>[
