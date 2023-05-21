@@ -5,9 +5,10 @@ class Session extends ChangeNotifier {
   String? token_;
   int? userId_;
 
-  void login(String token) {
-    token_ = token;
+  void login(dynamic logret) {
+    token_ = logret['token'];
     login_ = true;
+    userId_ = logret['userId'];
     notifyListeners();
   }
 

@@ -2,5 +2,8 @@ mutation login($loginName: String!, $password: String!){
 		login(input: {
 			loginName: $loginName
 			password: $password
-		})
+		}) {
+			token
+			userId
+		}
 	}

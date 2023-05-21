@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text('Register')),
               TextButton(
                 child: const Text('Cancel'),
-                onPressed: () => {},
+                onPressed: () => {context.pop()},
               ),
               Mutation(
                 options: MutationOptions(

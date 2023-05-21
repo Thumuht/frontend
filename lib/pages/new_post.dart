@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
+
+import '../model/session.dart';
 
 class NewPostPage extends StatefulWidget {
   const NewPostPage({super.key});
@@ -59,13 +62,20 @@ class _NewPostPageState extends State<NewPostPage> {
                 builder: (runMutation, result) => ElevatedButton(
                   onPressed: () {
                     if (_checkParams()) {
+                      // print userId_
+                      print(Provider.of<Session>(context, listen: false)
+                          .userId_
+                          .toString());
                       runMutation({
-                        'userId': 1,
+                        'userId': Provider.of<Session>(context, listen: false)
+                            .userId_
+                            .toString(),
                         'title': title_,
                         'content': content_,
                       });
                     }
-                    // context.pop();
+
+                    context.replace('/');
                   },
                   child: const Text('Post'),
                 ),
