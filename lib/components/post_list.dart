@@ -27,7 +27,9 @@ Widget _buildList(BuildContext context) => Query(
         }
         FetchMoreOptions opt = FetchMoreOptions(
           variables: <String, dynamic>{
-            'offset': result.data!['posts'].length,
+            'offset': (result.data!['posts'] == Null)
+                ? result.data!['posts'].length
+                : 0,
           },
           updateQuery: (previousResultData, fetchMoreResultData) {
             final List<dynamic> repos = [
@@ -45,7 +47,8 @@ Widget _buildList(BuildContext context) => Query(
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   return _tile(
-                      postlists![index]!.title!,
+                      postlists![index]!.id,
+                      postlists[index]!.title!,
                       postlists[index]!.content!,
                       postlists[index]!.view!,
                       postlists[index]!.like!,
@@ -58,7 +61,9 @@ Widget _buildList(BuildContext context) => Query(
             ),
             ElevatedButton(
               onPressed: () {
-                fetchMore!(opt);
+                if (postlists!.length == 10) {
+                  fetchMore!(opt);
+                }
               },
               child: const Text('Load More'),
             ),
@@ -67,7 +72,7 @@ Widget _buildList(BuildContext context) => Query(
       },
     );
 
-ListTile _tile(String title, String subtitle, int view, int like,
+ListTile _tile(int id, String title, String subtitle, int view, int like,
         int commentsNum, BuildContext context) =>
     ListTile(
       title: Text(
@@ -83,31 +88,44 @@ ListTile _tile(String title, String subtitle, int view, int like,
           height: 2,
         ),
         Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
             Text(
-              '查看数: ',
+              'View',
               style: TextStyle(fontSize: 10),
             ),
+            SizedBox(width: 2),
             Text(
               view.toString(),
               style: TextStyle(fontSize: 10),
             ),
           ]),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            // Mutation(
+            //     options: MutationOptions(document: LIKE_MUTATION_DOCUMENT),
+            //     builder: ((runMutation, result) => TextButton(
+            //           onPressed: () {
+            //             runMutation({
+            //               'userId': id,
+            //             });
+            //           },
+            //           child: const Text('Like'),
+            //         ))),
             Text(
-              '点赞数: ',
+              'Like',
               style: TextStyle(fontSize: 10),
             ),
+            SizedBox(width: 2),
             Text(
               like.toString(),
               style: TextStyle(fontSize: 10),
             )
           ]),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
             Text(
-              '评论数: ',
+              'comments',
               style: TextStyle(fontSize: 10),
             ),
+            SizedBox(width: 2),
             Text(
               commentsNum.toString(),
               style: TextStyle(fontSize: 10),
@@ -120,9 +138,12 @@ ListTile _tile(String title, String subtitle, int view, int like,
             context,
             MaterialPageRoute(
               builder: (context) => DetailPage(
+                id: id,
                 title: title,
                 content: subtitle,
+                like: like,
+                commentsNum: commentsNum,
               ),
-            ));
+            )).then((value) => Null);
       },
     );

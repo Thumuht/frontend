@@ -5,6 +5,7 @@ query getPostLists($offset: Int!){
 			orderBy: title
 			order: ASC
 		}) {
+			id
 			title
 			content
 			view

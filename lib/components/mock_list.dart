@@ -39,8 +39,11 @@ ListTile _tile(String title, String subtitle, BuildContext context) => ListTile(
             context,
             MaterialPageRoute(
               builder: (context) => DetailPage(
+                id: 1,
                 title: title,
                 content: subtitle,
+                like: 0,
+                commentsNum: 0,
               ),
             ));
       },

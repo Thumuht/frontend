@@ -1,0 +1,3 @@
+mutation dislike($postId: Int!){
+    dislikePost(input: $postId)
+}

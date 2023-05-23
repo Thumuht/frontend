@@ -53,7 +53,7 @@ class _NewPostPageState extends State<NewPostPage> {
             children: <Widget>[
               TextButton(
                 child: const Text('Cancel'),
-                onPressed: () => {context.pop()},
+                onPressed: () => {context.replace('/')},
               ),
               Mutation(
                 options: MutationOptions(
@@ -62,10 +62,6 @@ class _NewPostPageState extends State<NewPostPage> {
                 builder: (runMutation, result) => ElevatedButton(
                   onPressed: () {
                     if (_checkParams()) {
-                      // print userId_
-                      print(Provider.of<Session>(context, listen: false)
-                          .userId_
-                          .toString());
                       runMutation({
                         'userId': Provider.of<Session>(context, listen: false)
                             .userId_
