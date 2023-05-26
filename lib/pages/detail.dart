@@ -132,6 +132,8 @@ class _CommentsNumShowState extends State<CommentsNumShow> {
   }
 }
 
+VoidCallback? refetchGlobal;
+
 class showComments extends StatefulWidget {
   showComments({Key? key, required this.postId, required this.userId})
       : super(key: key);
@@ -176,6 +178,7 @@ class _showCommentsState extends State<showComments> {
                         Provider.of<Comment>(context, listen: false)
                             .addCommentNum();
                         _controller.clear();
+                        refetchGlobal!();
                       }
                     },
                     child: const Text('评论'),
@@ -194,6 +197,7 @@ class _showCommentsState extends State<showComments> {
             if (result.isLoading) {
               return const Center(child: CircularProgressIndicator());
             }
+            refetchGlobal = refetch;
             final comments = result.data?['comment'] as List<dynamic>;
             comments.retainWhere(
                 (comment) => comment['post']['id'] == widget.postId);
@@ -208,11 +212,11 @@ class _showCommentsState extends State<showComments> {
                         subtitle: Text(comments[index]['user']['loginName']),
                       );
                     }),
-                IconButton(
-                    onPressed: () {
-                      refetch!();
-                    },
-                    icon: const Icon(Icons.refresh))
+                // IconButton(
+                //     onPressed: () {
+                //       refetch!();
+                //     },
+                //     icon: const Icon(Icons.refresh))
               ],
             );
           }),
