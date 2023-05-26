@@ -1,5 +1,5 @@
 mutation newComment($userId: Int!, $postId: Int!, $content: String) {
-  createPost(input: {
+  createComment(input: {
     userId: $userId
     postId: $postId
     content: $content

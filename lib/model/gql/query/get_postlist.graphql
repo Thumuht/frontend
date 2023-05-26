@@ -1,8 +1,8 @@
-query getPostLists($offset: Int!){
+query getPostLists($offset: Int!, $orderBy: PostOrderBy!){
   posts(input: {
 			limit: 10
 			offset: $offset
-			orderBy: title
+			orderBy: $orderBy
 			order: ASC
 		}) {
 			id

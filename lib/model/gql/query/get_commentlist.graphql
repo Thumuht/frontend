@@ -1,0 +1,17 @@
+query getCommentLists(){
+  comment(input: {
+			limit: 10000
+			offset: 0
+			orderBy: comment_id
+			order: DESC
+		}) {
+			content
+            createdAt
+    		post{
+              id
+            }
+            user{
+                loginName
+            }
+		}
+}
