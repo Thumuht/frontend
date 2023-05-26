@@ -2,20 +2,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:thumuht/pages/detail.dart';
 
-Widget trueList(BuildContext context) => _buildList(context);
+Widget trueList(BuildContext context, PostOrderBy orderBy) =>
+    _buildList(context, orderBy);
 
 // post list.
-Widget _buildList(BuildContext context) => Query(
+Widget _buildList(BuildContext context, PostOrderBy orderBy) => Query(
       options: QueryOptions(
-          document:
-              GetPostListsQuery(variables: GetPostListsArguments(offset: 0))
-                  .document,
-          variables: const <String, dynamic>{
-            'offset': 0,
-          }),
+          document: GetPostListsQuery(
+                  variables: GetPostListsArguments(offset: 0, orderBy: orderBy))
+              .document,
+          variables:
+              GetPostListsArguments(offset: 0, orderBy: orderBy).toJson()),
       builder: (result, {fetchMore, refetch}) {
         if (result.hasException) {
           return Text(result.exception.toString());
@@ -134,6 +135,7 @@ ListTile _tile(int id, String title, String subtitle, int view, int like,
         ])
       ]),
       onTap: () {
+
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -144,6 +146,6 @@ ListTile _tile(int id, String title, String subtitle, int view, int like,
                 like: like,
                 commentsNum: commentsNum,
               ),
-            )).then((value) => Null);
+            ));
       },
     );
