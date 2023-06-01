@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:thumuht/components/post_list.dart';
+import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:thumuht/model/session.dart';
 import 'package:thumuht/pages/favorite.dart';
 import 'package:thumuht/pages/login.dart';
@@ -27,7 +28,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var selectedIndex_ = 0;
-  late Widget page_ = const PostListPage();
+  PostOrderBy defaultOrderBy_ = PostOrderBy.createdAt;
+  late Widget page_ = PostListPage(orderBy: defaultOrderBy_);
   bool login_ = false;
 
   // this function is called when user clicks an icon in bottom navigation bar.
@@ -37,7 +39,9 @@ class _HomePageState extends State<HomePage> {
       login_ = Provider.of<Session>(context, listen: false).login_;
       switch (selectedIndex_) {
         case 0:
-          page_ = const PostListPage();
+          page_ = PostListPage(
+            orderBy: defaultOrderBy_,
+          );
           break;
         case 1:
           page_ = const FavoritePage();

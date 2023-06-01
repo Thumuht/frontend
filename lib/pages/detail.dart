@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_final_fields
+// ignore_for_file: prefer_final_fields, camel_case_types
 
 import 'dart:io';
 
@@ -167,6 +167,7 @@ class _showCommentsState extends State<showComments> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('请先登录'),
+                            duration: Duration(seconds: 1),
                           ),
                         );
                       } else {
@@ -212,11 +213,6 @@ class _showCommentsState extends State<showComments> {
                         subtitle: Text(comments[index]['user']['loginName']),
                       );
                     }),
-                // IconButton(
-                //     onPressed: () {
-                //       refetch!();
-                //     },
-                //     icon: const Icon(Icons.refresh))
               ],
             );
           }),

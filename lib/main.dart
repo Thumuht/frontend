@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:thumuht/components/post_list.dart';
+import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:thumuht/model/session.dart';
+import 'package:thumuht/pages/detail.dart';
 import 'package:thumuht/router.dart';
 import 'package:provider/provider.dart';
 
 final HttpLink httpLink = HttpLink(
-  'http://localhost:8899/query',
+  'http://127.0.0.1:8899/query',
 );
 
 void main() async {
@@ -28,7 +31,9 @@ class MyApp extends StatelessWidget {
           providers: [
             ChangeNotifierProvider(
               create: (context) => Session(),
-            )
+            ),
+            ChangeNotifierProvider(
+                create: (context) => Order(orderBy: PostOrderBy.createdAt)),
           ],
           child: Consumer<Session>(
             builder: (context, value, child) {

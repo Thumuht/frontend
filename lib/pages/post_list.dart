@@ -21,20 +21,22 @@ class _PostListPageState extends State<PostListPage> {
     //     ],
     //   );
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: const TabBar(
           tabs: [
-            Tab(text: '最新'),
-            Tab(text: '最热'),
-            Tab(text: '评论'),
+            Tab(text: '全部'),
+            Tab(text: '已关注'),
+            Tab(text: '热门'),
+            Tab(text: '类型')
           ],
         ),
         body: TabBarView(
           children: [
-            trueList(context, PostOrderBy.createdAt),
-            trueList(context, PostOrderBy.like),
-            trueList(context, PostOrderBy.commentsNum),
+            trueList(context),
+            const Placeholder(),
+            const Placeholder(),
+            const Placeholder(),
           ],
         ),
       ),
