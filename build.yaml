@@ -12,3 +12,7 @@ targets:
             - schema: lib/model/gql/schema.graphql
               queries_glob: lib/model/gql/query/**.graphql
               output: lib/model/gql/graphql_api.dart
+          scalar_mapping:
+            - custom_parser_import: 'package:thumuht/model/parser.dart'
+              graphql_type: Time
+              dart_type: DateTime
