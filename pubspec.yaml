@@ -40,6 +40,11 @@ dependencies:
   graphql_flutter: ^5.1.2
   provider: ^6.0.0
   flutter_markdown: ^0.6.14
+  # 图片选择器
+  image_picker: ^0.8.2
+  file_selector: ^0.9.3
+  multiple_images_picker: ^1.0.0
+
 
 dev_dependencies:
   flutter_test:

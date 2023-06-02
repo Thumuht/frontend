@@ -8,7 +8,8 @@ import 'package:thumuht/router.dart';
 import 'package:provider/provider.dart';
 
 final HttpLink httpLink = HttpLink(
-  'http://127.0.0.1:8899/query',
+  // 'http://127.0.0.1:8899/query',
+  'http://10.0.2.2:8899/query',
 );
 
 void main() async {
