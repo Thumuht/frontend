@@ -7,9 +7,11 @@ import 'package:thumuht/pages/detail.dart';
 import 'package:thumuht/router.dart';
 import 'package:provider/provider.dart';
 
+// const String backendAddress = 'http://10.0.2.2:8899/';
+const String backendAddress = 'http://127.0.0.1:8899/';
+
 final HttpLink httpLink = HttpLink(
-  // 'http://127.0.0.1:8899/query',
-  'http://10.0.2.2:8899/query',
+  '${backendAddress}query',
 );
 
 void main() async {

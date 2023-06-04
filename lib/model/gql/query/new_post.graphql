@@ -4,6 +4,7 @@ mutation newPost($userId: Int!, $title: String, $content: String) {
     title: $title
     content: $content
   }) {
+    id
     title
   }
 }

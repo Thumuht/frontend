@@ -132,11 +132,6 @@ Widget _buildList(BuildContext context) {
       fetchMoreGlobal = fetchMore;
       refetchGlobal = refetch;
       FetchMoreOptions opt = FetchMoreOptions(
-        // variables: <String, dynamic>{
-        //   'offset': (result.data!['posts'] == Null)
-        //       ? result.data!['posts'].length
-        //       : 0,
-        // },
         variables: GetPostListsArguments(
                 offset: (result.data!['post'] == Null)
                     ? result.data!['posts'].length
@@ -148,14 +143,7 @@ Widget _buildList(BuildContext context) {
             ...previousResultData!['posts'],
             ...fetchMoreResultData!['posts']
           ];
-          stderr.writeln(GetPostListsArguments(
-                  offset: (result.data!['post'] == Null)
-                      ? result.data!['posts'].length
-                      : 0,
-                  orderBy:
-                      Provider.of<Order>(context, listen: false).getOrderBy)
-              .toJson());
-          stderr.writeln(fetchMoreResultData['posts']);
+
           fetchMoreResultData['posts'] = repos;
           return fetchMoreResultData;
         },

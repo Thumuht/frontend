@@ -8,11 +8,15 @@ targets:
           scalar_mapping:
             - graphql_type: Time
               dart_type: DateTime
+              # custom_parser_import: 'package:thumuht/model/parser.dart'
+            - graphql_type: Upload
+              custom_parser_import: 'package:thumuht/model/upload.dart'
+              dart_type:
+                name: MultipartFile
+                imports:
+                  - 'package:http/http.dart'
+
           schema_mapping:
             - schema: lib/model/gql/schema.graphql
               queries_glob: lib/model/gql/query/**.graphql
               output: lib/model/gql/graphql_api.dart
-          scalar_mapping:
-            - custom_parser_import: 'package:thumuht/model/parser.dart'
-              graphql_type: Time
-              dart_type: DateTime

@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:thumuht/model/session.dart';
 
+import '../main.dart';
+
 class Like extends ChangeNotifier {
   //这里也可以使用with来进行实现
   Like({required this.likeNum});
@@ -261,7 +263,7 @@ class DetailPage extends StatelessWidget {
                 Markdown(
                   shrinkWrap: true,
                   data: content,
-                  imageDirectory: "http://localhost:8899/fs/",
+                  imageDirectory: "${backendAddress}fs/",
                 ),
                 const SizedBox(height: 20),
                 Row(
