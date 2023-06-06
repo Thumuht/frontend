@@ -122,6 +122,7 @@ input NewPost {
   title: String
   content: String
   tag: Int
+  position: String
 }
 
 input NewComment {
