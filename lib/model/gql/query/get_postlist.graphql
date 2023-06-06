@@ -11,5 +11,6 @@ query getPostLists($offset: Int!, $orderBy: PostOrderBy!){
 			view
 			like
 			comments_num
+			position
 		}
 }

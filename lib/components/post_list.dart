@@ -161,6 +161,7 @@ Widget _buildList(BuildContext context) {
                     postlists[index]!.view!,
                     postlists[index]!.like!,
                     postlists[index]!.commentsNum!,
+                    postlists[index]!.position,
                     context);
               },
               itemCount: postlists?.length ??
@@ -182,7 +183,7 @@ Widget _buildList(BuildContext context) {
 }
 
 ListTile _tile(int id, String title, String subtitle, int view, int like,
-        int commentsNum, BuildContext context) =>
+        int commentsNum, String? position, BuildContext context) =>
     ListTile(
       title: Text(
         title,
@@ -192,7 +193,9 @@ ListTile _tile(int id, String title, String subtitle, int view, int like,
         ),
       ),
       subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(subtitle),
+        Text(!subtitle.contains('![]')
+            ? subtitle
+            : subtitle.substring(0, subtitle.indexOf('![]'))),
         const SizedBox(
           height: 2,
         ),
@@ -242,6 +245,7 @@ ListTile _tile(int id, String title, String subtitle, int view, int like,
                 content: subtitle,
                 like: like,
                 commentsNum: commentsNum,
+                position: position!,
               ),
             )).then((value) => refetchGlobal!());
       },

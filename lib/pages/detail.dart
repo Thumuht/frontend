@@ -229,12 +229,14 @@ class DetailPage extends StatelessWidget {
       required this.title,
       required this.content,
       required this.like,
-      required this.commentsNum});
+      required this.commentsNum,
+      required this.position});
   final int id;
   final String title;
   final String content;
   final int like;
   final int commentsNum;
+  final String position;
 
   @override
   Widget build(BuildContext context) => MultiProvider(
@@ -266,6 +268,10 @@ class DetailPage extends StatelessWidget {
                   imageDirectory: "${backendAddress}fs/",
                 ),
                 const SizedBox(height: 20),
+                if (position.isNotEmpty)
+                  Text(
+                    "位置：$position",
+                  ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
