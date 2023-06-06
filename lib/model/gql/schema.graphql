@@ -37,6 +37,7 @@ type Post {
   view: Int
   like: Int
   comments_num: Int
+  tag: Int
   position: String
   createdAt: Time
   updatedAt: Time
@@ -44,13 +45,8 @@ type Post {
   user: User
   comment: [Comment]
   attachment: [Attachment]
-  tag: [Tag]
 }
 
-type Tag {
-  tagId: Int!
-  tagName: String
-}
 
 type BookmarkList {
   id: Int!
@@ -125,7 +121,7 @@ input NewPost {
   userId: Int!
   title: String
   content: String
-  tag: [String]
+  tag: Int
 }
 
 input NewComment {
@@ -245,9 +241,7 @@ input GetPostInput {
   orderBy: PostOrderBy! = post_id
   order: Order! = ASC
   followed: Boolean = false
-  """all = true 意味着不用 tags"""
-  all: Boolean = true
-  tags: [String]
+  tags: Int
 }
 
 input GetCommentInput {
