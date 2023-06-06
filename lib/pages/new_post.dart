@@ -14,6 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import 'package:multiple_images_picker/multiple_images_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:thumuht/components/post_list.dart';
 import 'package:thumuht/main.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:dio/dio.dart';
@@ -191,6 +192,7 @@ class _PostButtonState extends State<PostButton> {
                 'content': widget.controller_content.text + imageUrls,
                 'position':
                     Provider.of<Position>(context, listen: false).getPosition,
+                'tag': Provider.of<Tag>(context, listen: false).getTag,
               });
               context.replace('/');
             },
@@ -291,12 +293,50 @@ class _ShowPositionState extends State<ShowPosition> {
   }
 }
 
-// class selectTag extends StatefulWidget {
-//   const selectTag({Key? key}) : super(key: key);
+class selectTag extends StatefulWidget {
+  const selectTag({Key? key}) : super(key: key);
 
-//   @override
-//   _selectTagState createState() => _selectTagState();
-// }
+  @override
+  _selectTagState createState() => _selectTagState();
+}
+
+class _selectTagState extends State<selectTag> {
+  String _value = "无标签";
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: _value,
+      elevation: 16,
+      onChanged: (String? value) {
+        setState(() {
+          _value = value!;
+          if (value == '无标签') {
+            Provider.of<Tag>(context, listen: false).setTag(0);
+          }
+          if (value == '校园资讯') {
+            Provider.of<Tag>(context, listen: false).setTag(1);
+          }
+          if (value == '二手交易') {
+            Provider.of<Tag>(context, listen: false).setTag(2);
+          }
+          if (value == '学术研讨') {
+            Provider.of<Tag>(context, listen: false).setTag(3);
+          }
+          if (value == '休闲娱乐') {
+            Provider.of<Tag>(context, listen: false).setTag(4);
+          }
+        });
+      },
+      items: TagMap.keys.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+}
 
 class NewPostPage extends StatefulWidget {
   const NewPostPage({super.key});
@@ -317,6 +357,7 @@ class _NewPostPageState extends State<NewPostPage> {
           providers: [
             ChangeNotifierProvider(create: (context) => Images(images: [])),
             ChangeNotifierProvider(create: (context) => Position(position: "")),
+            ChangeNotifierProvider(create: (context) => Tag(tag: 0)),
           ],
           child: Scaffold(
             body: SafeArea(
@@ -349,6 +390,7 @@ class _NewPostPageState extends State<NewPostPage> {
                   children: [
                     GetUserLocation(),
                     imageSelector(),
+                    selectTag(),
                   ],
                 ),
                 const SizedBox(

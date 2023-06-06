@@ -12,5 +12,6 @@ query getPostLists($offset: Int!, $orderBy: PostOrderBy!){
 			like
 			comments_num
 			position
+			tag
 		}
 }

@@ -10,6 +10,30 @@ import 'package:provider/provider.dart';
 const String backendAddress = 'http://10.0.2.2:8899/';
 // const String backendAddress = 'http://127.0.0.1:8899/';
 
+Map<String, int> TagMap = {
+  "无标签": 0,
+  "校园资讯": 1,
+  "二手交易": 2,
+  "学术研讨": 3,
+  "休闲娱乐": 4,
+};
+
+Map<int, String> TagMapReverse = {
+  0: "无标签",
+  1: "校园资讯",
+  2: "二手交易",
+  3: "学术研讨",
+  4: "休闲娱乐",
+};
+
+Map<int, Color> TagColor = {
+  0: Colors.grey,
+  1: Colors.blue,
+  2: Colors.green,
+  3: Colors.redAccent[400]!,
+  4: Colors.yellow,
+};
+
 final HttpLink httpLink = HttpLink(
   '${backendAddress}query',
 );

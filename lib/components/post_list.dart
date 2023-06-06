@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:thumuht/main.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:thumuht/pages/detail.dart';
 
@@ -162,6 +163,7 @@ Widget _buildList(BuildContext context) {
                     postlists[index]!.like!,
                     postlists[index]!.commentsNum!,
                     postlists[index]!.position,
+                    postlists[index]!.tag!,
                     context);
               },
               itemCount: postlists?.length ??
@@ -183,15 +185,23 @@ Widget _buildList(BuildContext context) {
 }
 
 ListTile _tile(int id, String title, String subtitle, int view, int like,
-        int commentsNum, String? position, BuildContext context) =>
+        int commentsNum, String? position, int tag, BuildContext context) =>
     ListTile(
-      title: Text(
-        title,
-        style: const TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 20,
+      title: Row(children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+          ),
         ),
-      ),
+        const SizedBox(width: 10),
+        if (tag != 0)
+          RawChip(
+            label: Text(TagMapReverse[tag]!),
+            backgroundColor: TagColor[tag],
+          )
+      ]),
       subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(!subtitle.contains('![]')
             ? subtitle
