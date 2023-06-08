@@ -1,0 +1,3 @@
+mutation mark($postId: Int!){
+    markPost(input: $postId)
+}

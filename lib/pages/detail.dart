@@ -64,8 +64,9 @@ class LikeWidget extends StatefulWidget {
   _LikeWidgetState createState() => _LikeWidgetState();
 }
 
+bool _isLiked = false;
+
 class _LikeWidgetState extends State<LikeWidget> {
-  bool _isLiked = false;
   Like _likeNum = Like(likeNum: 0);
 
   @override
@@ -73,7 +74,6 @@ class _LikeWidgetState extends State<LikeWidget> {
     super.initState();
     _likeNum.addListener(() {});
     _likeNum.changeLike(widget.like);
-    _isLiked = false;
   }
 
   @override
@@ -222,6 +222,38 @@ class _showCommentsState extends State<showComments> {
   }
 }
 
+class MarkPost extends StatefulWidget {
+  MarkPost({Key? key, required this.postId}) : super(key: key);
+  final int postId;
+  @override
+  _MarkPostState createState() => _MarkPostState();
+}
+
+bool marked = false;
+
+class _MarkPostState extends State<MarkPost> {
+  @override
+  Widget build(BuildContext context) {
+    return Mutation(
+        options: marked
+            ? MutationOptions(document: MARK_MUTATION_DOCUMENT)
+            : MutationOptions(document: UNMARK_MUTATION_DOCUMENT),
+        builder: (runMutation, result) => IconButton(
+              icon: Icon(marked ? Icons.bookmark : Icons.bookmark_border),
+              onPressed: () {
+                setState(() {
+                  if (marked) {
+                    runMutation({'postId': widget.postId});
+                  } else {
+                    runMutation({'postId': widget.postId});
+                  }
+                  marked = !marked;
+                });
+              },
+            ));
+  }
+}
+
 class DetailPage extends StatelessWidget {
   const DetailPage(
       {super.key,
@@ -277,6 +309,9 @@ class DetailPage extends StatelessWidget {
                   children: [
                     LikeWidget(like: like, id: id),
                     CommentsNumShow(commentsNum: commentsNum),
+                    MarkPost(
+                      postId: id,
+                    ),
                   ],
                 ),
                 showComments(

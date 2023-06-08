@@ -1,0 +1,3 @@
+mutation unmark($postId: Int!){
+    unmarkPost(input: $postId)
+}

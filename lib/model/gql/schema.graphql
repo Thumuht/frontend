@@ -19,7 +19,7 @@ type User {
   follow: [User]
   follower: [User]
   block: [User]
-  bookmarkList: [BookmarkList]
+  bookmarkList: [Post]
 }
 
 type Message {
@@ -201,8 +201,8 @@ type Mutation {
   likePost(input: Int!): Boolean!
   dislikePost(input: Int!): Boolean!
   newBookmarkList(input: String!): BookmarkList!
-  markPost(input: NewMarkPost!): Boolean!
-  unmarkPost(input: NewMarkPost!): Boolean!
+  markPost(input: Int!): Boolean!
+  unmarkPost(input: Int!): Boolean!
 
   updateComment(input: UpdateComment!): Comment!
   likeComment(input: Int!): Boolean!
@@ -267,6 +267,7 @@ type Query {
   myMessageUser: [User!]!
 
   globalSearch(query: String!): [Post]
+  getUserFavoritePost(input: Int!): [Post]
 
   posts(input: GetPostInput!): [Post]
   postDetail(input: Int!): Post
