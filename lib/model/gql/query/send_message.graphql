@@ -1,0 +1,3 @@
+mutation sendMessage($toId: Int!, $content: String!) {
+  sendMessage(input: { toId: $toId, content: $content })
+}

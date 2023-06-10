@@ -8,26 +8,80 @@ import 'package:provider/provider.dart';
 import 'package:thumuht/main.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:thumuht/pages/detail.dart';
+import 'package:thumuht/pages/new_post.dart';
 
 import '../model/session.dart';
 
-Widget LikeList(BuildContext context) {
+FetchMore? fetchMoreGlobal;
+Refetch? refetchGlobal;
+
+FetchMoreOptions getOpt(String tag) {
+  return FetchMoreOptions(
+      variables: GetTypePostArguments(tags: tag).toJson(),
+      updateQuery: (previousResultData, fetchMoreResultData) {
+        final List<dynamic> repos = [...fetchMoreResultData!['posts']];
+        fetchMoreResultData['posts'] = repos;
+        return fetchMoreResultData;
+      });
+}
+
+List<String> tags = ["校园资讯", "二手交易", "学术研讨", "休闲娱乐"];
+
+class selectTypeTag extends StatefulWidget {
+  const selectTypeTag({Key? key}) : super(key: key);
+
+  @override
+  State<selectTypeTag> createState() => _selectTypeState();
+}
+
+class _selectTypeState extends State<selectTypeTag> {
+  String _value = tags.first;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: _value,
+      elevation: 16,
+      onChanged: (String? value) {
+        setState(() {
+          if (value == "校园资讯") {
+            _value = "校园资讯";
+            fetchMoreGlobal == null ? null : fetchMoreGlobal!(getOpt("校园资讯"));
+          } else if (value == "二手交易") {
+            _value = "二手交易";
+            fetchMoreGlobal == null ? null : fetchMoreGlobal!(getOpt("二手交易"));
+          } else if (value == "学术研讨") {
+            _value = "学术研讨";
+            fetchMoreGlobal == null ? null : fetchMoreGlobal!(getOpt("学术研讨"));
+          } else if (value == "休闲娱乐") {
+            _value = "休闲娱乐";
+            fetchMoreGlobal == null ? null : fetchMoreGlobal!(getOpt("休闲娱乐"));
+          }
+        });
+      },
+      items: tags.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+}
+
+Widget TypeList(BuildContext context) {
   return Column(children: [
-    Expanded(child: _buildLikeList(context)),
+    const selectTypeTag(),
+    Expanded(child: _buildTypeList(context)),
   ]);
 }
 
-VoidCallback? refetchGlobal;
 // post list.
-Widget _buildLikeList(BuildContext context) {
+Widget _buildTypeList(BuildContext context) {
   return Query(
     options: QueryOptions(
-        document: GET_POST_LISTS_QUERY_DOCUMENT,
-        variables: GetPostListsArguments(
-          offset: 0,
-          orderBy: PostOrderBy.like,
-          order: Order.desc,
-        ).toJson()),
+        document: GET_TYPE_POST_QUERY_DOCUMENT,
+        variables: GetTypePostArguments(tags: "校园资讯").toJson()),
     builder: (result, {fetchMore, refetch}) {
       if (result.hasException) {
         return Text(result.exception.toString());
@@ -38,7 +92,8 @@ Widget _buildLikeList(BuildContext context) {
         );
       }
       refetchGlobal = refetch;
-      final postlists = GetPostLists$Query.fromJson(result.data!).posts;
+      fetchMoreGlobal = fetchMore;
+      final postlists = GetTypePost$Query.fromJson(result.data!).posts;
 
       return Column(
         children: [
@@ -54,7 +109,6 @@ Widget _buildLikeList(BuildContext context) {
                     postlists[index]!.commentsNum!,
                     postlists[index]!.position,
                     postlists[index]!.tag!,
-                    postlists[index]!.user!.id!,
                     context);
               },
               itemCount: postlists?.length ??
@@ -68,7 +122,7 @@ Widget _buildLikeList(BuildContext context) {
 }
 
 ListTile _tile(int id, String title, String subtitle, int view, int like,
-        int commentsNum, String? position, String tag, int postUserId, BuildContext context) =>
+        int commentsNum, String? position, String tag, BuildContext context) =>
     ListTile(
       title: Row(children: [
         Text(
@@ -128,7 +182,6 @@ ListTile _tile(int id, String title, String subtitle, int view, int like,
                 like: like,
                 commentsNum: commentsNum,
                 position: position!,
-                postUserId: postUserId,
               ),
             )).then((value) => refetchGlobal!());
       },

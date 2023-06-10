@@ -1,0 +1,14 @@
+query getTypePost($tags: String!){
+    posts(input:{
+        tags: $tags
+    }){
+        id
+        title
+        content
+        view
+        like
+        comments_num
+        position
+        tag
+    }
+}

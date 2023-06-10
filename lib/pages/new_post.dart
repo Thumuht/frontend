@@ -262,7 +262,7 @@ class _PostButtonState extends State<PostButton> {
                     in Provider.of<Images>(context, listen: false).getImages) {
                   ByteData byteData = await image.getByteData();
                   List<int> imageData = byteData.buffer.asUint8List();
-                  imageUrls += '![](http://10.0.2.2:8899/fs/${image.name}) ';
+                  imageUrls += '![](${backendAddress}fs/${image.name}) ';
                   MultipartFile multipartFile = MultipartFile.fromBytes(
                       imageData,
                       filename: image.name,
@@ -282,7 +282,7 @@ class _PostButtonState extends State<PostButton> {
                         .getVideo
                         .readAsBytes();
                 videoUrl =
-                    '<video src=http://10.0.2.2:8899/fs/${Provider.of<Video>(context, listen: false).getVideo.name}>';
+                    '<video src=${backendAddress}fs/${Provider.of<Video>(context, listen: false).getVideo.name}>';
                 FormData formData = FormData.fromMap({
                   "file": await MultipartFile.fromFile(
                       Provider.of<Video>(context, listen: false).getVideo.path,

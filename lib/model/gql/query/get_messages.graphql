@@ -1,8 +1,8 @@
-query getMessages($userId: Int!) {
-    myMessage() {
-        messageId
-        userFrom
-        content
-        createdAt
-    }
+query getMessages($userId: Int!, $offset: Int!, $limit: Int!) {
+  myMessage(from: $userId, offset: $offset, limit: $limit) {
+    messageId
+    userFrom
+    content
+    createdAt
+  }
 }

@@ -571,9 +571,65 @@ Map<String, dynamic> _$GetCommentLists$QueryToJson(
       'comment': instance.comment.map((e) => e.toJson()).toList(),
     };
 
-BlockArguments _$BlockArgumentsFromJson(Map<String, dynamic> json) =>
-    BlockArguments(
-      userId: json['userId'] as int,
+MessageNum$Query _$MessageNum$QueryFromJson(Map<String, dynamic> json) =>
+    MessageNum$Query()..messageNum = json['messageNum'] as int;
+
+Map<String, dynamic> _$MessageNum$QueryToJson(MessageNum$Query instance) =>
+    <String, dynamic>{
+      'messageNum': instance.messageNum,
+    };
+
+SendMessage$Mutation _$SendMessage$MutationFromJson(
+        Map<String, dynamic> json) =>
+    SendMessage$Mutation()..sendMessage = json['sendMessage'] as bool;
+
+Map<String, dynamic> _$SendMessage$MutationToJson(
+        SendMessage$Mutation instance) =>
+    <String, dynamic>{
+      'sendMessage': instance.sendMessage,
+    };
+
+GetTypePost$Query$Post _$GetTypePost$Query$PostFromJson(
+        Map<String, dynamic> json) =>
+    GetTypePost$Query$Post()
+      ..id = json['id'] as int
+      ..title = json['title'] as String?
+      ..content = json['content'] as String?
+      ..view = json['view'] as int?
+      ..like = json['like'] as int?
+      ..commentsNum = json['comments_num'] as int?
+      ..position = json['position'] as String?
+      ..tag = json['tag'] as String?;
+
+Map<String, dynamic> _$GetTypePost$Query$PostToJson(
+        GetTypePost$Query$Post instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'content': instance.content,
+      'view': instance.view,
+      'like': instance.like,
+      'comments_num': instance.commentsNum,
+      'position': instance.position,
+      'tag': instance.tag,
+    };
+
+GetTypePost$Query _$GetTypePost$QueryFromJson(Map<String, dynamic> json) =>
+    GetTypePost$Query()
+      ..posts = (json['posts'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : GetTypePost$Query$Post.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetTypePost$QueryToJson(GetTypePost$Query instance) =>
+    <String, dynamic>{
+      'posts': instance.posts?.map((e) => e?.toJson()).toList(),
+    };
+
+DislikeArguments _$DislikeArgumentsFromJson(Map<String, dynamic> json) =>
+    DislikeArguments(
+      postId: json['postId'] as int,
     );
 
 Map<String, dynamic> _$BlockArgumentsToJson(BlockArguments instance) =>
@@ -591,12 +647,12 @@ Map<String, dynamic> _$UnblockArgumentsToJson(UnblockArguments instance) =>
       'userId': instance.userId,
     };
 
-SetProfileArguments _$SetProfileArgumentsFromJson(Map<String, dynamic> json) =>
-    SetProfileArguments(
-      nickname: json['nickname'] as String?,
-      password: json['password'] as String?,
-      about: json['about'] as String?,
-      avatar: json['avatar'] as String?,
+GetMessagesArguments _$GetMessagesArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetMessagesArguments(
+      userId: json['userId'] as int,
+      offset: json['offset'] as int,
+      limit: json['limit'] as int,
     );
 
 Map<String, dynamic> _$SetProfileArgumentsToJson(
@@ -611,11 +667,15 @@ Map<String, dynamic> _$SetProfileArgumentsToJson(
 FollowArguments _$FollowArgumentsFromJson(Map<String, dynamic> json) =>
     FollowArguments(
       userId: json['userId'] as int,
+      offset: json['offset'] as int,
+      limit: json['limit'] as int,
     );
 
 Map<String, dynamic> _$FollowArgumentsToJson(FollowArguments instance) =>
     <String, dynamic>{
       'userId': instance.userId,
+      'offset': instance.offset,
+      'limit': instance.limit,
     };
 
 LikeArguments _$LikeArgumentsFromJson(Map<String, dynamic> json) =>
@@ -820,4 +880,78 @@ DislikeArguments _$DislikeArgumentsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$DislikeArgumentsToJson(DislikeArguments instance) =>
     <String, dynamic>{
       'postId': instance.postId,
+    };
+
+MessageNumArguments _$MessageNumArgumentsFromJson(Map<String, dynamic> json) =>
+    MessageNumArguments(
+      id: json['id'] as int,
+    );
+
+Map<String, dynamic> _$MessageNumArgumentsToJson(
+        MessageNumArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+SendMessageArguments _$SendMessageArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    SendMessageArguments(
+      toId: json['toId'] as int,
+      content: json['content'] as String,
+    );
+
+Map<String, dynamic> _$SendMessageArgumentsToJson(
+        SendMessageArguments instance) =>
+    <String, dynamic>{
+      'toId': instance.toId,
+      'content': instance.content,
+    };
+
+GetTypePostArguments _$GetTypePostArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetTypePostArguments(
+      tags: json['tags'] as String,
+    );
+
+Map<String, dynamic> _$GetTypePostArgumentsToJson(
+        GetTypePostArguments instance) =>
+    <String, dynamic>{
+      'tags': instance.tags,
+    };
+
+MessageNumArguments _$MessageNumArgumentsFromJson(Map<String, dynamic> json) =>
+    MessageNumArguments(
+      id: json['id'] as int,
+    );
+
+Map<String, dynamic> _$MessageNumArgumentsToJson(
+        MessageNumArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+SendMessageArguments _$SendMessageArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    SendMessageArguments(
+      toId: json['toId'] as int,
+      content: json['content'] as String,
+    );
+
+Map<String, dynamic> _$SendMessageArgumentsToJson(
+        SendMessageArguments instance) =>
+    <String, dynamic>{
+      'toId': instance.toId,
+      'content': instance.content,
+    };
+
+GetTypePostArguments _$GetTypePostArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetTypePostArguments(
+      tags: json['tags'] as String,
+    );
+
+Map<String, dynamic> _$GetTypePostArgumentsToJson(
+        GetTypePostArguments instance) =>
+    <String, dynamic>{
+      'tags': instance.tags,
     };
