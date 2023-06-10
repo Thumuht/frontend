@@ -1,0 +1,16 @@
+query myFollow() {
+    me {
+        follow {
+            id
+            nickname
+            loginName
+            avatar
+        }
+        block {
+            id
+            nickname
+            loginName
+            avatar
+        }
+    }
+}
