@@ -69,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 height: 50,
                               )
                             : Image.network(
-                                '$backendAddress/fs/${me0.avatar}',
+                                '${backendAddress}fs/${me0.avatar}',
                                 width: 50,
                                 height: 50,
                               ),
