@@ -38,67 +38,135 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: CircularProgressIndicator(),
                 );
               }
+              print(result);
+              final me0 = GetProfile$Query.fromJson(result.data!).me;
 
-              return ListView(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 24.0, vertical: 24.0),
-                children: [
-                  Row(children: [
-                    result.data!['me']['avatar'] == ''
-                        ? Image.asset(
-                            'assets/thumuht.jpg',
-                            width: 50,
-                            height: 50,
-                          )
-                        : Image.network(
-                            '$backendAddress/fs/${result.data!['me']['avatar'] as String}',
-                            width: 50,
-                            height: 50,
+              return Query(
+                options: QueryOptions(document: MY_FOLLOW_QUERY_DOCUMENT),
+                builder: (result, {fetchMore, refetch}) {
+                  if (result.hasException) {
+                    return Text(result.exception.toString());
+                  }
+                  if (result.isLoading || result.data == null) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  final me = MyFollow$Query.fromJson(result.data!).me;
+                  me.follow ??= [];
+                  me.block ??= [];
+                  return ListView(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0, vertical: 24.0),
+                    children: [
+                      Row(children: [
+                        me0.avatar == ''
+                            ? Image.asset(
+                                'assets/thumuht.jpg',
+                                width: 50,
+                                height: 50,
+                              )
+                            : Image.network(
+                                '$backendAddress/fs/${me0.avatar}',
+                                width: 50,
+                                height: 50,
+                              ),
+                        const SizedBox(
+                          width: 16.0,
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                                me0.nickname == ''
+                                    ? me0.loginName
+                                    : me0.nickname!,
+                                style: const TextStyle(fontSize: 20.0)),
+                            Text('@${me0.loginName}',
+                                style: const TextStyle(color: Colors.grey)),
+                          ],
+                        )
+                      ]),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      Text(me0.about!),
+                      const SizedBox(
+                        height: 40.0,
+                      ),
+                      Mutation(
+                        options: MutationOptions(
+                            document: LOGOUT_MUTATION_DOCUMENT,
+                            onCompleted: (data) {
+                              Provider.of<Session>(context, listen: false)
+                                  .logout();
+                            }),
+                        builder: (runMutation, result) => ElevatedButton(
+                          onPressed: () {
+                            runMutation({});
+                          },
+                          child: const Text('Log Out'),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      ElevatedButton(
+                          onPressed: () async {
+                            await context.push('/profile-edit');
+                            refetch!();
+                          },
+                          child: const Text('Edit')),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                              onPressed: () {
+                                context.push('/list', extra: {
+                                  'userId': Provider.of<Session>(context,
+                                          listen: false)
+                                      .userId_,
+                                  'isBlacklist': false,
+                                  'users':
+                                      me.follow!.map((e) => e!.id).toList(),
+                                  'refetch': refetch!
+                                });
+                              },
+                              child: const Text('Follow List')),
+                          const SizedBox(
+                            width: 20.0,
                           ),
-                    const SizedBox(
-                      width: 16.0,
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                            result.data!['me']['nickname'] == ''
-                                ? result.data!['me']['loginName'] as String
-                                : result.data!['me']['nickname'] as String,
-                            style: const TextStyle(fontSize: 20.0)),
-                        Text('@${result.data!['me']['loginName'] as String}',
-                            style: const TextStyle(color: Colors.grey)),
-                      ],
-                    )
-                  ]),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  Text(result.data!['me']['about'] as String),
-                  const SizedBox(
-                    height: 40.0,
-                  ),
-                  Mutation(
-                    options: MutationOptions(
-                        document: LOGOUT_MUTATION_DOCUMENT,
-                        onCompleted: (data) {
-                          Provider.of<Session>(context, listen: false).logout();
-                        }),
-                    builder: (runMutation, result) => ElevatedButton(
-                      onPressed: () {
-                        runMutation({});
-                      },
-                      child: const Text('Log Out'),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        context.push('/profile-edit');
-                      },
-                      child: const Text('Edit'))
-                ],
+                          ElevatedButton(
+                              onPressed: () {
+                                context.push('/list', extra: {
+                                  'userId': Provider.of<Session>(context,
+                                          listen: false)
+                                      .userId_,
+                                  'isBlacklist': true,
+                                  'users': me.block!.map((e) => e!.id).toList(),
+                                  'refetch': refetch!
+                                });
+                              },
+                              child: const Text('Block List')),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            context.push('/user-posts', extra: {
+                              'userId':
+                                  Provider.of<Session>(context, listen: false)
+                                      .userId_!
+                            });
+                          },
+                          child: const Text('View posts'))
+                    ],
+                  );
+                },
               );
             }),
       ),

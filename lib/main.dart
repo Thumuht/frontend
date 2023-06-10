@@ -4,11 +4,13 @@ import 'package:thumuht/components/post_list.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:thumuht/model/session.dart';
 import 'package:thumuht/pages/detail.dart';
+import 'package:thumuht/message_list.dart';
 import 'package:thumuht/router.dart';
 import 'package:provider/provider.dart';
 
-const String backendAddress = 'http://10.0.2.2:8899/';
-// const String backendAddress = 'http://127.0.0.1:8899/';
+//const String backendAddress = 'http://10.0.2.2:8899/';
+const String backendAddress = 'http://127.0.0.1:8899/';
+const String backendWsAddress = 'ws://127.0.0.1:8899/';
 
 Map<int, List<int>> likeMap = {};
 Map<int, List<int>> markMap = {};
@@ -23,6 +25,12 @@ Map<String, Color> TagColor = {
 
 final HttpLink httpLink = HttpLink(
   '${backendAddress}query',
+);
+
+final WebSocketLink webSocketLink = WebSocketLink(
+  '${backendWsAddress}query',
+  config: const SocketClientConfig(
+      autoReconnect: true, inactivityTimeout: Duration(seconds: 30)),
 );
 
 void main() async {
@@ -48,21 +56,23 @@ class MyApp extends StatelessWidget {
             ),
             ChangeNotifierProvider(
                 create: (context) => OrderBy(orderBy: PostOrderBy.createdAt)),
+            ChangeNotifierProvider(create: (context) => MessageList()),
           ],
           child: Consumer<Session>(
             builder: (context, value, child) {
               final myLink = CustomAuthLink(value);
-              final Link link = myLink.concat(httpLink);
+              final Link link = myLink.concat(httpLink).concat(webSocketLink);
               return GraphQLProvider(
-                  client: ValueNotifier(GraphQLClient(
-                      link: link, cache: GraphQLCache(store: hstore))),
-                  child: MaterialApp.router(
-                    title: 'thumuht',
-                    theme: ThemeData(
-                      primarySwatch: Colors.lightBlue,
-                    ),
-                    routerConfig: router(),
-                  ));
+                client: ValueNotifier(GraphQLClient(
+                    link: link, cache: GraphQLCache(store: hstore))),
+                child: MaterialApp.router(
+                  title: 'thumuht',
+                  theme: ThemeData(
+                    primarySwatch: Colors.lightBlue,
+                  ),
+                  routerConfig: router(),
+                ),
+              );
             },
           ));
 }

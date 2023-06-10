@@ -103,9 +103,85 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                       },
                       child: const Text('Upload'))
                 ]),
+                const SizedBox(
+                  height: 16.0,
+                ),
                 Row(
-                  children: [TextField()],
-                )
+                  children: [
+                    const Text('Nickname'),
+                    const SizedBox(
+                      width: 16.0,
+                    ),
+                    Expanded(
+                        child: TextField(
+                      onChanged: (value) {
+                        nickname_ = value;
+                      },
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: oldProfile['nickname'] as String),
+                    ))
+                  ],
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                Row(
+                  children: [
+                    const Text('About'),
+                    const SizedBox(
+                      width: 16.0,
+                    ),
+                    Expanded(
+                        child: TextField(
+                      onChanged: (value) {
+                        about_ = value;
+                      },
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: oldProfile['about'] as String),
+                    ))
+                  ],
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                Row(
+                  children: [
+                    const Text('Password'),
+                    const SizedBox(
+                      width: 16.0,
+                    ),
+                    Expanded(
+                        child: TextField(
+                      onChanged: (value) {
+                        password_ = value;
+                      },
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Enter new password'),
+                    ))
+                  ],
+                ),
+                // a button to submit the form
+                const SizedBox(
+                  height: 16.0,
+                ),
+                ElevatedButton(
+                    onPressed: () async {
+                      var result = await client.mutate(MutationOptions(
+                          document: SET_PROFILE_MUTATION_DOCUMENT,
+                          variables: {
+                            'nickname': nickname_,
+                            'about': about_,
+                            'password': password_ == ''
+                                ? oldProfile['password']
+                                : password_,
+                            'avatar': avatarPath_
+                          }));
+                      context.pop();
+                    },
+                    child: const Text('Submit'))
               ],
             );
           },

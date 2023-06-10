@@ -47,7 +47,6 @@ type Post {
   attachment: [Attachment]
 }
 
-
 type BookmarkList {
   id: Int!
   list: String
@@ -73,7 +72,6 @@ type LoginInfo {
   token: String!
   userId: Int!
 }
-
 
 type Comment {
   id: Int!
@@ -147,7 +145,6 @@ input UpdateComment {
   content: String
 }
 
-
 enum AttachmentParent {
   post
   comment
@@ -158,7 +155,6 @@ enum UserOrderBy {
   nickname
 }
 
-
 input PostUpload {
   upload: Upload!
   parentId: Int!
@@ -166,30 +162,42 @@ input PostUpload {
 }
 
 type Mutation {
-  """ 注册帐号，设置密码 """
-  createUser (input: NewUser!): User!
+  """
+  注册帐号，设置密码
+  """
+  createUser(input: NewUser!): User!
 
-  """ 对用户进行关注和取消关注 """
+  """
+  对用户进行关注和取消关注
+  """
   followUser(input: Int!): Boolean!
   unfollowUser(input: Int!): Boolean!
 
-  """ 删除用户 """
+  """
+  删除用户
+  """
   deleteUser(input: Int!): Boolean!
-  """ 修改用户名，头像，简介，密码  """
+  """
+  修改用户名，头像，简介，密码
+  """
   updateUser(input: UpdateUser!): User!
 
-  """屏蔽用户"""
+  """
+  屏蔽用户
+  """
   blockUser(input: Int!): Boolean!
   unblockUser(input: Int!): Boolean!
 
-  """ 私信 """
+  """
+  私信
+  """
   sendMessage(input: MessageInput!): Boolean!
 
-
-  """ 登录 """
+  """
+  登录
+  """
   login(input: LoginSession!): LoginInfo!
   logout: Boolean!
-
 
   createPost(input: NewPost!): Post!
   createComment(input: NewComment!): Comment!
@@ -252,18 +260,27 @@ input GetCommentInput {
   order: Order! = ASC
 }
 
-
 type Query {
-   """ 查询用户 """
+  """
+  查询用户
+  """
   users(input: GetUserInput!): [User!]!
-  """ 查询用户 """
+  """
+  查询用户
+  """
   getUserById(input: Int!): User!
 
-  """ 获取本人信息 """
+  """
+  获取本人信息
+  """
   me: User!
-  """ 获取本人的私信 """
+  """
+  获取本人的私信
+  """
   myMessage(from: Int, offset: Int = 0, limit: Int = 10): [Message!]!
-  """获取和我私信的用户"""
+  """
+  获取和我私信的用户
+  """
   myMessageUser: [User!]!
 
   globalSearch(query: String!): [Post]
@@ -272,9 +289,11 @@ type Query {
   posts(input: GetPostInput!): [Post]
   postDetail(input: Int!): Post
   comment(input: GetCommentInput!): [Comment!]!
+
+  messageNum(from: Int!): Int!
 }
 
 type Subscription {
-    currentTime: myTime!
-    messageToMe: Message!
+  currentTime: myTime!
+  messageToMe: Message!
 }

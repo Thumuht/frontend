@@ -11,5 +11,7 @@ mutation setProfile(
       about: $about
       avatar: $avatar
     }
-  ) {}
+  ) {
+    id
+  }
 }
