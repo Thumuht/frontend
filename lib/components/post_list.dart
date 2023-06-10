@@ -190,7 +190,7 @@ Widget _buildList(BuildContext context) {
       refetchGlobal = refetch;
       FetchMoreOptions opt = FetchMoreOptions(
         variables: GetPostListsArguments(
-                offset: (result.data!['post'] != Null)
+                offset: (result.data?['post'] != null)
                     ? result.data!['posts'].length
                     : 0,
                 orderBy:

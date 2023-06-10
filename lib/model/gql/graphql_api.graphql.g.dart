@@ -115,37 +115,6 @@ Map<String, dynamic> _$GetFavoritePost$QueryToJson(
           instance.getUserFavoritePost?.map((e) => e?.toJson()).toList(),
     };
 
-GetMessages$Query$Message _$GetMessages$Query$MessageFromJson(
-        Map<String, dynamic> json) =>
-    GetMessages$Query$Message()
-      ..messageId = json['messageId'] as int
-      ..userFrom = json['userFrom'] as int
-      ..content = json['content'] as String
-      ..createdAt = json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String);
-
-Map<String, dynamic> _$GetMessages$Query$MessageToJson(
-        GetMessages$Query$Message instance) =>
-    <String, dynamic>{
-      'messageId': instance.messageId,
-      'userFrom': instance.userFrom,
-      'content': instance.content,
-      'createdAt': instance.createdAt?.toIso8601String(),
-    };
-
-GetMessages$Query _$GetMessages$QueryFromJson(Map<String, dynamic> json) =>
-    GetMessages$Query()
-      ..myMessage = (json['myMessage'] as List<dynamic>)
-          .map((e) =>
-              GetMessages$Query$Message.fromJson(e as Map<String, dynamic>))
-          .toList();
-
-Map<String, dynamic> _$GetMessages$QueryToJson(GetMessages$Query instance) =>
-    <String, dynamic>{
-      'myMessage': instance.myMessage.map((e) => e.toJson()).toList(),
-    };
-
 GetPostLists$Query$Post _$GetPostLists$Query$PostFromJson(
         Map<String, dynamic> json) =>
     GetPostLists$Query$Post()
@@ -210,56 +179,6 @@ GetProfile$Query _$GetProfile$QueryFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$GetProfile$QueryToJson(GetProfile$Query instance) =>
     <String, dynamic>{
       'me': instance.me.toJson(),
-    };
-
-GetUserById$Query$User$User _$GetUserById$Query$User$UserFromJson(
-        Map<String, dynamic> json) =>
-    GetUserById$Query$User$User()
-      ..id = json['id'] as int
-      ..loginName = json['loginName'] as String
-      ..nickname = json['nickname'] as String?
-      ..avatar = json['avatar'] as String?;
-
-Map<String, dynamic> _$GetUserById$Query$User$UserToJson(
-        GetUserById$Query$User$User instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'loginName': instance.loginName,
-      'nickname': instance.nickname,
-      'avatar': instance.avatar,
-    };
-
-GetUserById$Query$User _$GetUserById$Query$UserFromJson(
-        Map<String, dynamic> json) =>
-    GetUserById$Query$User()
-      ..loginName = json['loginName'] as String
-      ..nickname = json['nickname'] as String?
-      ..about = json['about'] as String?
-      ..avatar = json['avatar'] as String?
-      ..follow = (json['follow'] as List<dynamic>?)
-          ?.map((e) => e == null
-              ? null
-              : GetUserById$Query$User$User.fromJson(e as Map<String, dynamic>))
-          .toList();
-
-Map<String, dynamic> _$GetUserById$Query$UserToJson(
-        GetUserById$Query$User instance) =>
-    <String, dynamic>{
-      'loginName': instance.loginName,
-      'nickname': instance.nickname,
-      'about': instance.about,
-      'avatar': instance.avatar,
-      'follow': instance.follow?.map((e) => e?.toJson()).toList(),
-    };
-
-GetUserById$Query _$GetUserById$QueryFromJson(Map<String, dynamic> json) =>
-    GetUserById$Query()
-      ..getUserById = GetUserById$Query$User.fromJson(
-          json['getUserById'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetUserById$QueryToJson(GetUserById$Query instance) =>
-    <String, dynamic>{
-      'getUserById': instance.getUserById.toJson(),
     };
 
 GlobalSearch$Query$Post _$GlobalSearch$Query$PostFromJson(
@@ -360,39 +279,6 @@ Map<String, dynamic> _$NewPost$MutationToJson(NewPost$Mutation instance) =>
       'createPost': instance.createPost.toJson(),
     };
 
-ReceiveMessage$Subscription$Message
-    _$ReceiveMessage$Subscription$MessageFromJson(Map<String, dynamic> json) =>
-        ReceiveMessage$Subscription$Message()
-          ..messageId = json['messageId'] as int
-          ..userFrom = json['userFrom'] as int
-          ..userTo = json['userTo'] as int
-          ..content = json['content'] as String
-          ..createdAt = json['createdAt'] == null
-              ? null
-              : DateTime.parse(json['createdAt'] as String);
-
-Map<String, dynamic> _$ReceiveMessage$Subscription$MessageToJson(
-        ReceiveMessage$Subscription$Message instance) =>
-    <String, dynamic>{
-      'messageId': instance.messageId,
-      'userFrom': instance.userFrom,
-      'userTo': instance.userTo,
-      'content': instance.content,
-      'createdAt': instance.createdAt?.toIso8601String(),
-    };
-
-ReceiveMessage$Subscription _$ReceiveMessage$SubscriptionFromJson(
-        Map<String, dynamic> json) =>
-    ReceiveMessage$Subscription()
-      ..messageToMe = ReceiveMessage$Subscription$Message.fromJson(
-          json['messageToMe'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$ReceiveMessage$SubscriptionToJson(
-        ReceiveMessage$Subscription instance) =>
-    <String, dynamic>{
-      'messageToMe': instance.messageToMe.toJson(),
-    };
-
 Register$Mutation$User _$Register$Mutation$UserFromJson(
         Map<String, dynamic> json) =>
     Register$Mutation$User()
@@ -476,6 +362,44 @@ Map<String, dynamic> _$Logout$MutationToJson(Logout$Mutation instance) =>
       'logout': instance.logout,
     };
 
+GetTypePost$Query$Post _$GetTypePost$Query$PostFromJson(
+        Map<String, dynamic> json) =>
+    GetTypePost$Query$Post()
+      ..id = json['id'] as int
+      ..title = json['title'] as String?
+      ..content = json['content'] as String?
+      ..view = json['view'] as int?
+      ..like = json['like'] as int?
+      ..commentsNum = json['comments_num'] as int?
+      ..position = json['position'] as String?
+      ..tag = json['tag'] as String?;
+
+Map<String, dynamic> _$GetTypePost$Query$PostToJson(
+        GetTypePost$Query$Post instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'content': instance.content,
+      'view': instance.view,
+      'like': instance.like,
+      'comments_num': instance.commentsNum,
+      'position': instance.position,
+      'tag': instance.tag,
+    };
+
+GetTypePost$Query _$GetTypePost$QueryFromJson(Map<String, dynamic> json) =>
+    GetTypePost$Query()
+      ..posts = (json['posts'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : GetTypePost$Query$Post.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetTypePost$QueryToJson(GetTypePost$Query instance) =>
+    <String, dynamic>{
+      'posts': instance.posts?.map((e) => e?.toJson()).toList(),
+    };
+
 Block$Mutation _$Block$MutationFromJson(Map<String, dynamic> json) =>
     Block$Mutation()..blockUser = json['blockUser'] as bool;
 
@@ -492,20 +416,85 @@ Map<String, dynamic> _$Follow$MutationToJson(Follow$Mutation instance) =>
       'followUser': instance.followUser,
     };
 
-Unblock$Mutation _$Unblock$MutationFromJson(Map<String, dynamic> json) =>
-    Unblock$Mutation()..unblockUser = json['unblockUser'] as bool;
+GetMessages$Query$Message _$GetMessages$Query$MessageFromJson(
+        Map<String, dynamic> json) =>
+    GetMessages$Query$Message()
+      ..messageId = json['messageId'] as int
+      ..userFrom = json['userFrom'] as int
+      ..content = json['content'] as String
+      ..createdAt = json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String);
 
-Map<String, dynamic> _$Unblock$MutationToJson(Unblock$Mutation instance) =>
+Map<String, dynamic> _$GetMessages$Query$MessageToJson(
+        GetMessages$Query$Message instance) =>
     <String, dynamic>{
-      'unblockUser': instance.unblockUser,
+      'messageId': instance.messageId,
+      'userFrom': instance.userFrom,
+      'content': instance.content,
+      'createdAt': instance.createdAt?.toIso8601String(),
     };
 
-Unfollow$Mutation _$Unfollow$MutationFromJson(Map<String, dynamic> json) =>
-    Unfollow$Mutation()..unfollowUser = json['unfollowUser'] as bool;
+GetMessages$Query _$GetMessages$QueryFromJson(Map<String, dynamic> json) =>
+    GetMessages$Query()
+      ..myMessage = (json['myMessage'] as List<dynamic>)
+          .map((e) =>
+              GetMessages$Query$Message.fromJson(e as Map<String, dynamic>))
+          .toList();
 
-Map<String, dynamic> _$Unfollow$MutationToJson(Unfollow$Mutation instance) =>
+Map<String, dynamic> _$GetMessages$QueryToJson(GetMessages$Query instance) =>
     <String, dynamic>{
-      'unfollowUser': instance.unfollowUser,
+      'myMessage': instance.myMessage.map((e) => e.toJson()).toList(),
+    };
+
+GetUserById$Query$User$User _$GetUserById$Query$User$UserFromJson(
+        Map<String, dynamic> json) =>
+    GetUserById$Query$User$User()
+      ..id = json['id'] as int
+      ..loginName = json['loginName'] as String
+      ..nickname = json['nickname'] as String?
+      ..avatar = json['avatar'] as String?;
+
+Map<String, dynamic> _$GetUserById$Query$User$UserToJson(
+        GetUserById$Query$User$User instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'loginName': instance.loginName,
+      'nickname': instance.nickname,
+      'avatar': instance.avatar,
+    };
+
+GetUserById$Query$User _$GetUserById$Query$UserFromJson(
+        Map<String, dynamic> json) =>
+    GetUserById$Query$User()
+      ..loginName = json['loginName'] as String
+      ..nickname = json['nickname'] as String?
+      ..about = json['about'] as String?
+      ..avatar = json['avatar'] as String?
+      ..follow = (json['follow'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : GetUserById$Query$User$User.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetUserById$Query$UserToJson(
+        GetUserById$Query$User instance) =>
+    <String, dynamic>{
+      'loginName': instance.loginName,
+      'nickname': instance.nickname,
+      'about': instance.about,
+      'avatar': instance.avatar,
+      'follow': instance.follow?.map((e) => e?.toJson()).toList(),
+    };
+
+GetUserById$Query _$GetUserById$QueryFromJson(Map<String, dynamic> json) =>
+    GetUserById$Query()
+      ..getUserById = GetUserById$Query$User.fromJson(
+          json['getUserById'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetUserById$QueryToJson(GetUserById$Query instance) =>
+    <String, dynamic>{
+      'getUserById': instance.getUserById.toJson(),
     };
 
 MyFollow$Query$User$User _$MyFollow$Query$User$UserFromJson(
@@ -554,22 +543,53 @@ Map<String, dynamic> _$MyFollow$QueryToJson(MyFollow$Query instance) =>
       'me': instance.me.toJson(),
     };
 
-MessageNum$Query _$MessageNum$QueryFromJson(Map<String, dynamic> json) =>
-    MessageNum$Query()..messageNum = json['messageNum'] as int;
+ReceiveMessage$Subscription$Message
+    _$ReceiveMessage$Subscription$MessageFromJson(Map<String, dynamic> json) =>
+        ReceiveMessage$Subscription$Message()
+          ..messageId = json['messageId'] as int
+          ..userFrom = json['userFrom'] as int
+          ..userTo = json['userTo'] as int
+          ..content = json['content'] as String
+          ..createdAt = json['createdAt'] == null
+              ? null
+              : DateTime.parse(json['createdAt'] as String);
 
-Map<String, dynamic> _$MessageNum$QueryToJson(MessageNum$Query instance) =>
+Map<String, dynamic> _$ReceiveMessage$Subscription$MessageToJson(
+        ReceiveMessage$Subscription$Message instance) =>
     <String, dynamic>{
-      'messageNum': instance.messageNum,
+      'messageId': instance.messageId,
+      'userFrom': instance.userFrom,
+      'userTo': instance.userTo,
+      'content': instance.content,
+      'createdAt': instance.createdAt?.toIso8601String(),
     };
 
-SendMessage$Mutation _$SendMessage$MutationFromJson(
+ReceiveMessage$Subscription _$ReceiveMessage$SubscriptionFromJson(
         Map<String, dynamic> json) =>
-    SendMessage$Mutation()..sendMessage = json['sendMessage'] as bool;
+    ReceiveMessage$Subscription()
+      ..messageToMe = ReceiveMessage$Subscription$Message.fromJson(
+          json['messageToMe'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$SendMessage$MutationToJson(
-        SendMessage$Mutation instance) =>
+Map<String, dynamic> _$ReceiveMessage$SubscriptionToJson(
+        ReceiveMessage$Subscription instance) =>
     <String, dynamic>{
-      'sendMessage': instance.sendMessage,
+      'messageToMe': instance.messageToMe.toJson(),
+    };
+
+Unblock$Mutation _$Unblock$MutationFromJson(Map<String, dynamic> json) =>
+    Unblock$Mutation()..unblockUser = json['unblockUser'] as bool;
+
+Map<String, dynamic> _$Unblock$MutationToJson(Unblock$Mutation instance) =>
+    <String, dynamic>{
+      'unblockUser': instance.unblockUser,
+    };
+
+Unfollow$Mutation _$Unfollow$MutationFromJson(Map<String, dynamic> json) =>
+    Unfollow$Mutation()..unfollowUser = json['unfollowUser'] as bool;
+
+Map<String, dynamic> _$Unfollow$MutationToJson(Unfollow$Mutation instance) =>
+    <String, dynamic>{
+      'unfollowUser': instance.unfollowUser,
     };
 
 DislikeArguments _$DislikeArgumentsFromJson(Map<String, dynamic> json) =>
@@ -592,22 +612,6 @@ Map<String, dynamic> _$GetFavoritePostArgumentsToJson(
         GetFavoritePostArguments instance) =>
     <String, dynamic>{
       'userId': instance.userId,
-    };
-
-GetMessagesArguments _$GetMessagesArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    GetMessagesArguments(
-      userId: json['userId'] as int,
-      offset: json['offset'] as int,
-      limit: json['limit'] as int,
-    );
-
-Map<String, dynamic> _$GetMessagesArgumentsToJson(
-        GetMessagesArguments instance) =>
-    <String, dynamic>{
-      'userId': instance.userId,
-      'offset': instance.offset,
-      'limit': instance.limit,
     };
 
 GetPostListsArguments _$GetPostListsArgumentsFromJson(
@@ -646,18 +650,6 @@ const _$OrderEnumMap = {
   Order.desc: 'DESC',
   Order.artemisUnknown: 'ARTEMIS_UNKNOWN',
 };
-
-GetUserByIdArguments _$GetUserByIdArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    GetUserByIdArguments(
-      id: json['id'] as int,
-    );
-
-Map<String, dynamic> _$GetUserByIdArgumentsToJson(
-        GetUserByIdArguments instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-    };
 
 GlobalSearchArguments _$GlobalSearchArgumentsFromJson(
         Map<String, dynamic> json) =>
@@ -724,18 +716,6 @@ Map<String, dynamic> _$NewPostArgumentsToJson(NewPostArguments instance) =>
       'position': instance.position,
     };
 
-ReceiveMessageArguments _$ReceiveMessageArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    ReceiveMessageArguments(
-      token: json['token'] as String,
-    );
-
-Map<String, dynamic> _$ReceiveMessageArgumentsToJson(
-        ReceiveMessageArguments instance) =>
-    <String, dynamic>{
-      'token': instance.token,
-    };
-
 RegisterArguments _$RegisterArgumentsFromJson(Map<String, dynamic> json) =>
     RegisterArguments(
       loginName: json['loginName'] as String,
@@ -787,6 +767,18 @@ Map<String, dynamic> _$LoginArgumentsToJson(LoginArguments instance) =>
       'password': instance.password,
     };
 
+GetTypePostArguments _$GetTypePostArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetTypePostArguments(
+      tags: json['tags'] as String,
+    );
+
+Map<String, dynamic> _$GetTypePostArgumentsToJson(
+        GetTypePostArguments instance) =>
+    <String, dynamic>{
+      'tags': instance.tags,
+    };
+
 BlockArguments _$BlockArgumentsFromJson(Map<String, dynamic> json) =>
     BlockArguments(
       userId: json['userId'] as int,
@@ -805,6 +797,42 @@ FollowArguments _$FollowArgumentsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$FollowArgumentsToJson(FollowArguments instance) =>
     <String, dynamic>{
       'userId': instance.userId,
+    };
+
+GetMessagesArguments _$GetMessagesArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetMessagesArguments(
+      userId: json['userId'] as int,
+    );
+
+Map<String, dynamic> _$GetMessagesArgumentsToJson(
+        GetMessagesArguments instance) =>
+    <String, dynamic>{
+      'userId': instance.userId,
+    };
+
+GetUserByIdArguments _$GetUserByIdArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetUserByIdArguments(
+      id: json['id'] as int,
+    );
+
+Map<String, dynamic> _$GetUserByIdArgumentsToJson(
+        GetUserByIdArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+ReceiveMessageArguments _$ReceiveMessageArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    ReceiveMessageArguments(
+      token: json['token'] as String,
+    );
+
+Map<String, dynamic> _$ReceiveMessageArgumentsToJson(
+        ReceiveMessageArguments instance) =>
+    <String, dynamic>{
+      'token': instance.token,
     };
 
 UnblockArguments _$UnblockArgumentsFromJson(Map<String, dynamic> json) =>
