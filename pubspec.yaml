@@ -39,7 +39,6 @@ dependencies:
   graphql: ^5.1.2
   graphql_flutter: ^5.1.2
   provider: ^6.0.0
-  flutter_markdown: ^0.6.14
   # 图片选择器
   image_picker: ^0.8.2
   file_selector: ^0.9.3
@@ -48,6 +47,9 @@ dependencies:
   dio: ^5.1.2
   location: ^4.4.0
   geocode: ^1.0.3
+  # markdown
+  markdown_widget: ^2.2.0
+  video_player: ^2.6.1
 
 
 dev_dependencies:
