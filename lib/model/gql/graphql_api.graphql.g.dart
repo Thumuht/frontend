@@ -27,11 +27,13 @@ Map<String, dynamic> _$GetCommentLists$Query$Comment$PostToJson(
 GetCommentLists$Query$Comment$User _$GetCommentLists$Query$Comment$UserFromJson(
         Map<String, dynamic> json) =>
     GetCommentLists$Query$Comment$User()
+      ..id = json['id'] as int
       ..loginName = json['loginName'] as String;
 
 Map<String, dynamic> _$GetCommentLists$Query$Comment$UserToJson(
         GetCommentLists$Query$Comment$User instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'loginName': instance.loginName,
     };
 
@@ -115,6 +117,16 @@ Map<String, dynamic> _$GetFavoritePost$QueryToJson(
           instance.getUserFavoritePost?.map((e) => e?.toJson()).toList(),
     };
 
+GetPostLists$Query$Post$User _$GetPostLists$Query$Post$UserFromJson(
+        Map<String, dynamic> json) =>
+    GetPostLists$Query$Post$User()..id = json['id'] as int;
+
+Map<String, dynamic> _$GetPostLists$Query$Post$UserToJson(
+        GetPostLists$Query$Post$User instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
 GetPostLists$Query$Post _$GetPostLists$Query$PostFromJson(
         Map<String, dynamic> json) =>
     GetPostLists$Query$Post()
@@ -125,7 +137,11 @@ GetPostLists$Query$Post _$GetPostLists$Query$PostFromJson(
       ..like = json['like'] as int?
       ..commentsNum = json['comments_num'] as int?
       ..position = json['position'] as String?
-      ..tag = json['tag'] as String?;
+      ..tag = json['tag'] as String?
+      ..user = json['user'] == null
+          ? null
+          : GetPostLists$Query$Post$User.fromJson(
+              json['user'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$GetPostLists$Query$PostToJson(
         GetPostLists$Query$Post instance) =>
@@ -138,6 +154,7 @@ Map<String, dynamic> _$GetPostLists$Query$PostToJson(
       'comments_num': instance.commentsNum,
       'position': instance.position,
       'tag': instance.tag,
+      'user': instance.user?.toJson(),
     };
 
 GetPostLists$Query _$GetPostLists$QueryFromJson(Map<String, dynamic> json) =>
@@ -642,6 +659,24 @@ Map<String, dynamic> _$GetUserPost$QueryToJson(GetUserPost$Query instance) =>
       'getUserById': instance.getUserById.toJson(),
     };
 
+MessageNum$Query _$MessageNum$QueryFromJson(Map<String, dynamic> json) =>
+    MessageNum$Query()..messageNum = json['messageNum'] as int;
+
+Map<String, dynamic> _$MessageNum$QueryToJson(MessageNum$Query instance) =>
+    <String, dynamic>{
+      'messageNum': instance.messageNum,
+    };
+
+SendMessage$Mutation _$SendMessage$MutationFromJson(
+        Map<String, dynamic> json) =>
+    SendMessage$Mutation()..sendMessage = json['sendMessage'] as bool;
+
+Map<String, dynamic> _$SendMessage$MutationToJson(
+        SendMessage$Mutation instance) =>
+    <String, dynamic>{
+      'sendMessage': instance.sendMessage,
+    };
+
 DislikeArguments _$DislikeArgumentsFromJson(Map<String, dynamic> json) =>
     DislikeArguments(
       postId: json['postId'] as int,
@@ -853,12 +888,16 @@ GetMessagesArguments _$GetMessagesArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetMessagesArguments(
       userId: json['userId'] as int,
+      offset: json['offset'] as int,
+      limit: json['limit'] as int,
     );
 
 Map<String, dynamic> _$GetMessagesArgumentsToJson(
         GetMessagesArguments instance) =>
     <String, dynamic>{
       'userId': instance.userId,
+      'offset': instance.offset,
+      'limit': instance.limit,
     };
 
 GetUserByIdArguments _$GetUserByIdArgumentsFromJson(
@@ -915,4 +954,29 @@ Map<String, dynamic> _$GetUserPostArgumentsToJson(
         GetUserPostArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
+    };
+
+MessageNumArguments _$MessageNumArgumentsFromJson(Map<String, dynamic> json) =>
+    MessageNumArguments(
+      id: json['id'] as int,
+    );
+
+Map<String, dynamic> _$MessageNumArgumentsToJson(
+        MessageNumArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+SendMessageArguments _$SendMessageArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    SendMessageArguments(
+      toId: json['toId'] as int,
+      content: json['content'] as String,
+    );
+
+Map<String, dynamic> _$SendMessageArgumentsToJson(
+        SendMessageArguments instance) =>
+    <String, dynamic>{
+      'toId': instance.toId,
+      'content': instance.content,
     };

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:thumuht/main.dart';
 import 'package:thumuht/router.dart';
 
+import '../message_list.dart';
 import '../model/gql/graphql_api.graphql.dart';
 import '../model/session.dart';
 
@@ -68,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 height: 50,
                               )
                             : Image.network(
-                                '$backendAddress/fs/${me0.avatar}',
+                                '${backendAddress}fs/${me0.avatar}',
                                 width: 50,
                                 height: 50,
                               ),
@@ -100,6 +101,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             onCompleted: (data) {
                               Provider.of<Session>(context, listen: false)
                                   .logout();
+                              Provider.of<MessageList>(context, listen: false)
+                                  .stopSubscription();
                             }),
                         builder: (runMutation, result) => ElevatedButton(
                           onPressed: () {

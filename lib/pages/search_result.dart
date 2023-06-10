@@ -142,6 +142,7 @@ ListTile _tile(int id, String title, String subtitle, int view, int like,
                 like: like,
                 commentsNum: commentsNum,
                 position: position!,
+                postUserId: 0, // FIXME
               ),
             ));
       },

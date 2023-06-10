@@ -92,16 +92,18 @@ class _MessageItemState extends State<MessageItem> {
 }
 
 class ChatMessage extends StatefulWidget {
-  const ChatMessage({
-    Key? key,
-    required this.avatar,
-    required this.content,
-    required this.isMe,
-  }) : super(key: key);
+  const ChatMessage(
+      {Key? key,
+      required this.avatar,
+      required this.content,
+      required this.isMe,
+      required this.senderId})
+      : super(key: key);
 
   final String avatar;
   final String content;
   final bool isMe;
+  final int senderId;
 
   @override
   State<ChatMessage> createState() => _ChatMessageState();
@@ -110,41 +112,50 @@ class ChatMessage extends StatefulWidget {
 class _ChatMessageState extends State<ChatMessage> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment:
-          widget.isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
-      children: [
-        widget.isMe
-            ? const SizedBox()
-            : widget.avatar == ''
-                ? Image.asset(
-                    'assets/thumuht.jpg',
-                    width: 50,
-                    height: 50,
-                  )
-                : Image.network(
-                    '$backendAddress/fs/${widget.avatar}',
-                    width: 50,
-                    height: 50,
-                  ),
-        const SizedBox(
-          width: 16.0,
+    final widgets = [
+      GestureDetector(
+        onTap: () {
+          if (!widget.isMe) {
+            context.push('/user', extra: {'userId': widget.senderId});
+          }
+        },
+        child: widget.avatar == ''
+            ? Image.asset(
+                'assets/thumuht.jpg',
+                width: 50,
+                height: 50,
+              )
+            : Image.network(
+                '$backendAddress/fs/${widget.avatar}',
+                width: 50,
+                height: 50,
+              ),
+      ),
+      const SizedBox(
+        width: 16.0,
+      ),
+      Container(
+        constraints: const BoxConstraints(maxWidth: 200),
+        padding: const EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          color: widget.isMe ? Colors.blue : Colors.grey[200],
+          borderRadius: BorderRadius.circular(12.0),
         ),
-        Container(
-          constraints: const BoxConstraints(maxWidth: 200),
-          padding: const EdgeInsets.all(12.0),
-          decoration: BoxDecoration(
-            color: widget.isMe ? Colors.blue : Colors.grey[200],
-            borderRadius: BorderRadius.circular(12.0),
-          ),
-          child: Text(
-            widget.content,
-            style: const TextStyle(
-              fontSize: 14,
-            ),
+        child: Text(
+          widget.content,
+          style: const TextStyle(
+            fontSize: 14,
           ),
         ),
-      ],
+      ),
+    ];
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Row(
+        mainAxisAlignment:
+            widget.isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: widget.isMe ? widgets.reversed.toList() : widgets,
+      ),
     );
   }
 }

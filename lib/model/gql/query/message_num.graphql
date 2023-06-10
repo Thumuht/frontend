@@ -1,0 +1,3 @@
+query messageNum($id: Int!) {
+  messageNum(from: $id)
+}

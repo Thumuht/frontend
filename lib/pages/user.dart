@@ -107,15 +107,13 @@ class _UserPageState extends State<UserPage> {
                         document: _following
                             ? UNFOLLOW_MUTATION_DOCUMENT
                             : FOLLOW_MUTATION_DOCUMENT,
+                        onCompleted: (data) {
+                          refetch!();
+                        },
                       ),
                       builder: (runMutation, result) => ElevatedButton(
-                          onPressed: () async {
-                            final result =
-                                runMutation({'userId': widget.userId});
-                            if ((await result.networkResult)!.hasException) {
-                              return;
-                            }
-                            refetch!();
+                          onPressed: () {
+                            runMutation({'userId': widget.userId});
                           },
                           child: _following
                               ? const Text('Unfollow')
@@ -165,7 +163,16 @@ class _UserPageState extends State<UserPage> {
                         context.push('/user-posts',
                             extra: {'userId': widget.userId});
                       },
-                      child: const Text('View posts'))
+                      child: const Text('View posts')),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        context
+                            .push('/chat', extra: {'toUserId': widget.userId});
+                      },
+                      child: const Text('Send message')),
                 ],
               )),
             );
