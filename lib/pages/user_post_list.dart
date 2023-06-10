@@ -56,14 +56,14 @@ class _UserPostListState extends State<UserPostList> {
         future: _future(),
         builder: (context, snapshot) {
           // developer.log(resultPost.toString());
-          Widget widget = Container();
+          Widget widget_temp = Container();
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
-              widget = const Text("出错了");
+              widget_temp = const Text("出错了");
             } else {
               // var resultPost = GlobalSearch$Query.fromJson(snapshot.data!).posts;
               // developer.log(resultPost.toString());
-              widget = ListView.builder(
+              widget_temp = ListView.builder(
                 itemBuilder: (context, index) {
                   var line = snapshot.data![index]!;
                   developer.log(line.toString());
@@ -76,6 +76,7 @@ class _UserPostListState extends State<UserPostList> {
                       line.commentsNum!,
                       line.position,
                       line.tag,
+                      widget.userId,
                       context);
                 },
                 itemCount: snapshot.data?.length ??
@@ -90,8 +91,17 @@ class _UserPostListState extends State<UserPostList> {
   }
 }
 
-ListTile _tile(int id, String title, String subtitle, int view, int like,
-        int commentsNum, String? position, String? tag, BuildContext context) =>
+ListTile _tile(
+        int id,
+        String title,
+        String subtitle,
+        int view,
+        int like,
+        int commentsNum,
+        String? position,
+        String? tag,
+        int userId,
+        BuildContext context) =>
     ListTile(
       title: Row(children: [
         Text(
@@ -151,6 +161,7 @@ ListTile _tile(int id, String title, String subtitle, int view, int like,
                 like: like,
                 commentsNum: commentsNum,
                 position: position!,
+                postUserId: userId,
               ),
             )).then((value) => refetchGlobal!());
       },
