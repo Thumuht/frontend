@@ -149,17 +149,6 @@ ListTile _tile(int id, String title, String subtitle, int view, int like,
         Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           Row(mainAxisAlignment: MainAxisAlignment.start, children: [
             Text(
-              'View',
-              style: TextStyle(fontSize: 10),
-            ),
-            SizedBox(width: 2),
-            Text(
-              view.toString(),
-              style: TextStyle(fontSize: 10),
-            ),
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Text(
               'Like',
               style: TextStyle(fontSize: 10),
             ),
