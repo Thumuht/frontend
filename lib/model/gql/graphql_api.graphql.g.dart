@@ -592,6 +592,56 @@ Map<String, dynamic> _$Unfollow$MutationToJson(Unfollow$Mutation instance) =>
       'unfollowUser': instance.unfollowUser,
     };
 
+GetUserPost$Query$User$Post _$GetUserPost$Query$User$PostFromJson(
+        Map<String, dynamic> json) =>
+    GetUserPost$Query$User$Post()
+      ..id = json['id'] as int
+      ..title = json['title'] as String?
+      ..content = json['content'] as String?
+      ..view = json['view'] as int?
+      ..like = json['like'] as int?
+      ..commentsNum = json['comments_num'] as int?
+      ..position = json['position'] as String?
+      ..tag = json['tag'] as String?;
+
+Map<String, dynamic> _$GetUserPost$Query$User$PostToJson(
+        GetUserPost$Query$User$Post instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'content': instance.content,
+      'view': instance.view,
+      'like': instance.like,
+      'comments_num': instance.commentsNum,
+      'position': instance.position,
+      'tag': instance.tag,
+    };
+
+GetUserPost$Query$User _$GetUserPost$Query$UserFromJson(
+        Map<String, dynamic> json) =>
+    GetUserPost$Query$User()
+      ..post = (json['post'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : GetUserPost$Query$User$Post.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetUserPost$Query$UserToJson(
+        GetUserPost$Query$User instance) =>
+    <String, dynamic>{
+      'post': instance.post?.map((e) => e?.toJson()).toList(),
+    };
+
+GetUserPost$Query _$GetUserPost$QueryFromJson(Map<String, dynamic> json) =>
+    GetUserPost$Query()
+      ..getUserById = GetUserPost$Query$User.fromJson(
+          json['getUserById'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetUserPost$QueryToJson(GetUserPost$Query instance) =>
+    <String, dynamic>{
+      'getUserById': instance.getUserById.toJson(),
+    };
+
 DislikeArguments _$DislikeArgumentsFromJson(Map<String, dynamic> json) =>
     DislikeArguments(
       postId: json['postId'] as int,
@@ -853,4 +903,16 @@ UnfollowArguments _$UnfollowArgumentsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$UnfollowArgumentsToJson(UnfollowArguments instance) =>
     <String, dynamic>{
       'userId': instance.userId,
+    };
+
+GetUserPostArguments _$GetUserPostArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetUserPostArguments(
+      id: json['id'] as int,
+    );
+
+Map<String, dynamic> _$GetUserPostArgumentsToJson(
+        GetUserPostArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
     };

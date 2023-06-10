@@ -783,6 +783,67 @@ class Unfollow$Mutation extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$Unfollow$MutationToJson(this);
 }
 
+@JsonSerializable(explicitToJson: true)
+class GetUserPost$Query$User$Post extends JsonSerializable with EquatableMixin {
+  GetUserPost$Query$User$Post();
+
+  factory GetUserPost$Query$User$Post.fromJson(Map<String, dynamic> json) =>
+      _$GetUserPost$Query$User$PostFromJson(json);
+
+  late int id;
+
+  String? title;
+
+  String? content;
+
+  int? view;
+
+  int? like;
+
+  @JsonKey(name: 'comments_num')
+  int? commentsNum;
+
+  String? position;
+
+  String? tag;
+
+  @override
+  List<Object?> get props =>
+      [id, title, content, view, like, commentsNum, position, tag];
+  @override
+  Map<String, dynamic> toJson() => _$GetUserPost$Query$User$PostToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetUserPost$Query$User extends JsonSerializable with EquatableMixin {
+  GetUserPost$Query$User();
+
+  factory GetUserPost$Query$User.fromJson(Map<String, dynamic> json) =>
+      _$GetUserPost$Query$UserFromJson(json);
+
+  List<GetUserPost$Query$User$Post?>? post;
+
+  @override
+  List<Object?> get props => [post];
+  @override
+  Map<String, dynamic> toJson() => _$GetUserPost$Query$UserToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetUserPost$Query extends JsonSerializable with EquatableMixin {
+  GetUserPost$Query();
+
+  factory GetUserPost$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetUserPost$QueryFromJson(json);
+
+  late GetUserPost$Query$User getUserById;
+
+  @override
+  List<Object?> get props => [getUserById];
+  @override
+  Map<String, dynamic> toJson() => _$GetUserPost$QueryToJson(this);
+}
+
 enum PostOrderBy {
   @JsonValue('post_id')
   postId,
@@ -3197,4 +3258,139 @@ class UnfollowMutation
   @override
   Unfollow$Mutation parse(Map<String, dynamic> json) =>
       Unfollow$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetUserPostArguments extends JsonSerializable with EquatableMixin {
+  GetUserPostArguments({required this.id});
+
+  @override
+  factory GetUserPostArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetUserPostArgumentsFromJson(json);
+
+  late int id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$GetUserPostArgumentsToJson(this);
+}
+
+final GET_USER_POST_QUERY_DOCUMENT_OPERATION_NAME = 'getUserPost';
+final GET_USER_POST_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'getUserPost'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'getUserById'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'post'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'title'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'content'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'view'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'like'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'comments_num'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'position'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'tag'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          )
+        ]),
+      )
+    ]),
+  )
+]);
+
+class GetUserPostQuery
+    extends GraphQLQuery<GetUserPost$Query, GetUserPostArguments> {
+  GetUserPostQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_USER_POST_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_USER_POST_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetUserPostArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetUserPost$Query parse(Map<String, dynamic> json) =>
+      GetUserPost$Query.fromJson(json);
 }

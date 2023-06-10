@@ -35,6 +35,7 @@ class _searchResultPageState extends State<searchResultPage> {
         return resultPost;
       }
       resultPost = GlobalSearch$Query.fromJson(result.data!).globalSearch;
+      
       return resultPost;
     }
 
