@@ -13,9 +13,10 @@ Widget _buildList(BuildContext context) => ListView(
             context),
         _tile(
             'genesis',
-            '## first chapter\n ![picture](/a.webp) In the beginning **God** created the heavens and the earth.'
+            '## first chapter\n <img width="250" height="250" src="http://10.0.2.2:8899/fs/a.webp"/> In the beginning **God** created the heavens and the earth.'
                 'Now the earth was formless and *empty*, darkness was over the surface of '
-                'the deep, and the Spirit of God was hovering over the waters\n',
+                'the deep, and the Spirit of God was hovering over the waters\n'
+                '<video src="http://10.0.2.2:8899/fs/test.mp4">',
             context),
         _tile(
             'exorus',
