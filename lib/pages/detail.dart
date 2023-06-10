@@ -270,16 +270,18 @@ class _MarkPostState extends State<MarkPost> {
   Widget build(BuildContext context) {
     return Mutation(
         options: marked
-            ? MutationOptions(document: MARK_MUTATION_DOCUMENT)
-            : MutationOptions(document: UNMARK_MUTATION_DOCUMENT),
+            ? MutationOptions(document: UNMARK_MUTATION_DOCUMENT)
+            : MutationOptions(document: MARK_MUTATION_DOCUMENT),
         builder: (runMutation, result) => IconButton(
-              icon: Icon(marked ? Icons.bookmark_border : Icons.bookmark),
+              icon: Icon(marked ? Icons.bookmark : Icons.bookmark_border),
               onPressed: () {
                 setState(() {
                   if (marked) {
                     runMutation({'postId': widget.postId});
+                    markMap[widget.userId]!.remove(widget.postId);
                   } else {
                     runMutation({'postId': widget.postId});
+                    markMap[widget.userId]!.add(widget.postId);
                   }
                   marked = !marked;
                 });
@@ -363,7 +365,7 @@ class DetailPage extends StatelessWidget {
               ],
             ),
           ));
-          
+
   Future<void> shareMsg(String msg) async {
     String? response;
     final FlutterShareMe flutterShareMe = FlutterShareMe();

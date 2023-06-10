@@ -760,6 +760,15 @@ enum PostOrderBy {
   artemisUnknown,
 }
 
+enum Order {
+  @JsonValue('ASC')
+  asc,
+  @JsonValue('DESC')
+  desc,
+  @JsonValue('ARTEMIS_UNKNOWN')
+  artemisUnknown,
+}
+
 @JsonSerializable(explicitToJson: true)
 class DislikeArguments extends JsonSerializable with EquatableMixin {
   DislikeArguments({required this.postId});
@@ -1158,6 +1167,7 @@ class GetPostListsArguments extends JsonSerializable with EquatableMixin {
   GetPostListsArguments({
     required this.offset,
     required this.orderBy,
+    required this.order,
   });
 
   @override
@@ -1169,8 +1179,11 @@ class GetPostListsArguments extends JsonSerializable with EquatableMixin {
   @JsonKey(unknownEnumValue: PostOrderBy.artemisUnknown)
   late PostOrderBy orderBy;
 
+  @JsonKey(unknownEnumValue: Order.artemisUnknown)
+  late Order order;
+
   @override
-  List<Object?> get props => [offset, orderBy];
+  List<Object?> get props => [offset, orderBy, order];
   @override
   Map<String, dynamic> toJson() => _$GetPostListsArgumentsToJson(this);
 }
@@ -1194,6 +1207,15 @@ final GET_POST_LISTS_QUERY_DOCUMENT = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'orderBy')),
         type: NamedTypeNode(
           name: NameNode(value: 'PostOrderBy'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'order')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Order'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1223,7 +1245,7 @@ final GET_POST_LISTS_QUERY_DOCUMENT = DocumentNode(definitions: [
               ),
               ObjectFieldNode(
                 name: NameNode(value: 'order'),
-                value: EnumValueNode(name: NameNode(value: 'ASC')),
+                value: VariableNode(name: NameNode(value: 'order')),
               ),
             ]),
           )
