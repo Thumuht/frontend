@@ -50,6 +50,7 @@ dependencies:
   # markdown
   markdown_widget: ^2.2.0
   video_player: ^2.6.1
+  flutter_share_me: ^1.4.0
 
 
 dev_dependencies:

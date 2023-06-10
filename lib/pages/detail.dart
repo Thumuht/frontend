@@ -10,6 +10,7 @@ import 'package:thumuht/components/custom_node.dart';
 import 'package:thumuht/components/video.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:thumuht/model/session.dart';
+import 'package:flutter_share_me/flutter_share_me.dart';
 
 import '../main.dart';
 
@@ -314,6 +315,7 @@ class DetailPage extends StatelessWidget {
                     MarkPost(
                       postId: id,
                     ),
+                    sharePost(title, content),
                   ],
                 ),
                 showComments(
@@ -323,4 +325,19 @@ class DetailPage extends StatelessWidget {
               ],
             ),
           ));
+          
+  Future<void> shareMsg(String msg) async {
+    String? response;
+    final FlutterShareMe flutterShareMe = FlutterShareMe();
+    response = await flutterShareMe.shareToSystem(msg: msg);
+  }
+
+  Widget sharePost(String title, String content) {
+    return IconButton(
+      icon: const Icon(Icons.share),
+      onPressed: () {
+        shareMsg('$title\n$content');
+      },
+    );
+  }
 }
