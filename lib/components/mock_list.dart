@@ -46,6 +46,7 @@ ListTile _tile(String title, String subtitle, BuildContext context) => ListTile(
                 like: 0,
                 commentsNum: 0,
                 position: 'thumuht',
+                postUserId: 0,
               ),
             ));
       },

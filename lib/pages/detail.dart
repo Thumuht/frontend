@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
@@ -298,13 +299,15 @@ class DetailPage extends StatelessWidget {
       required this.content,
       required this.like,
       required this.commentsNum,
-      required this.position});
+      required this.position,
+      required this.postUserId});
   final int id;
   final String title;
   final String content;
   final int like;
   final int commentsNum;
   final String position;
+  final int postUserId;
 
   @override
   Widget build(BuildContext context) => MultiProvider(
@@ -356,6 +359,11 @@ class DetailPage extends StatelessWidget {
                           Provider.of<Session>(context, listen: false).userId_,
                     ),
                     sharePost(title, content),
+                    IconButton(
+                        onPressed: () {
+                          context.push('/user', extra: {'userId': postUserId});
+                        },
+                        icon: const Icon(Icons.person))
                   ],
                 ),
                 showComments(

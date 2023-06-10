@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, no_leading_underscores_for_local_identifiers
-
+// TODO: FIX THIS
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -55,6 +55,7 @@ Widget _buildMarkList(BuildContext context) {
                           postlists[index]!.commentsNum!,
                           postlists[index]!.position,
                           postlists[index]!.tag!,
+                          0,
                           context);
                     },
                     itemCount: postlists?.length ??
@@ -68,7 +69,7 @@ Widget _buildMarkList(BuildContext context) {
 }
 
 ListTile _tile(int id, String title, String subtitle, int view, int like,
-        int commentsNum, String? position, String tag, BuildContext context) =>
+        int commentsNum, String? position, String tag, int postUserId, BuildContext context) =>
     ListTile(
       title: Row(children: [
         Text(
@@ -139,6 +140,7 @@ ListTile _tile(int id, String title, String subtitle, int view, int like,
                 like: like,
                 commentsNum: commentsNum,
                 position: position!,
+                postUserId: 0, // FIXME
               ),
             )).then((value) => refetchGlobal!());
       },

@@ -9,91 +9,437 @@ import 'package:thumuht/model/upload.dart';
 part 'graphql_api.graphql.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Dislike$Mutation extends JsonSerializable with EquatableMixin {
-  Dislike$Mutation();
+class Block$Mutation extends JsonSerializable with EquatableMixin {
+  Block$Mutation();
 
-  factory Dislike$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$Dislike$MutationFromJson(json);
+  factory Block$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$Block$MutationFromJson(json);
 
-  late bool dislikePost;
+  late bool blockUser;
 
   @override
-  List<Object?> get props => [dislikePost];
+  List<Object?> get props => [blockUser];
   @override
-  Map<String, dynamic> toJson() => _$Dislike$MutationToJson(this);
+  Map<String, dynamic> toJson() => _$Block$MutationToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetCommentLists$Query$Comment$Post extends JsonSerializable
-    with EquatableMixin {
-  GetCommentLists$Query$Comment$Post();
+class Unblock$Mutation extends JsonSerializable with EquatableMixin {
+  Unblock$Mutation();
 
-  factory GetCommentLists$Query$Comment$Post.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetCommentLists$Query$Comment$PostFromJson(json);
+  factory Unblock$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$Unblock$MutationFromJson(json);
+
+  late bool unblockUser;
+
+  @override
+  List<Object?> get props => [unblockUser];
+  @override
+  Map<String, dynamic> toJson() => _$Unblock$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class SetProfile$Mutation$User extends JsonSerializable with EquatableMixin {
+  SetProfile$Mutation$User();
+
+  factory SetProfile$Mutation$User.fromJson(Map<String, dynamic> json) =>
+      _$SetProfile$Mutation$UserFromJson(json);
 
   late int id;
 
   @override
   List<Object?> get props => [id];
   @override
-  Map<String, dynamic> toJson() =>
-      _$GetCommentLists$Query$Comment$PostToJson(this);
+  Map<String, dynamic> toJson() => _$SetProfile$Mutation$UserToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetCommentLists$Query$Comment$User extends JsonSerializable
-    with EquatableMixin {
-  GetCommentLists$Query$Comment$User();
+class SetProfile$Mutation extends JsonSerializable with EquatableMixin {
+  SetProfile$Mutation();
 
-  factory GetCommentLists$Query$Comment$User.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetCommentLists$Query$Comment$UserFromJson(json);
+  factory SetProfile$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$SetProfile$MutationFromJson(json);
+
+  late SetProfile$Mutation$User updateUser;
+
+  @override
+  List<Object?> get props => [updateUser];
+  @override
+  Map<String, dynamic> toJson() => _$SetProfile$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetProfile$Query$User extends JsonSerializable with EquatableMixin {
+  GetProfile$Query$User();
+
+  factory GetProfile$Query$User.fromJson(Map<String, dynamic> json) =>
+      _$GetProfile$Query$UserFromJson(json);
+
+  late int id;
+
+  late String loginName;
+
+  String? nickname;
+
+  String? about;
+
+  String? avatar;
+
+  @override
+  List<Object?> get props => [id, loginName, nickname, about, avatar];
+  @override
+  Map<String, dynamic> toJson() => _$GetProfile$Query$UserToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetProfile$Query extends JsonSerializable with EquatableMixin {
+  GetProfile$Query();
+
+  factory GetProfile$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetProfile$QueryFromJson(json);
+
+  late GetProfile$Query$User me;
+
+  @override
+  List<Object?> get props => [me];
+  @override
+  Map<String, dynamic> toJson() => _$GetProfile$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Follow$Mutation extends JsonSerializable with EquatableMixin {
+  Follow$Mutation();
+
+  factory Follow$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$Follow$MutationFromJson(json);
+
+  late bool followUser;
+
+  @override
+  List<Object?> get props => [followUser];
+  @override
+  Map<String, dynamic> toJson() => _$Follow$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Like$Mutation extends JsonSerializable with EquatableMixin {
+  Like$Mutation();
+
+  factory Like$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$Like$MutationFromJson(json);
+
+  late bool likePost;
+
+  @override
+  List<Object?> get props => [likePost];
+  @override
+  Map<String, dynamic> toJson() => _$Like$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Unmark$Mutation extends JsonSerializable with EquatableMixin {
+  Unmark$Mutation();
+
+  factory Unmark$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$Unmark$MutationFromJson(json);
+
+  late bool unmarkPost;
+
+  @override
+  List<Object?> get props => [unmarkPost];
+  @override
+  Map<String, dynamic> toJson() => _$Unmark$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetMessages$Query$Message extends JsonSerializable with EquatableMixin {
+  GetMessages$Query$Message();
+
+  factory GetMessages$Query$Message.fromJson(Map<String, dynamic> json) =>
+      _$GetMessages$Query$MessageFromJson(json);
+
+  late int messageId;
+
+  late int userFrom;
+
+  late String content;
+
+  DateTime? createdAt;
+
+  @override
+  List<Object?> get props => [messageId, userFrom, content, createdAt];
+  @override
+  Map<String, dynamic> toJson() => _$GetMessages$Query$MessageToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetMessages$Query extends JsonSerializable with EquatableMixin {
+  GetMessages$Query();
+
+  factory GetMessages$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetMessages$QueryFromJson(json);
+
+  late List<GetMessages$Query$Message> myMessage;
+
+  @override
+  List<Object?> get props => [myMessage];
+  @override
+  Map<String, dynamic> toJson() => _$GetMessages$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class MyFollow$Query$User$User extends JsonSerializable with EquatableMixin {
+  MyFollow$Query$User$User();
+
+  factory MyFollow$Query$User$User.fromJson(Map<String, dynamic> json) =>
+      _$MyFollow$Query$User$UserFromJson(json);
+
+  late int id;
+
+  String? nickname;
+
+  late String loginName;
+
+  String? avatar;
+
+  @override
+  List<Object?> get props => [id, nickname, loginName, avatar];
+  @override
+  Map<String, dynamic> toJson() => _$MyFollow$Query$User$UserToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class MyFollow$Query$User extends JsonSerializable with EquatableMixin {
+  MyFollow$Query$User();
+
+  factory MyFollow$Query$User.fromJson(Map<String, dynamic> json) =>
+      _$MyFollow$Query$UserFromJson(json);
+
+  List<MyFollow$Query$User$User?>? follow;
+
+  List<MyFollow$Query$User$User?>? block;
+
+  @override
+  List<Object?> get props => [follow, block];
+  @override
+  Map<String, dynamic> toJson() => _$MyFollow$Query$UserToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class MyFollow$Query extends JsonSerializable with EquatableMixin {
+  MyFollow$Query();
+
+  factory MyFollow$Query.fromJson(Map<String, dynamic> json) =>
+      _$MyFollow$QueryFromJson(json);
+
+  late MyFollow$Query$User me;
+
+  @override
+  List<Object?> get props => [me];
+  @override
+  Map<String, dynamic> toJson() => _$MyFollow$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GlobalSearch$Query$Post extends JsonSerializable with EquatableMixin {
+  GlobalSearch$Query$Post();
+
+  factory GlobalSearch$Query$Post.fromJson(Map<String, dynamic> json) =>
+      _$GlobalSearch$Query$PostFromJson(json);
+
+  late int id;
+
+  String? title;
+
+  String? content;
+
+  int? view;
+
+  int? like;
+
+  @JsonKey(name: 'comments_num')
+  int? commentsNum;
+
+  String? position;
+
+  String? tag;
+
+  @override
+  List<Object?> get props =>
+      [id, title, content, view, like, commentsNum, position, tag];
+  @override
+  Map<String, dynamic> toJson() => _$GlobalSearch$Query$PostToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GlobalSearch$Query extends JsonSerializable with EquatableMixin {
+  GlobalSearch$Query();
+
+  factory GlobalSearch$Query.fromJson(Map<String, dynamic> json) =>
+      _$GlobalSearch$QueryFromJson(json);
+
+  List<GlobalSearch$Query$Post?>? globalSearch;
+
+  @override
+  List<Object?> get props => [globalSearch];
+  @override
+  Map<String, dynamic> toJson() => _$GlobalSearch$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class NewComment$Mutation$Comment extends JsonSerializable with EquatableMixin {
+  NewComment$Mutation$Comment();
+
+  factory NewComment$Mutation$Comment.fromJson(Map<String, dynamic> json) =>
+      _$NewComment$Mutation$CommentFromJson(json);
+
+  String? content;
+
+  @override
+  List<Object?> get props => [content];
+  @override
+  Map<String, dynamic> toJson() => _$NewComment$Mutation$CommentToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class NewComment$Mutation extends JsonSerializable with EquatableMixin {
+  NewComment$Mutation();
+
+  factory NewComment$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$NewComment$MutationFromJson(json);
+
+  late NewComment$Mutation$Comment createComment;
+
+  @override
+  List<Object?> get props => [createComment];
+  @override
+  Map<String, dynamic> toJson() => _$NewComment$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Unfollow$Mutation extends JsonSerializable with EquatableMixin {
+  Unfollow$Mutation();
+
+  factory Unfollow$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$Unfollow$MutationFromJson(json);
+
+  late bool unfollowUser;
+
+  @override
+  List<Object?> get props => [unfollowUser];
+  @override
+  Map<String, dynamic> toJson() => _$Unfollow$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class NewPost$Mutation$Post extends JsonSerializable with EquatableMixin {
+  NewPost$Mutation$Post();
+
+  factory NewPost$Mutation$Post.fromJson(Map<String, dynamic> json) =>
+      _$NewPost$Mutation$PostFromJson(json);
+
+  late int id;
+
+  String? title;
+
+  @override
+  List<Object?> get props => [id, title];
+  @override
+  Map<String, dynamic> toJson() => _$NewPost$Mutation$PostToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class NewPost$Mutation extends JsonSerializable with EquatableMixin {
+  NewPost$Mutation();
+
+  factory NewPost$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$NewPost$MutationFromJson(json);
+
+  late NewPost$Mutation$Post createPost;
+
+  @override
+  List<Object?> get props => [createPost];
+  @override
+  Map<String, dynamic> toJson() => _$NewPost$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Register$Mutation$User extends JsonSerializable with EquatableMixin {
+  Register$Mutation$User();
+
+  factory Register$Mutation$User.fromJson(Map<String, dynamic> json) =>
+      _$Register$Mutation$UserFromJson(json);
+
+  late int id;
 
   late String loginName;
 
   @override
-  List<Object?> get props => [loginName];
+  List<Object?> get props => [id, loginName];
   @override
-  Map<String, dynamic> toJson() =>
-      _$GetCommentLists$Query$Comment$UserToJson(this);
+  Map<String, dynamic> toJson() => _$Register$Mutation$UserToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetCommentLists$Query$Comment extends JsonSerializable
-    with EquatableMixin {
-  GetCommentLists$Query$Comment();
+class Register$Mutation extends JsonSerializable with EquatableMixin {
+  Register$Mutation();
 
-  factory GetCommentLists$Query$Comment.fromJson(Map<String, dynamic> json) =>
-      _$GetCommentLists$Query$CommentFromJson(json);
+  factory Register$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$Register$MutationFromJson(json);
 
-  String? content;
-
-  DateTime? createdAt;
-
-  GetCommentLists$Query$Comment$Post? post;
-
-  GetCommentLists$Query$Comment$User? user;
+  late Register$Mutation$User createUser;
 
   @override
-  List<Object?> get props => [content, createdAt, post, user];
+  List<Object?> get props => [createUser];
   @override
-  Map<String, dynamic> toJson() => _$GetCommentLists$Query$CommentToJson(this);
+  Map<String, dynamic> toJson() => _$Register$MutationToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetCommentLists$Query extends JsonSerializable with EquatableMixin {
-  GetCommentLists$Query();
+class Login$Mutation$LoginInfo extends JsonSerializable with EquatableMixin {
+  Login$Mutation$LoginInfo();
 
-  factory GetCommentLists$Query.fromJson(Map<String, dynamic> json) =>
-      _$GetCommentLists$QueryFromJson(json);
+  factory Login$Mutation$LoginInfo.fromJson(Map<String, dynamic> json) =>
+      _$Login$Mutation$LoginInfoFromJson(json);
 
-  late List<GetCommentLists$Query$Comment> comment;
+  late String token;
+
+  late int userId;
 
   @override
-  List<Object?> get props => [comment];
+  List<Object?> get props => [token, userId];
   @override
-  Map<String, dynamic> toJson() => _$GetCommentLists$QueryToJson(this);
+  Map<String, dynamic> toJson() => _$Login$Mutation$LoginInfoToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Login$Mutation extends JsonSerializable with EquatableMixin {
+  Login$Mutation();
+
+  factory Login$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$Login$MutationFromJson(json);
+
+  late Login$Mutation$LoginInfo login;
+
+  @override
+  List<Object?> get props => [login];
+  @override
+  Map<String, dynamic> toJson() => _$Login$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Mark$Mutation extends JsonSerializable with EquatableMixin {
+  Mark$Mutation();
+
+  factory Mark$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$Mark$MutationFromJson(json);
+
+  late bool markPost;
+
+  @override
+  List<Object?> get props => [markPost];
+  @override
+  Map<String, dynamic> toJson() => _$Mark$MutationToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -143,123 +489,44 @@ class GetFavoritePost$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetMessages$Query$Message extends JsonSerializable with EquatableMixin {
-  GetMessages$Query$Message();
+class ReceiveMessage$Subscription$Message extends JsonSerializable
+    with EquatableMixin {
+  ReceiveMessage$Subscription$Message();
 
-  factory GetMessages$Query$Message.fromJson(Map<String, dynamic> json) =>
-      _$GetMessages$Query$MessageFromJson(json);
+  factory ReceiveMessage$Subscription$Message.fromJson(
+          Map<String, dynamic> json) =>
+      _$ReceiveMessage$Subscription$MessageFromJson(json);
 
   late int messageId;
 
   late int userFrom;
+
+  late int userTo;
 
   late String content;
 
   DateTime? createdAt;
 
   @override
-  List<Object?> get props => [messageId, userFrom, content, createdAt];
+  List<Object?> get props => [messageId, userFrom, userTo, content, createdAt];
   @override
-  Map<String, dynamic> toJson() => _$GetMessages$Query$MessageToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$ReceiveMessage$Subscription$MessageToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetMessages$Query extends JsonSerializable with EquatableMixin {
-  GetMessages$Query();
+class ReceiveMessage$Subscription extends JsonSerializable with EquatableMixin {
+  ReceiveMessage$Subscription();
 
-  factory GetMessages$Query.fromJson(Map<String, dynamic> json) =>
-      _$GetMessages$QueryFromJson(json);
+  factory ReceiveMessage$Subscription.fromJson(Map<String, dynamic> json) =>
+      _$ReceiveMessage$SubscriptionFromJson(json);
 
-  late List<GetMessages$Query$Message> myMessage;
-
-  @override
-  List<Object?> get props => [myMessage];
-  @override
-  Map<String, dynamic> toJson() => _$GetMessages$QueryToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetPostLists$Query$Post extends JsonSerializable with EquatableMixin {
-  GetPostLists$Query$Post();
-
-  factory GetPostLists$Query$Post.fromJson(Map<String, dynamic> json) =>
-      _$GetPostLists$Query$PostFromJson(json);
-
-  late int id;
-
-  String? title;
-
-  String? content;
-
-  int? view;
-
-  int? like;
-
-  @JsonKey(name: 'comments_num')
-  int? commentsNum;
-
-  String? position;
-
-  String? tag;
+  late ReceiveMessage$Subscription$Message messageToMe;
 
   @override
-  List<Object?> get props =>
-      [id, title, content, view, like, commentsNum, position, tag];
+  List<Object?> get props => [messageToMe];
   @override
-  Map<String, dynamic> toJson() => _$GetPostLists$Query$PostToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetPostLists$Query extends JsonSerializable with EquatableMixin {
-  GetPostLists$Query();
-
-  factory GetPostLists$Query.fromJson(Map<String, dynamic> json) =>
-      _$GetPostLists$QueryFromJson(json);
-
-  List<GetPostLists$Query$Post?>? posts;
-
-  @override
-  List<Object?> get props => [posts];
-  @override
-  Map<String, dynamic> toJson() => _$GetPostLists$QueryToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetProfile$Query$User extends JsonSerializable with EquatableMixin {
-  GetProfile$Query$User();
-
-  factory GetProfile$Query$User.fromJson(Map<String, dynamic> json) =>
-      _$GetProfile$Query$UserFromJson(json);
-
-  late int id;
-
-  late String loginName;
-
-  String? nickname;
-
-  String? about;
-
-  String? avatar;
-
-  @override
-  List<Object?> get props => [id, loginName, nickname, about, avatar];
-  @override
-  Map<String, dynamic> toJson() => _$GetProfile$Query$UserToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetProfile$Query extends JsonSerializable with EquatableMixin {
-  GetProfile$Query();
-
-  factory GetProfile$Query.fromJson(Map<String, dynamic> json) =>
-      _$GetProfile$QueryFromJson(json);
-
-  late GetProfile$Query$User me;
-
-  @override
-  List<Object?> get props => [me];
-  @override
-  Map<String, dynamic> toJson() => _$GetProfile$QueryToJson(this);
+  Map<String, dynamic> toJson() => _$ReceiveMessage$SubscriptionToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -322,11 +589,27 @@ class GetUserById$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class GlobalSearch$Query$Post extends JsonSerializable with EquatableMixin {
-  GlobalSearch$Query$Post();
+class GetPostLists$Query$Post$User extends JsonSerializable
+    with EquatableMixin {
+  GetPostLists$Query$Post$User();
 
-  factory GlobalSearch$Query$Post.fromJson(Map<String, dynamic> json) =>
-      _$GlobalSearch$Query$PostFromJson(json);
+  factory GetPostLists$Query$Post$User.fromJson(Map<String, dynamic> json) =>
+      _$GetPostLists$Query$Post$UserFromJson(json);
+
+  late int id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$GetPostLists$Query$Post$UserToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetPostLists$Query$Post extends JsonSerializable with EquatableMixin {
+  GetPostLists$Query$Post();
+
+  factory GetPostLists$Query$Post.fromJson(Map<String, dynamic> json) =>
+      _$GetPostLists$Query$PostFromJson(json);
 
   late int id;
 
@@ -345,268 +628,28 @@ class GlobalSearch$Query$Post extends JsonSerializable with EquatableMixin {
 
   String? tag;
 
+  GetPostLists$Query$Post$User? user;
+
   @override
   List<Object?> get props =>
-      [id, title, content, view, like, commentsNum, position, tag];
+      [id, title, content, view, like, commentsNum, position, tag, user];
   @override
-  Map<String, dynamic> toJson() => _$GlobalSearch$Query$PostToJson(this);
+  Map<String, dynamic> toJson() => _$GetPostLists$Query$PostToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class GlobalSearch$Query extends JsonSerializable with EquatableMixin {
-  GlobalSearch$Query();
+class GetPostLists$Query extends JsonSerializable with EquatableMixin {
+  GetPostLists$Query();
 
-  factory GlobalSearch$Query.fromJson(Map<String, dynamic> json) =>
-      _$GlobalSearch$QueryFromJson(json);
+  factory GetPostLists$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetPostLists$QueryFromJson(json);
 
-  List<GlobalSearch$Query$Post?>? globalSearch;
-
-  @override
-  List<Object?> get props => [globalSearch];
-  @override
-  Map<String, dynamic> toJson() => _$GlobalSearch$QueryToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Like$Mutation extends JsonSerializable with EquatableMixin {
-  Like$Mutation();
-
-  factory Like$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$Like$MutationFromJson(json);
-
-  late bool likePost;
+  List<GetPostLists$Query$Post?>? posts;
 
   @override
-  List<Object?> get props => [likePost];
+  List<Object?> get props => [posts];
   @override
-  Map<String, dynamic> toJson() => _$Like$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Mark$Mutation extends JsonSerializable with EquatableMixin {
-  Mark$Mutation();
-
-  factory Mark$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$Mark$MutationFromJson(json);
-
-  late bool markPost;
-
-  @override
-  List<Object?> get props => [markPost];
-  @override
-  Map<String, dynamic> toJson() => _$Mark$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class NewComment$Mutation$Comment extends JsonSerializable with EquatableMixin {
-  NewComment$Mutation$Comment();
-
-  factory NewComment$Mutation$Comment.fromJson(Map<String, dynamic> json) =>
-      _$NewComment$Mutation$CommentFromJson(json);
-
-  String? content;
-
-  @override
-  List<Object?> get props => [content];
-  @override
-  Map<String, dynamic> toJson() => _$NewComment$Mutation$CommentToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class NewComment$Mutation extends JsonSerializable with EquatableMixin {
-  NewComment$Mutation();
-
-  factory NewComment$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$NewComment$MutationFromJson(json);
-
-  late NewComment$Mutation$Comment createComment;
-
-  @override
-  List<Object?> get props => [createComment];
-  @override
-  Map<String, dynamic> toJson() => _$NewComment$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class NewPost$Mutation$Post extends JsonSerializable with EquatableMixin {
-  NewPost$Mutation$Post();
-
-  factory NewPost$Mutation$Post.fromJson(Map<String, dynamic> json) =>
-      _$NewPost$Mutation$PostFromJson(json);
-
-  late int id;
-
-  String? title;
-
-  @override
-  List<Object?> get props => [id, title];
-  @override
-  Map<String, dynamic> toJson() => _$NewPost$Mutation$PostToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class NewPost$Mutation extends JsonSerializable with EquatableMixin {
-  NewPost$Mutation();
-
-  factory NewPost$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$NewPost$MutationFromJson(json);
-
-  late NewPost$Mutation$Post createPost;
-
-  @override
-  List<Object?> get props => [createPost];
-  @override
-  Map<String, dynamic> toJson() => _$NewPost$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class ReceiveMessage$Subscription$Message extends JsonSerializable
-    with EquatableMixin {
-  ReceiveMessage$Subscription$Message();
-
-  factory ReceiveMessage$Subscription$Message.fromJson(
-          Map<String, dynamic> json) =>
-      _$ReceiveMessage$Subscription$MessageFromJson(json);
-
-  late int messageId;
-
-  late int userFrom;
-
-  late int userTo;
-
-  late String content;
-
-  DateTime? createdAt;
-
-  @override
-  List<Object?> get props => [messageId, userFrom, userTo, content, createdAt];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$ReceiveMessage$Subscription$MessageToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class ReceiveMessage$Subscription extends JsonSerializable with EquatableMixin {
-  ReceiveMessage$Subscription();
-
-  factory ReceiveMessage$Subscription.fromJson(Map<String, dynamic> json) =>
-      _$ReceiveMessage$SubscriptionFromJson(json);
-
-  late ReceiveMessage$Subscription$Message messageToMe;
-
-  @override
-  List<Object?> get props => [messageToMe];
-  @override
-  Map<String, dynamic> toJson() => _$ReceiveMessage$SubscriptionToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Register$Mutation$User extends JsonSerializable with EquatableMixin {
-  Register$Mutation$User();
-
-  factory Register$Mutation$User.fromJson(Map<String, dynamic> json) =>
-      _$Register$Mutation$UserFromJson(json);
-
-  late int id;
-
-  late String loginName;
-
-  @override
-  List<Object?> get props => [id, loginName];
-  @override
-  Map<String, dynamic> toJson() => _$Register$Mutation$UserToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Register$Mutation extends JsonSerializable with EquatableMixin {
-  Register$Mutation();
-
-  factory Register$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$Register$MutationFromJson(json);
-
-  late Register$Mutation$User createUser;
-
-  @override
-  List<Object?> get props => [createUser];
-  @override
-  Map<String, dynamic> toJson() => _$Register$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class SetProfile$Mutation$User extends JsonSerializable with EquatableMixin {
-  SetProfile$Mutation$User();
-
-  factory SetProfile$Mutation$User.fromJson(Map<String, dynamic> json) =>
-      _$SetProfile$Mutation$UserFromJson(json);
-
-  late int id;
-
-  @override
-  List<Object?> get props => [id];
-  @override
-  Map<String, dynamic> toJson() => _$SetProfile$Mutation$UserToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class SetProfile$Mutation extends JsonSerializable with EquatableMixin {
-  SetProfile$Mutation();
-
-  factory SetProfile$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$SetProfile$MutationFromJson(json);
-
-  late SetProfile$Mutation$User updateUser;
-
-  @override
-  List<Object?> get props => [updateUser];
-  @override
-  Map<String, dynamic> toJson() => _$SetProfile$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Unmark$Mutation extends JsonSerializable with EquatableMixin {
-  Unmark$Mutation();
-
-  factory Unmark$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$Unmark$MutationFromJson(json);
-
-  late bool unmarkPost;
-
-  @override
-  List<Object?> get props => [unmarkPost];
-  @override
-  Map<String, dynamic> toJson() => _$Unmark$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Login$Mutation$LoginInfo extends JsonSerializable with EquatableMixin {
-  Login$Mutation$LoginInfo();
-
-  factory Login$Mutation$LoginInfo.fromJson(Map<String, dynamic> json) =>
-      _$Login$Mutation$LoginInfoFromJson(json);
-
-  late String token;
-
-  late int userId;
-
-  @override
-  List<Object?> get props => [token, userId];
-  @override
-  Map<String, dynamic> toJson() => _$Login$Mutation$LoginInfoToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Login$Mutation extends JsonSerializable with EquatableMixin {
-  Login$Mutation();
-
-  factory Login$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$Login$MutationFromJson(json);
-
-  late Login$Mutation$LoginInfo login;
-
-  @override
-  List<Object?> get props => [login];
-  @override
-  Map<String, dynamic> toJson() => _$Login$MutationToJson(this);
+  Map<String, dynamic> toJson() => _$GetPostLists$QueryToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -625,116 +668,93 @@ class Logout$Mutation extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class Block$Mutation extends JsonSerializable with EquatableMixin {
-  Block$Mutation();
+class Dislike$Mutation extends JsonSerializable with EquatableMixin {
+  Dislike$Mutation();
 
-  factory Block$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$Block$MutationFromJson(json);
+  factory Dislike$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$Dislike$MutationFromJson(json);
 
-  late bool blockUser;
+  late bool dislikePost;
 
   @override
-  List<Object?> get props => [blockUser];
+  List<Object?> get props => [dislikePost];
   @override
-  Map<String, dynamic> toJson() => _$Block$MutationToJson(this);
+  Map<String, dynamic> toJson() => _$Dislike$MutationToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class Follow$Mutation extends JsonSerializable with EquatableMixin {
-  Follow$Mutation();
+class GetCommentLists$Query$Comment$Post extends JsonSerializable
+    with EquatableMixin {
+  GetCommentLists$Query$Comment$Post();
 
-  factory Follow$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$Follow$MutationFromJson(json);
-
-  late bool followUser;
-
-  @override
-  List<Object?> get props => [followUser];
-  @override
-  Map<String, dynamic> toJson() => _$Follow$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Unblock$Mutation extends JsonSerializable with EquatableMixin {
-  Unblock$Mutation();
-
-  factory Unblock$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$Unblock$MutationFromJson(json);
-
-  late bool unblockUser;
-
-  @override
-  List<Object?> get props => [unblockUser];
-  @override
-  Map<String, dynamic> toJson() => _$Unblock$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Unfollow$Mutation extends JsonSerializable with EquatableMixin {
-  Unfollow$Mutation();
-
-  factory Unfollow$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$Unfollow$MutationFromJson(json);
-
-  late bool unfollowUser;
-
-  @override
-  List<Object?> get props => [unfollowUser];
-  @override
-  Map<String, dynamic> toJson() => _$Unfollow$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class MyFollow$Query$User$User extends JsonSerializable with EquatableMixin {
-  MyFollow$Query$User$User();
-
-  factory MyFollow$Query$User$User.fromJson(Map<String, dynamic> json) =>
-      _$MyFollow$Query$User$UserFromJson(json);
+  factory GetCommentLists$Query$Comment$Post.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetCommentLists$Query$Comment$PostFromJson(json);
 
   late int id;
 
-  String? nickname;
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetCommentLists$Query$Comment$PostToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetCommentLists$Query$Comment$User extends JsonSerializable
+    with EquatableMixin {
+  GetCommentLists$Query$Comment$User();
+
+  factory GetCommentLists$Query$Comment$User.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetCommentLists$Query$Comment$UserFromJson(json);
+
+  late int id;
 
   late String loginName;
 
-  String? avatar;
-
   @override
-  List<Object?> get props => [id, nickname, loginName, avatar];
+  List<Object?> get props => [id, loginName];
   @override
-  Map<String, dynamic> toJson() => _$MyFollow$Query$User$UserToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$GetCommentLists$Query$Comment$UserToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class MyFollow$Query$User extends JsonSerializable with EquatableMixin {
-  MyFollow$Query$User();
+class GetCommentLists$Query$Comment extends JsonSerializable
+    with EquatableMixin {
+  GetCommentLists$Query$Comment();
 
-  factory MyFollow$Query$User.fromJson(Map<String, dynamic> json) =>
-      _$MyFollow$Query$UserFromJson(json);
+  factory GetCommentLists$Query$Comment.fromJson(Map<String, dynamic> json) =>
+      _$GetCommentLists$Query$CommentFromJson(json);
 
-  List<MyFollow$Query$User$User?>? follow;
+  String? content;
 
-  List<MyFollow$Query$User$User?>? block;
+  DateTime? createdAt;
+
+  GetCommentLists$Query$Comment$Post? post;
+
+  GetCommentLists$Query$Comment$User? user;
 
   @override
-  List<Object?> get props => [follow, block];
+  List<Object?> get props => [content, createdAt, post, user];
   @override
-  Map<String, dynamic> toJson() => _$MyFollow$Query$UserToJson(this);
+  Map<String, dynamic> toJson() => _$GetCommentLists$Query$CommentToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class MyFollow$Query extends JsonSerializable with EquatableMixin {
-  MyFollow$Query();
+class GetCommentLists$Query extends JsonSerializable with EquatableMixin {
+  GetCommentLists$Query();
 
-  factory MyFollow$Query.fromJson(Map<String, dynamic> json) =>
-      _$MyFollow$QueryFromJson(json);
+  factory GetCommentLists$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetCommentLists$QueryFromJson(json);
 
-  late MyFollow$Query$User me;
+  late List<GetCommentLists$Query$Comment> comment;
 
   @override
-  List<Object?> get props => [me];
+  List<Object?> get props => [comment];
   @override
-  Map<String, dynamic> toJson() => _$MyFollow$QueryToJson(this);
+  Map<String, dynamic> toJson() => _$GetCommentLists$QueryToJson(this);
 }
 
 enum PostOrderBy {
@@ -770,198 +790,26 @@ enum Order {
 }
 
 @JsonSerializable(explicitToJson: true)
-class DislikeArguments extends JsonSerializable with EquatableMixin {
-  DislikeArguments({required this.postId});
+class BlockArguments extends JsonSerializable with EquatableMixin {
+  BlockArguments({required this.userId});
 
   @override
-  factory DislikeArguments.fromJson(Map<String, dynamic> json) =>
-      _$DislikeArgumentsFromJson(json);
-
-  late int postId;
-
-  @override
-  List<Object?> get props => [postId];
-  @override
-  Map<String, dynamic> toJson() => _$DislikeArgumentsToJson(this);
-}
-
-final DISLIKE_MUTATION_DOCUMENT_OPERATION_NAME = 'dislike';
-final DISLIKE_MUTATION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'dislike'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'postId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'dislikePost'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'input'),
-            value: VariableNode(name: NameNode(value: 'postId')),
-          )
-        ],
-        directives: [],
-        selectionSet: null,
-      )
-    ]),
-  )
-]);
-
-class DislikeMutation extends GraphQLQuery<Dislike$Mutation, DislikeArguments> {
-  DislikeMutation({required this.variables});
-
-  @override
-  final DocumentNode document = DISLIKE_MUTATION_DOCUMENT;
-
-  @override
-  final String operationName = DISLIKE_MUTATION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final DislikeArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  Dislike$Mutation parse(Map<String, dynamic> json) =>
-      Dislike$Mutation.fromJson(json);
-}
-
-final GET_COMMENT_LISTS_QUERY_DOCUMENT_OPERATION_NAME = 'getCommentLists';
-final GET_COMMENT_LISTS_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'getCommentLists'),
-    variableDefinitions: [],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'comment'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'input'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'limit'),
-                value: IntValueNode(value: '10000'),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'offset'),
-                value: IntValueNode(value: '0'),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'orderBy'),
-                value: EnumValueNode(name: NameNode(value: 'comment_id')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'order'),
-                value: EnumValueNode(name: NameNode(value: 'DESC')),
-              ),
-            ]),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'content'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'createdAt'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'post'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'id'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: 'user'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'loginName'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-        ]),
-      )
-    ]),
-  )
-]);
-
-class GetCommentListsQuery
-    extends GraphQLQuery<GetCommentLists$Query, JsonSerializable> {
-  GetCommentListsQuery();
-
-  @override
-  final DocumentNode document = GET_COMMENT_LISTS_QUERY_DOCUMENT;
-
-  @override
-  final String operationName = GET_COMMENT_LISTS_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  List<Object?> get props => [document, operationName];
-  @override
-  GetCommentLists$Query parse(Map<String, dynamic> json) =>
-      GetCommentLists$Query.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetFavoritePostArguments extends JsonSerializable with EquatableMixin {
-  GetFavoritePostArguments({required this.userId});
-
-  @override
-  factory GetFavoritePostArguments.fromJson(Map<String, dynamic> json) =>
-      _$GetFavoritePostArgumentsFromJson(json);
+  factory BlockArguments.fromJson(Map<String, dynamic> json) =>
+      _$BlockArgumentsFromJson(json);
 
   late int userId;
 
   @override
   List<Object?> get props => [userId];
   @override
-  Map<String, dynamic> toJson() => _$GetFavoritePostArgumentsToJson(this);
+  Map<String, dynamic> toJson() => _$BlockArgumentsToJson(this);
 }
 
-final GET_FAVORITE_POST_QUERY_DOCUMENT_OPERATION_NAME = 'getFavoritePost';
-final GET_FAVORITE_POST_QUERY_DOCUMENT = DocumentNode(definitions: [
+final BLOCK_MUTATION_DOCUMENT_OPERATION_NAME = 'block';
+final BLOCK_MUTATION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'getFavoritePost'),
+    type: OperationType.mutation,
+    name: NameNode(value: 'block'),
     variableDefinitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'userId')),
@@ -976,12 +824,205 @@ final GET_FAVORITE_POST_QUERY_DOCUMENT = DocumentNode(definitions: [
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'getUserFavoritePost'),
+        name: NameNode(value: 'blockUser'),
         alias: null,
         arguments: [
           ArgumentNode(
             name: NameNode(value: 'input'),
             value: VariableNode(name: NameNode(value: 'userId')),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  )
+]);
+
+class BlockMutation extends GraphQLQuery<Block$Mutation, BlockArguments> {
+  BlockMutation({required this.variables});
+
+  @override
+  final DocumentNode document = BLOCK_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName = BLOCK_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final BlockArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  Block$Mutation parse(Map<String, dynamic> json) =>
+      Block$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class UnblockArguments extends JsonSerializable with EquatableMixin {
+  UnblockArguments({required this.userId});
+
+  @override
+  factory UnblockArguments.fromJson(Map<String, dynamic> json) =>
+      _$UnblockArgumentsFromJson(json);
+
+  late int userId;
+
+  @override
+  List<Object?> get props => [userId];
+  @override
+  Map<String, dynamic> toJson() => _$UnblockArgumentsToJson(this);
+}
+
+final UNBLOCK_MUTATION_DOCUMENT_OPERATION_NAME = 'unblock';
+final UNBLOCK_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'unblock'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'userId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'unblockUser'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'userId')),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  )
+]);
+
+class UnblockMutation extends GraphQLQuery<Unblock$Mutation, UnblockArguments> {
+  UnblockMutation({required this.variables});
+
+  @override
+  final DocumentNode document = UNBLOCK_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName = UNBLOCK_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final UnblockArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  Unblock$Mutation parse(Map<String, dynamic> json) =>
+      Unblock$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class SetProfileArguments extends JsonSerializable with EquatableMixin {
+  SetProfileArguments({
+    this.nickname,
+    this.password,
+    this.about,
+    this.avatar,
+  });
+
+  @override
+  factory SetProfileArguments.fromJson(Map<String, dynamic> json) =>
+      _$SetProfileArgumentsFromJson(json);
+
+  final String? nickname;
+
+  final String? password;
+
+  final String? about;
+
+  final String? avatar;
+
+  @override
+  List<Object?> get props => [nickname, password, about, avatar];
+  @override
+  Map<String, dynamic> toJson() => _$SetProfileArgumentsToJson(this);
+}
+
+final SET_PROFILE_MUTATION_DOCUMENT_OPERATION_NAME = 'setProfile';
+final SET_PROFILE_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'setProfile'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'nickname')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'password')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'about')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'avatar')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'updateUser'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'nickname'),
+                value: VariableNode(name: NameNode(value: 'nickname')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'password'),
+                value: VariableNode(name: NameNode(value: 'password')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'about'),
+                value: VariableNode(name: NameNode(value: 'about')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'avatar'),
+                value: VariableNode(name: NameNode(value: 'avatar')),
+              ),
+            ]),
           )
         ],
         directives: [],
@@ -992,51 +1033,77 @@ final GET_FAVORITE_POST_QUERY_DOCUMENT = DocumentNode(definitions: [
             arguments: [],
             directives: [],
             selectionSet: null,
-          ),
+          )
+        ]),
+      )
+    ]),
+  )
+]);
+
+class SetProfileMutation
+    extends GraphQLQuery<SetProfile$Mutation, SetProfileArguments> {
+  SetProfileMutation({required this.variables});
+
+  @override
+  final DocumentNode document = SET_PROFILE_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName = SET_PROFILE_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final SetProfileArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  SetProfile$Mutation parse(Map<String, dynamic> json) =>
+      SetProfile$Mutation.fromJson(json);
+}
+
+final GET_PROFILE_QUERY_DOCUMENT_OPERATION_NAME = 'getProfile';
+final GET_PROFILE_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'getProfile'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'me'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'title'),
+            name: NameNode(value: 'id'),
             alias: null,
             arguments: [],
             directives: [],
             selectionSet: null,
           ),
           FieldNode(
-            name: NameNode(value: 'content'),
+            name: NameNode(value: 'loginName'),
             alias: null,
             arguments: [],
             directives: [],
             selectionSet: null,
           ),
           FieldNode(
-            name: NameNode(value: 'view'),
+            name: NameNode(value: 'nickname'),
             alias: null,
             arguments: [],
             directives: [],
             selectionSet: null,
           ),
           FieldNode(
-            name: NameNode(value: 'like'),
+            name: NameNode(value: 'about'),
             alias: null,
             arguments: [],
             directives: [],
             selectionSet: null,
           ),
           FieldNode(
-            name: NameNode(value: 'comments_num'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'position'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'tag'),
+            name: NameNode(value: 'avatar'),
             alias: null,
             arguments: [],
             directives: [],
@@ -1048,24 +1115,227 @@ final GET_FAVORITE_POST_QUERY_DOCUMENT = DocumentNode(definitions: [
   )
 ]);
 
-class GetFavoritePostQuery
-    extends GraphQLQuery<GetFavoritePost$Query, GetFavoritePostArguments> {
-  GetFavoritePostQuery({required this.variables});
+class GetProfileQuery extends GraphQLQuery<GetProfile$Query, JsonSerializable> {
+  GetProfileQuery();
 
   @override
-  final DocumentNode document = GET_FAVORITE_POST_QUERY_DOCUMENT;
+  final DocumentNode document = GET_PROFILE_QUERY_DOCUMENT;
 
   @override
-  final String operationName = GET_FAVORITE_POST_QUERY_DOCUMENT_OPERATION_NAME;
+  final String operationName = GET_PROFILE_QUERY_DOCUMENT_OPERATION_NAME;
 
   @override
-  final GetFavoritePostArguments variables;
+  List<Object?> get props => [document, operationName];
+  @override
+  GetProfile$Query parse(Map<String, dynamic> json) =>
+      GetProfile$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class FollowArguments extends JsonSerializable with EquatableMixin {
+  FollowArguments({required this.userId});
+
+  @override
+  factory FollowArguments.fromJson(Map<String, dynamic> json) =>
+      _$FollowArgumentsFromJson(json);
+
+  late int userId;
+
+  @override
+  List<Object?> get props => [userId];
+  @override
+  Map<String, dynamic> toJson() => _$FollowArgumentsToJson(this);
+}
+
+final FOLLOW_MUTATION_DOCUMENT_OPERATION_NAME = 'follow';
+final FOLLOW_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'follow'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'userId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'followUser'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'userId')),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  )
+]);
+
+class FollowMutation extends GraphQLQuery<Follow$Mutation, FollowArguments> {
+  FollowMutation({required this.variables});
+
+  @override
+  final DocumentNode document = FOLLOW_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName = FOLLOW_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final FollowArguments variables;
 
   @override
   List<Object?> get props => [document, operationName, variables];
   @override
-  GetFavoritePost$Query parse(Map<String, dynamic> json) =>
-      GetFavoritePost$Query.fromJson(json);
+  Follow$Mutation parse(Map<String, dynamic> json) =>
+      Follow$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class LikeArguments extends JsonSerializable with EquatableMixin {
+  LikeArguments({required this.postId});
+
+  @override
+  factory LikeArguments.fromJson(Map<String, dynamic> json) =>
+      _$LikeArgumentsFromJson(json);
+
+  late int postId;
+
+  @override
+  List<Object?> get props => [postId];
+  @override
+  Map<String, dynamic> toJson() => _$LikeArgumentsToJson(this);
+}
+
+final LIKE_MUTATION_DOCUMENT_OPERATION_NAME = 'like';
+final LIKE_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'like'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'postId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'likePost'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'postId')),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  )
+]);
+
+class LikeMutation extends GraphQLQuery<Like$Mutation, LikeArguments> {
+  LikeMutation({required this.variables});
+
+  @override
+  final DocumentNode document = LIKE_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName = LIKE_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final LikeArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  Like$Mutation parse(Map<String, dynamic> json) =>
+      Like$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class UnmarkArguments extends JsonSerializable with EquatableMixin {
+  UnmarkArguments({required this.postId});
+
+  @override
+  factory UnmarkArguments.fromJson(Map<String, dynamic> json) =>
+      _$UnmarkArgumentsFromJson(json);
+
+  late int postId;
+
+  @override
+  List<Object?> get props => [postId];
+  @override
+  Map<String, dynamic> toJson() => _$UnmarkArgumentsToJson(this);
+}
+
+final UNMARK_MUTATION_DOCUMENT_OPERATION_NAME = 'unmark';
+final UNMARK_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'unmark'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'postId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'unmarkPost'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'postId')),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  )
+]);
+
+class UnmarkMutation extends GraphQLQuery<Unmark$Mutation, UnmarkArguments> {
+  UnmarkMutation({required this.variables});
+
+  @override
+  final DocumentNode document = UNMARK_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName = UNMARK_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final UnmarkArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  Unmark$Mutation parse(Map<String, dynamic> json) =>
+      Unmark$Mutation.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1162,183 +1432,11 @@ class GetMessagesQuery
       GetMessages$Query.fromJson(json);
 }
 
-@JsonSerializable(explicitToJson: true)
-class GetPostListsArguments extends JsonSerializable with EquatableMixin {
-  GetPostListsArguments({
-    required this.offset,
-    required this.orderBy,
-    required this.order,
-  });
-
-  @override
-  factory GetPostListsArguments.fromJson(Map<String, dynamic> json) =>
-      _$GetPostListsArgumentsFromJson(json);
-
-  late int offset;
-
-  @JsonKey(unknownEnumValue: PostOrderBy.artemisUnknown)
-  late PostOrderBy orderBy;
-
-  @JsonKey(unknownEnumValue: Order.artemisUnknown)
-  late Order order;
-
-  @override
-  List<Object?> get props => [offset, orderBy, order];
-  @override
-  Map<String, dynamic> toJson() => _$GetPostListsArgumentsToJson(this);
-}
-
-final GET_POST_LISTS_QUERY_DOCUMENT_OPERATION_NAME = 'getPostLists';
-final GET_POST_LISTS_QUERY_DOCUMENT = DocumentNode(definitions: [
+final MY_FOLLOW_QUERY_DOCUMENT_OPERATION_NAME = 'myFollow';
+final MY_FOLLOW_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
-    name: NameNode(value: 'getPostLists'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'offset')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'orderBy')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'PostOrderBy'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'order')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Order'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'posts'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'input'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'limit'),
-                value: IntValueNode(value: '10'),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'offset'),
-                value: VariableNode(name: NameNode(value: 'offset')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'orderBy'),
-                value: VariableNode(name: NameNode(value: 'orderBy')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'order'),
-                value: VariableNode(name: NameNode(value: 'order')),
-              ),
-            ]),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'title'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'content'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'view'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'like'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'comments_num'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'position'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'tag'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  )
-]);
-
-class GetPostListsQuery
-    extends GraphQLQuery<GetPostLists$Query, GetPostListsArguments> {
-  GetPostListsQuery({required this.variables});
-
-  @override
-  final DocumentNode document = GET_POST_LISTS_QUERY_DOCUMENT;
-
-  @override
-  final String operationName = GET_POST_LISTS_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final GetPostListsArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  GetPostLists$Query parse(Map<String, dynamic> json) =>
-      GetPostLists$Query.fromJson(json);
-}
-
-final GET_PROFILE_QUERY_DOCUMENT_OPERATION_NAME = 'getProfile';
-final GET_PROFILE_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'getProfile'),
+    name: NameNode(value: 'myFollow'),
     variableDefinitions: [],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -1348,136 +1446,6 @@ final GET_PROFILE_QUERY_DOCUMENT = DocumentNode(definitions: [
         arguments: [],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'loginName'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'nickname'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'about'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'avatar'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  )
-]);
-
-class GetProfileQuery extends GraphQLQuery<GetProfile$Query, JsonSerializable> {
-  GetProfileQuery();
-
-  @override
-  final DocumentNode document = GET_PROFILE_QUERY_DOCUMENT;
-
-  @override
-  final String operationName = GET_PROFILE_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  List<Object?> get props => [document, operationName];
-  @override
-  GetProfile$Query parse(Map<String, dynamic> json) =>
-      GetProfile$Query.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetUserByIdArguments extends JsonSerializable with EquatableMixin {
-  GetUserByIdArguments({required this.id});
-
-  @override
-  factory GetUserByIdArguments.fromJson(Map<String, dynamic> json) =>
-      _$GetUserByIdArgumentsFromJson(json);
-
-  late int id;
-
-  @override
-  List<Object?> get props => [id];
-  @override
-  Map<String, dynamic> toJson() => _$GetUserByIdArgumentsToJson(this);
-}
-
-final GET_USER_BY_ID_QUERY_DOCUMENT_OPERATION_NAME = 'getUserById';
-final GET_USER_BY_ID_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'getUserById'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'getUserById'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'input'),
-            value: VariableNode(name: NameNode(value: 'id')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'loginName'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'nickname'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'about'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'avatar'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
           FieldNode(
             name: NameNode(value: 'follow'),
             alias: null,
@@ -1492,6 +1460,13 @@ final GET_USER_BY_ID_QUERY_DOCUMENT = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
+                name: NameNode(value: 'nickname'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: 'loginName'),
                 alias: null,
                 arguments: [],
@@ -1499,7 +1474,36 @@ final GET_USER_BY_ID_QUERY_DOCUMENT = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
+                name: NameNode(value: 'avatar'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'block'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: 'nickname'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'loginName'),
                 alias: null,
                 arguments: [],
                 directives: [],
@@ -1520,24 +1524,20 @@ final GET_USER_BY_ID_QUERY_DOCUMENT = DocumentNode(definitions: [
   )
 ]);
 
-class GetUserByIdQuery
-    extends GraphQLQuery<GetUserById$Query, GetUserByIdArguments> {
-  GetUserByIdQuery({required this.variables});
+class MyFollowQuery extends GraphQLQuery<MyFollow$Query, JsonSerializable> {
+  MyFollowQuery();
 
   @override
-  final DocumentNode document = GET_USER_BY_ID_QUERY_DOCUMENT;
+  final DocumentNode document = MY_FOLLOW_QUERY_DOCUMENT;
 
   @override
-  final String operationName = GET_USER_BY_ID_QUERY_DOCUMENT_OPERATION_NAME;
+  final String operationName = MY_FOLLOW_QUERY_DOCUMENT_OPERATION_NAME;
 
   @override
-  final GetUserByIdArguments variables;
-
+  List<Object?> get props => [document, operationName];
   @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  GetUserById$Query parse(Map<String, dynamic> json) =>
-      GetUserById$Query.fromJson(json);
+  MyFollow$Query parse(Map<String, dynamic> json) =>
+      MyFollow$Query.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1668,144 +1668,6 @@ class GlobalSearchQuery
 }
 
 @JsonSerializable(explicitToJson: true)
-class LikeArguments extends JsonSerializable with EquatableMixin {
-  LikeArguments({required this.postId});
-
-  @override
-  factory LikeArguments.fromJson(Map<String, dynamic> json) =>
-      _$LikeArgumentsFromJson(json);
-
-  late int postId;
-
-  @override
-  List<Object?> get props => [postId];
-  @override
-  Map<String, dynamic> toJson() => _$LikeArgumentsToJson(this);
-}
-
-final LIKE_MUTATION_DOCUMENT_OPERATION_NAME = 'like';
-final LIKE_MUTATION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'like'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'postId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'likePost'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'input'),
-            value: VariableNode(name: NameNode(value: 'postId')),
-          )
-        ],
-        directives: [],
-        selectionSet: null,
-      )
-    ]),
-  )
-]);
-
-class LikeMutation extends GraphQLQuery<Like$Mutation, LikeArguments> {
-  LikeMutation({required this.variables});
-
-  @override
-  final DocumentNode document = LIKE_MUTATION_DOCUMENT;
-
-  @override
-  final String operationName = LIKE_MUTATION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final LikeArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  Like$Mutation parse(Map<String, dynamic> json) =>
-      Like$Mutation.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class MarkArguments extends JsonSerializable with EquatableMixin {
-  MarkArguments({required this.postId});
-
-  @override
-  factory MarkArguments.fromJson(Map<String, dynamic> json) =>
-      _$MarkArgumentsFromJson(json);
-
-  late int postId;
-
-  @override
-  List<Object?> get props => [postId];
-  @override
-  Map<String, dynamic> toJson() => _$MarkArgumentsToJson(this);
-}
-
-final MARK_MUTATION_DOCUMENT_OPERATION_NAME = 'mark';
-final MARK_MUTATION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'mark'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'postId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'markPost'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'input'),
-            value: VariableNode(name: NameNode(value: 'postId')),
-          )
-        ],
-        directives: [],
-        selectionSet: null,
-      )
-    ]),
-  )
-]);
-
-class MarkMutation extends GraphQLQuery<Mark$Mutation, MarkArguments> {
-  MarkMutation({required this.variables});
-
-  @override
-  final DocumentNode document = MARK_MUTATION_DOCUMENT;
-
-  @override
-  final String operationName = MARK_MUTATION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final MarkArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  Mark$Mutation parse(Map<String, dynamic> json) =>
-      Mark$Mutation.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
 class NewCommentArguments extends JsonSerializable with EquatableMixin {
   NewCommentArguments({
     required this.userId,
@@ -1920,6 +1782,76 @@ class NewCommentMutation
   @override
   NewComment$Mutation parse(Map<String, dynamic> json) =>
       NewComment$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class UnfollowArguments extends JsonSerializable with EquatableMixin {
+  UnfollowArguments({required this.userId});
+
+  @override
+  factory UnfollowArguments.fromJson(Map<String, dynamic> json) =>
+      _$UnfollowArgumentsFromJson(json);
+
+  late int userId;
+
+  @override
+  List<Object?> get props => [userId];
+  @override
+  Map<String, dynamic> toJson() => _$UnfollowArgumentsToJson(this);
+}
+
+final UNFOLLOW_MUTATION_DOCUMENT_OPERATION_NAME = 'unfollow';
+final UNFOLLOW_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'unfollow'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'userId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'unfollowUser'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'userId')),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  )
+]);
+
+class UnfollowMutation
+    extends GraphQLQuery<Unfollow$Mutation, UnfollowArguments> {
+  UnfollowMutation({required this.variables});
+
+  @override
+  final DocumentNode document = UNFOLLOW_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName = UNFOLLOW_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final UnfollowArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  Unfollow$Mutation parse(Map<String, dynamic> json) =>
+      Unfollow$Mutation.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -2078,113 +2010,6 @@ class NewPostMutation extends GraphQLQuery<NewPost$Mutation, NewPostArguments> {
 }
 
 @JsonSerializable(explicitToJson: true)
-class ReceiveMessageArguments extends JsonSerializable with EquatableMixin {
-  ReceiveMessageArguments({required this.token});
-
-  @override
-  factory ReceiveMessageArguments.fromJson(Map<String, dynamic> json) =>
-      _$ReceiveMessageArgumentsFromJson(json);
-
-  late String token;
-
-  @override
-  List<Object?> get props => [token];
-  @override
-  Map<String, dynamic> toJson() => _$ReceiveMessageArgumentsToJson(this);
-}
-
-final RECEIVE_MESSAGE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'receiveMessage';
-final RECEIVE_MESSAGE_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'receiveMessage'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'token')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'String'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'messageToMe'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'token'),
-            value: VariableNode(name: NameNode(value: 'token')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'messageId'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'userFrom'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'userTo'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'content'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'createdAt'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  )
-]);
-
-class ReceiveMessageSubscription
-    extends GraphQLQuery<ReceiveMessage$Subscription, ReceiveMessageArguments> {
-  ReceiveMessageSubscription({required this.variables});
-
-  @override
-  final DocumentNode document = RECEIVE_MESSAGE_SUBSCRIPTION_DOCUMENT;
-
-  @override
-  final String operationName =
-      RECEIVE_MESSAGE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final ReceiveMessageArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  ReceiveMessage$Subscription parse(Map<String, dynamic> json) =>
-      ReceiveMessage$Subscription.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
 class RegisterArguments extends JsonSerializable with EquatableMixin {
   RegisterArguments({
     required this.loginName,
@@ -2290,208 +2115,6 @@ class RegisterMutation
   @override
   Register$Mutation parse(Map<String, dynamic> json) =>
       Register$Mutation.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class SetProfileArguments extends JsonSerializable with EquatableMixin {
-  SetProfileArguments({
-    this.nickname,
-    this.password,
-    this.about,
-    this.avatar,
-  });
-
-  @override
-  factory SetProfileArguments.fromJson(Map<String, dynamic> json) =>
-      _$SetProfileArgumentsFromJson(json);
-
-  final String? nickname;
-
-  final String? password;
-
-  final String? about;
-
-  final String? avatar;
-
-  @override
-  List<Object?> get props => [nickname, password, about, avatar];
-  @override
-  Map<String, dynamic> toJson() => _$SetProfileArgumentsToJson(this);
-}
-
-final SET_PROFILE_MUTATION_DOCUMENT_OPERATION_NAME = 'setProfile';
-final SET_PROFILE_MUTATION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'setProfile'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'nickname')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'String'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'password')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'String'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'about')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'String'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'avatar')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'String'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'updateUser'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'input'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'nickname'),
-                value: VariableNode(name: NameNode(value: 'nickname')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'password'),
-                value: VariableNode(name: NameNode(value: 'password')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'about'),
-                value: VariableNode(name: NameNode(value: 'about')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'avatar'),
-                value: VariableNode(name: NameNode(value: 'avatar')),
-              ),
-            ]),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          )
-        ]),
-      )
-    ]),
-  )
-]);
-
-class SetProfileMutation
-    extends GraphQLQuery<SetProfile$Mutation, SetProfileArguments> {
-  SetProfileMutation({required this.variables});
-
-  @override
-  final DocumentNode document = SET_PROFILE_MUTATION_DOCUMENT;
-
-  @override
-  final String operationName = SET_PROFILE_MUTATION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final SetProfileArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  SetProfile$Mutation parse(Map<String, dynamic> json) =>
-      SetProfile$Mutation.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class UnmarkArguments extends JsonSerializable with EquatableMixin {
-  UnmarkArguments({required this.postId});
-
-  @override
-  factory UnmarkArguments.fromJson(Map<String, dynamic> json) =>
-      _$UnmarkArgumentsFromJson(json);
-
-  late int postId;
-
-  @override
-  List<Object?> get props => [postId];
-  @override
-  Map<String, dynamic> toJson() => _$UnmarkArgumentsToJson(this);
-}
-
-final UNMARK_MUTATION_DOCUMENT_OPERATION_NAME = 'unmark';
-final UNMARK_MUTATION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'unmark'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'postId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'unmarkPost'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'input'),
-            value: VariableNode(name: NameNode(value: 'postId')),
-          )
-        ],
-        directives: [],
-        selectionSet: null,
-      )
-    ]),
-  )
-]);
-
-class UnmarkMutation extends GraphQLQuery<Unmark$Mutation, UnmarkArguments> {
-  UnmarkMutation({required this.variables});
-
-  @override
-  final DocumentNode document = UNMARK_MUTATION_DOCUMENT;
-
-  @override
-  final String operationName = UNMARK_MUTATION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final UnmarkArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  Unmark$Mutation parse(Map<String, dynamic> json) =>
-      Unmark$Mutation.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -2601,6 +2224,631 @@ class LoginMutation extends GraphQLQuery<Login$Mutation, LoginArguments> {
       Login$Mutation.fromJson(json);
 }
 
+@JsonSerializable(explicitToJson: true)
+class MarkArguments extends JsonSerializable with EquatableMixin {
+  MarkArguments({required this.postId});
+
+  @override
+  factory MarkArguments.fromJson(Map<String, dynamic> json) =>
+      _$MarkArgumentsFromJson(json);
+
+  late int postId;
+
+  @override
+  List<Object?> get props => [postId];
+  @override
+  Map<String, dynamic> toJson() => _$MarkArgumentsToJson(this);
+}
+
+final MARK_MUTATION_DOCUMENT_OPERATION_NAME = 'mark';
+final MARK_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'mark'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'postId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'markPost'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'postId')),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  )
+]);
+
+class MarkMutation extends GraphQLQuery<Mark$Mutation, MarkArguments> {
+  MarkMutation({required this.variables});
+
+  @override
+  final DocumentNode document = MARK_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName = MARK_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final MarkArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  Mark$Mutation parse(Map<String, dynamic> json) =>
+      Mark$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetFavoritePostArguments extends JsonSerializable with EquatableMixin {
+  GetFavoritePostArguments({required this.userId});
+
+  @override
+  factory GetFavoritePostArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetFavoritePostArgumentsFromJson(json);
+
+  late int userId;
+
+  @override
+  List<Object?> get props => [userId];
+  @override
+  Map<String, dynamic> toJson() => _$GetFavoritePostArgumentsToJson(this);
+}
+
+final GET_FAVORITE_POST_QUERY_DOCUMENT_OPERATION_NAME = 'getFavoritePost';
+final GET_FAVORITE_POST_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'getFavoritePost'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'userId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'getUserFavoritePost'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'userId')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'title'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'content'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'view'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'like'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'comments_num'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'position'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'tag'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  )
+]);
+
+class GetFavoritePostQuery
+    extends GraphQLQuery<GetFavoritePost$Query, GetFavoritePostArguments> {
+  GetFavoritePostQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_FAVORITE_POST_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_FAVORITE_POST_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetFavoritePostArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetFavoritePost$Query parse(Map<String, dynamic> json) =>
+      GetFavoritePost$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class ReceiveMessageArguments extends JsonSerializable with EquatableMixin {
+  ReceiveMessageArguments({required this.token});
+
+  @override
+  factory ReceiveMessageArguments.fromJson(Map<String, dynamic> json) =>
+      _$ReceiveMessageArgumentsFromJson(json);
+
+  late String token;
+
+  @override
+  List<Object?> get props => [token];
+  @override
+  Map<String, dynamic> toJson() => _$ReceiveMessageArgumentsToJson(this);
+}
+
+final RECEIVE_MESSAGE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME = 'receiveMessage';
+final RECEIVE_MESSAGE_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'receiveMessage'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'token')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'messageToMe'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'token'),
+            value: VariableNode(name: NameNode(value: 'token')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'messageId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'userFrom'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'userTo'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'content'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'createdAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  )
+]);
+
+class ReceiveMessageSubscription
+    extends GraphQLQuery<ReceiveMessage$Subscription, ReceiveMessageArguments> {
+  ReceiveMessageSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = RECEIVE_MESSAGE_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      RECEIVE_MESSAGE_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final ReceiveMessageArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  ReceiveMessage$Subscription parse(Map<String, dynamic> json) =>
+      ReceiveMessage$Subscription.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetUserByIdArguments extends JsonSerializable with EquatableMixin {
+  GetUserByIdArguments({required this.id});
+
+  @override
+  factory GetUserByIdArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetUserByIdArgumentsFromJson(json);
+
+  late int id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$GetUserByIdArgumentsToJson(this);
+}
+
+final GET_USER_BY_ID_QUERY_DOCUMENT_OPERATION_NAME = 'getUserById';
+final GET_USER_BY_ID_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'getUserById'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'getUserById'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'loginName'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'nickname'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'about'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'avatar'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'follow'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'loginName'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'nickname'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'avatar'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+        ]),
+      )
+    ]),
+  )
+]);
+
+class GetUserByIdQuery
+    extends GraphQLQuery<GetUserById$Query, GetUserByIdArguments> {
+  GetUserByIdQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_USER_BY_ID_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_USER_BY_ID_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetUserByIdArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetUserById$Query parse(Map<String, dynamic> json) =>
+      GetUserById$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetPostListsArguments extends JsonSerializable with EquatableMixin {
+  GetPostListsArguments({
+    required this.offset,
+    required this.orderBy,
+    required this.order,
+  });
+
+  @override
+  factory GetPostListsArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetPostListsArgumentsFromJson(json);
+
+  late int offset;
+
+  @JsonKey(unknownEnumValue: PostOrderBy.artemisUnknown)
+  late PostOrderBy orderBy;
+
+  @JsonKey(unknownEnumValue: Order.artemisUnknown)
+  late Order order;
+
+  @override
+  List<Object?> get props => [offset, orderBy, order];
+  @override
+  Map<String, dynamic> toJson() => _$GetPostListsArgumentsToJson(this);
+}
+
+final GET_POST_LISTS_QUERY_DOCUMENT_OPERATION_NAME = 'getPostLists';
+final GET_POST_LISTS_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'getPostLists'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'offset')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'orderBy')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'PostOrderBy'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'order')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Order'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'posts'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '10'),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'offset'),
+                value: VariableNode(name: NameNode(value: 'offset')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'orderBy'),
+                value: VariableNode(name: NameNode(value: 'orderBy')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'order'),
+                value: VariableNode(name: NameNode(value: 'order')),
+              ),
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'title'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'content'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'view'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'like'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'comments_num'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'position'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'tag'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'user'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+        ]),
+      )
+    ]),
+  )
+]);
+
+class GetPostListsQuery
+    extends GraphQLQuery<GetPostLists$Query, GetPostListsArguments> {
+  GetPostListsQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_POST_LISTS_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_POST_LISTS_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetPostListsArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetPostLists$Query parse(Map<String, dynamic> json) =>
+      GetPostLists$Query.fromJson(json);
+}
+
 final LOGOUT_MUTATION_DOCUMENT_OPERATION_NAME = 'logout';
 final LOGOUT_MUTATION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
@@ -2637,29 +2885,29 @@ class LogoutMutation extends GraphQLQuery<Logout$Mutation, JsonSerializable> {
 }
 
 @JsonSerializable(explicitToJson: true)
-class BlockArguments extends JsonSerializable with EquatableMixin {
-  BlockArguments({required this.userId});
+class DislikeArguments extends JsonSerializable with EquatableMixin {
+  DislikeArguments({required this.postId});
 
   @override
-  factory BlockArguments.fromJson(Map<String, dynamic> json) =>
-      _$BlockArgumentsFromJson(json);
+  factory DislikeArguments.fromJson(Map<String, dynamic> json) =>
+      _$DislikeArgumentsFromJson(json);
 
-  late int userId;
+  late int postId;
 
   @override
-  List<Object?> get props => [userId];
+  List<Object?> get props => [postId];
   @override
-  Map<String, dynamic> toJson() => _$BlockArgumentsToJson(this);
+  Map<String, dynamic> toJson() => _$DislikeArgumentsToJson(this);
 }
 
-final BLOCK_MUTATION_DOCUMENT_OPERATION_NAME = 'block';
-final BLOCK_MUTATION_DOCUMENT = DocumentNode(definitions: [
+final DISLIKE_MUTATION_DOCUMENT_OPERATION_NAME = 'dislike';
+final DISLIKE_MUTATION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.mutation,
-    name: NameNode(value: 'block'),
+    name: NameNode(value: 'dislike'),
     variableDefinitions: [
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'userId')),
+        variable: VariableNode(name: NameNode(value: 'postId')),
         type: NamedTypeNode(
           name: NameNode(value: 'Int'),
           isNonNull: true,
@@ -2671,12 +2919,12 @@ final BLOCK_MUTATION_DOCUMENT = DocumentNode(definitions: [
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'blockUser'),
+        name: NameNode(value: 'dislikePost'),
         alias: null,
         arguments: [
           ArgumentNode(
             name: NameNode(value: 'input'),
-            value: VariableNode(name: NameNode(value: 'userId')),
+            value: VariableNode(name: NameNode(value: 'postId')),
           )
         ],
         directives: [],
@@ -2686,249 +2934,77 @@ final BLOCK_MUTATION_DOCUMENT = DocumentNode(definitions: [
   )
 ]);
 
-class BlockMutation extends GraphQLQuery<Block$Mutation, BlockArguments> {
-  BlockMutation({required this.variables});
+class DislikeMutation extends GraphQLQuery<Dislike$Mutation, DislikeArguments> {
+  DislikeMutation({required this.variables});
 
   @override
-  final DocumentNode document = BLOCK_MUTATION_DOCUMENT;
+  final DocumentNode document = DISLIKE_MUTATION_DOCUMENT;
 
   @override
-  final String operationName = BLOCK_MUTATION_DOCUMENT_OPERATION_NAME;
+  final String operationName = DISLIKE_MUTATION_DOCUMENT_OPERATION_NAME;
 
   @override
-  final BlockArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  Block$Mutation parse(Map<String, dynamic> json) =>
-      Block$Mutation.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class FollowArguments extends JsonSerializable with EquatableMixin {
-  FollowArguments({required this.userId});
-
-  @override
-  factory FollowArguments.fromJson(Map<String, dynamic> json) =>
-      _$FollowArgumentsFromJson(json);
-
-  late int userId;
-
-  @override
-  List<Object?> get props => [userId];
-  @override
-  Map<String, dynamic> toJson() => _$FollowArgumentsToJson(this);
-}
-
-final FOLLOW_MUTATION_DOCUMENT_OPERATION_NAME = 'follow';
-final FOLLOW_MUTATION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'follow'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'userId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'followUser'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'input'),
-            value: VariableNode(name: NameNode(value: 'userId')),
-          )
-        ],
-        directives: [],
-        selectionSet: null,
-      )
-    ]),
-  )
-]);
-
-class FollowMutation extends GraphQLQuery<Follow$Mutation, FollowArguments> {
-  FollowMutation({required this.variables});
-
-  @override
-  final DocumentNode document = FOLLOW_MUTATION_DOCUMENT;
-
-  @override
-  final String operationName = FOLLOW_MUTATION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final FollowArguments variables;
+  final DislikeArguments variables;
 
   @override
   List<Object?> get props => [document, operationName, variables];
   @override
-  Follow$Mutation parse(Map<String, dynamic> json) =>
-      Follow$Mutation.fromJson(json);
+  Dislike$Mutation parse(Map<String, dynamic> json) =>
+      Dislike$Mutation.fromJson(json);
 }
 
-@JsonSerializable(explicitToJson: true)
-class UnblockArguments extends JsonSerializable with EquatableMixin {
-  UnblockArguments({required this.userId});
-
-  @override
-  factory UnblockArguments.fromJson(Map<String, dynamic> json) =>
-      _$UnblockArgumentsFromJson(json);
-
-  late int userId;
-
-  @override
-  List<Object?> get props => [userId];
-  @override
-  Map<String, dynamic> toJson() => _$UnblockArgumentsToJson(this);
-}
-
-final UNBLOCK_MUTATION_DOCUMENT_OPERATION_NAME = 'unblock';
-final UNBLOCK_MUTATION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'unblock'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'userId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'unblockUser'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'input'),
-            value: VariableNode(name: NameNode(value: 'userId')),
-          )
-        ],
-        directives: [],
-        selectionSet: null,
-      )
-    ]),
-  )
-]);
-
-class UnblockMutation extends GraphQLQuery<Unblock$Mutation, UnblockArguments> {
-  UnblockMutation({required this.variables});
-
-  @override
-  final DocumentNode document = UNBLOCK_MUTATION_DOCUMENT;
-
-  @override
-  final String operationName = UNBLOCK_MUTATION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final UnblockArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  Unblock$Mutation parse(Map<String, dynamic> json) =>
-      Unblock$Mutation.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class UnfollowArguments extends JsonSerializable with EquatableMixin {
-  UnfollowArguments({required this.userId});
-
-  @override
-  factory UnfollowArguments.fromJson(Map<String, dynamic> json) =>
-      _$UnfollowArgumentsFromJson(json);
-
-  late int userId;
-
-  @override
-  List<Object?> get props => [userId];
-  @override
-  Map<String, dynamic> toJson() => _$UnfollowArgumentsToJson(this);
-}
-
-final UNFOLLOW_MUTATION_DOCUMENT_OPERATION_NAME = 'unfollow';
-final UNFOLLOW_MUTATION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'unfollow'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'userId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'unfollowUser'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'input'),
-            value: VariableNode(name: NameNode(value: 'userId')),
-          )
-        ],
-        directives: [],
-        selectionSet: null,
-      )
-    ]),
-  )
-]);
-
-class UnfollowMutation
-    extends GraphQLQuery<Unfollow$Mutation, UnfollowArguments> {
-  UnfollowMutation({required this.variables});
-
-  @override
-  final DocumentNode document = UNFOLLOW_MUTATION_DOCUMENT;
-
-  @override
-  final String operationName = UNFOLLOW_MUTATION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final UnfollowArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  Unfollow$Mutation parse(Map<String, dynamic> json) =>
-      Unfollow$Mutation.fromJson(json);
-}
-
-final MY_FOLLOW_QUERY_DOCUMENT_OPERATION_NAME = 'myFollow';
-final MY_FOLLOW_QUERY_DOCUMENT = DocumentNode(definitions: [
+final GET_COMMENT_LISTS_QUERY_DOCUMENT_OPERATION_NAME = 'getCommentLists';
+final GET_COMMENT_LISTS_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
-    name: NameNode(value: 'myFollow'),
+    name: NameNode(value: 'getCommentLists'),
     variableDefinitions: [],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'me'),
+        name: NameNode(value: 'comment'),
         alias: null,
-        arguments: [],
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '10000'),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'offset'),
+                value: IntValueNode(value: '0'),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'orderBy'),
+                value: EnumValueNode(name: NameNode(value: 'comment_id')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'order'),
+                value: EnumValueNode(name: NameNode(value: 'DESC')),
+              ),
+            ]),
+          )
+        ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'follow'),
+            name: NameNode(value: 'content'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'createdAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'post'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2939,32 +3015,11 @@ final MY_FOLLOW_QUERY_DOCUMENT = DocumentNode(definitions: [
                 arguments: [],
                 directives: [],
                 selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'nickname'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'loginName'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'avatar'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
+              )
             ]),
           ),
           FieldNode(
-            name: NameNode(value: 'block'),
+            name: NameNode(value: 'user'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2977,21 +3032,7 @@ final MY_FOLLOW_QUERY_DOCUMENT = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
-                name: NameNode(value: 'nickname'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
                 name: NameNode(value: 'loginName'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'avatar'),
                 alias: null,
                 arguments: [],
                 directives: [],
@@ -3005,18 +3046,19 @@ final MY_FOLLOW_QUERY_DOCUMENT = DocumentNode(definitions: [
   )
 ]);
 
-class MyFollowQuery extends GraphQLQuery<MyFollow$Query, JsonSerializable> {
-  MyFollowQuery();
+class GetCommentListsQuery
+    extends GraphQLQuery<GetCommentLists$Query, JsonSerializable> {
+  GetCommentListsQuery();
 
   @override
-  final DocumentNode document = MY_FOLLOW_QUERY_DOCUMENT;
+  final DocumentNode document = GET_COMMENT_LISTS_QUERY_DOCUMENT;
 
   @override
-  final String operationName = MY_FOLLOW_QUERY_DOCUMENT_OPERATION_NAME;
+  final String operationName = GET_COMMENT_LISTS_QUERY_DOCUMENT_OPERATION_NAME;
 
   @override
   List<Object?> get props => [document, operationName];
   @override
-  MyFollow$Query parse(Map<String, dynamic> json) =>
-      MyFollow$Query.fromJson(json);
+  GetCommentLists$Query parse(Map<String, dynamic> json) =>
+      GetCommentLists$Query.fromJson(json);
 }

@@ -13,5 +13,8 @@ query getPostLists($offset: Int!, $orderBy: PostOrderBy!, $order: Order!){
 			comments_num
 			position
 			tag
+			user {
+				id
+			}
 		}
 }

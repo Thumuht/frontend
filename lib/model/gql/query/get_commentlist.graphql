@@ -11,6 +11,7 @@ query getCommentLists(){
               id
             }
             user{
+				id
                 loginName
             }
 		}

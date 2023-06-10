@@ -222,6 +222,7 @@ Widget _buildList(BuildContext context) {
                     postlists[index]!.commentsNum!,
                     postlists[index]!.position,
                     postlists[index]!.tag,
+                    postlists[index]!.user!.id,
                     context);
               },
               itemCount: postlists?.length ??
@@ -243,7 +244,7 @@ Widget _buildList(BuildContext context) {
 }
 
 ListTile _tile(int id, String title, String subtitle, int view, int like,
-        int commentsNum, String? position, String? tag, BuildContext context) =>
+        int commentsNum, String? position, String? tag, int postUserId, BuildContext context) =>
     ListTile(
       title: Row(children: [
         Text(
@@ -303,6 +304,7 @@ ListTile _tile(int id, String title, String subtitle, int view, int like,
                 like: like,
                 commentsNum: commentsNum,
                 position: position!,
+                postUserId: postUserId,
               ),
             )).then((value) => refetchGlobal!());
       },
