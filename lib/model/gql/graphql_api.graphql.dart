@@ -484,6 +484,52 @@ class Logout$Mutation extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$Logout$MutationToJson(this);
 }
 
+@JsonSerializable(explicitToJson: true)
+class GetTypePost$Query$Post extends JsonSerializable with EquatableMixin {
+  GetTypePost$Query$Post();
+
+  factory GetTypePost$Query$Post.fromJson(Map<String, dynamic> json) =>
+      _$GetTypePost$Query$PostFromJson(json);
+
+  late int id;
+
+  String? title;
+
+  String? content;
+
+  int? view;
+
+  int? like;
+
+  @JsonKey(name: 'comments_num')
+  int? commentsNum;
+
+  String? position;
+
+  String? tag;
+
+  @override
+  List<Object?> get props =>
+      [id, title, content, view, like, commentsNum, position, tag];
+  @override
+  Map<String, dynamic> toJson() => _$GetTypePost$Query$PostToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetTypePost$Query extends JsonSerializable with EquatableMixin {
+  GetTypePost$Query();
+
+  factory GetTypePost$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetTypePost$QueryFromJson(json);
+
+  List<GetTypePost$Query$Post?>? posts;
+
+  @override
+  List<Object?> get props => [posts];
+  @override
+  Map<String, dynamic> toJson() => _$GetTypePost$QueryToJson(this);
+}
+
 enum PostOrderBy {
   @JsonValue('post_id')
   postId,
@@ -2030,4 +2076,136 @@ class LogoutMutation extends GraphQLQuery<Logout$Mutation, JsonSerializable> {
   @override
   Logout$Mutation parse(Map<String, dynamic> json) =>
       Logout$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetTypePostArguments extends JsonSerializable with EquatableMixin {
+  GetTypePostArguments({required this.tags});
+
+  @override
+  factory GetTypePostArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetTypePostArgumentsFromJson(json);
+
+  late String tags;
+
+  @override
+  List<Object?> get props => [tags];
+  @override
+  Map<String, dynamic> toJson() => _$GetTypePostArgumentsToJson(this);
+}
+
+final GET_TYPE_POST_QUERY_DOCUMENT_OPERATION_NAME = 'getTypePost';
+final GET_TYPE_POST_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'getTypePost'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'tags')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'posts'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'tags'),
+                value: VariableNode(name: NameNode(value: 'tags')),
+              )
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'title'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'content'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'view'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'like'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'comments_num'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'position'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'tag'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  )
+]);
+
+class GetTypePostQuery
+    extends GraphQLQuery<GetTypePost$Query, GetTypePostArguments> {
+  GetTypePostQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_TYPE_POST_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_TYPE_POST_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetTypePostArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetTypePost$Query parse(Map<String, dynamic> json) =>
+      GetTypePost$Query.fromJson(json);
 }

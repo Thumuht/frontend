@@ -4,6 +4,7 @@ import 'package:thumuht/model/gql/graphql_api.dart';
 
 import '../components/like_list.dart';
 import '../components/mark_list.dart';
+import '../components/type_list.dart';
 
 class PostListPage extends StatefulWidget {
   PostListPage({super.key, required this.orderBy});
@@ -24,7 +25,7 @@ class _PostListPageState extends State<PostListPage> {
             Tab(text: '全部'),
             Tab(text: '已关注'),
             Tab(text: '热门'),
-            Tab(text: '已收藏')
+            Tab(text: '消息类型')
           ],
         ),
         body: TabBarView(
@@ -32,7 +33,7 @@ class _PostListPageState extends State<PostListPage> {
             trueList(context),
             const Placeholder(),
             LikeList(context),
-            markList(context),
+            TypeList(context),
           ],
         ),
       ),

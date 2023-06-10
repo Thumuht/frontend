@@ -358,6 +358,44 @@ Map<String, dynamic> _$Logout$MutationToJson(Logout$Mutation instance) =>
       'logout': instance.logout,
     };
 
+GetTypePost$Query$Post _$GetTypePost$Query$PostFromJson(
+        Map<String, dynamic> json) =>
+    GetTypePost$Query$Post()
+      ..id = json['id'] as int
+      ..title = json['title'] as String?
+      ..content = json['content'] as String?
+      ..view = json['view'] as int?
+      ..like = json['like'] as int?
+      ..commentsNum = json['comments_num'] as int?
+      ..position = json['position'] as String?
+      ..tag = json['tag'] as String?;
+
+Map<String, dynamic> _$GetTypePost$Query$PostToJson(
+        GetTypePost$Query$Post instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'content': instance.content,
+      'view': instance.view,
+      'like': instance.like,
+      'comments_num': instance.commentsNum,
+      'position': instance.position,
+      'tag': instance.tag,
+    };
+
+GetTypePost$Query _$GetTypePost$QueryFromJson(Map<String, dynamic> json) =>
+    GetTypePost$Query()
+      ..posts = (json['posts'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : GetTypePost$Query$Post.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetTypePost$QueryToJson(GetTypePost$Query instance) =>
+    <String, dynamic>{
+      'posts': instance.posts?.map((e) => e?.toJson()).toList(),
+    };
+
 DislikeArguments _$DislikeArgumentsFromJson(Map<String, dynamic> json) =>
     DislikeArguments(
       postId: json['postId'] as int,
@@ -531,4 +569,16 @@ Map<String, dynamic> _$LoginArgumentsToJson(LoginArguments instance) =>
     <String, dynamic>{
       'loginName': instance.loginName,
       'password': instance.password,
+    };
+
+GetTypePostArguments _$GetTypePostArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetTypePostArguments(
+      tags: json['tags'] as String,
+    );
+
+Map<String, dynamic> _$GetTypePostArgumentsToJson(
+        GetTypePostArguments instance) =>
+    <String, dynamic>{
+      'tags': instance.tags,
     };
