@@ -163,7 +163,7 @@ Widget _buildList(BuildContext context) {
                     postlists[index]!.like!,
                     postlists[index]!.commentsNum!,
                     postlists[index]!.position,
-                    postlists[index]!.tag!,
+                    postlists[index]!.tag,
                     context);
               },
               itemCount: postlists?.length ??
@@ -185,7 +185,7 @@ Widget _buildList(BuildContext context) {
 }
 
 ListTile _tile(int id, String title, String subtitle, int view, int like,
-        int commentsNum, String? position, int tag, BuildContext context) =>
+        int commentsNum, String? position, String? tag, BuildContext context) =>
     ListTile(
       title: Row(children: [
         Text(
@@ -196,9 +196,9 @@ ListTile _tile(int id, String title, String subtitle, int view, int like,
           ),
         ),
         const SizedBox(width: 10),
-        if (tag != 0)
+        if (tag != "none")
           RawChip(
-            label: Text(TagMapReverse[tag]!),
+            label: Text(tag!),
             backgroundColor: TagColor[tag],
           )
       ]),

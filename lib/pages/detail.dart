@@ -64,11 +64,9 @@ class LikeWidget extends StatefulWidget {
   _LikeWidgetState createState() => _LikeWidgetState();
 }
 
-bool _isLiked = false;
-
 class _LikeWidgetState extends State<LikeWidget> {
   Like _likeNum = Like(likeNum: 0);
-
+  bool _isLiked = false;
   @override
   void initState() {
     super.initState();
@@ -99,7 +97,8 @@ class _LikeWidgetState extends State<LikeWidget> {
                         runMutation({'postId': widget.id});
                         _likeNum.notLike();
                       } else {
-                        runMutation({'postId': widget.id});
+                        runMutation({'postId': widget.id}).networkResult;
+                        // print(l.toString());
                         _likeNum.addLike();
                       }
                       _isLiked = !_isLiked;

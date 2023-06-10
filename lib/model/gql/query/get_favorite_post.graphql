@@ -1,0 +1,15 @@
+query getFavoritePost($userId: Int!){
+    getUserFavoritePost(
+        input: $userId
+    )
+    {
+        id
+        title
+        content
+        view
+        like
+        comments_num
+        position
+        tag
+    }
+}
