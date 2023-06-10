@@ -625,6 +625,18 @@ const _$OrderEnumMap = {
   Order.artemisUnknown: 'ARTEMIS_UNKNOWN',
 };
 
+GetUserByIdArguments _$GetUserByIdArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetUserByIdArguments(
+      id: json['id'] as int,
+    );
+
+Map<String, dynamic> _$GetUserByIdArgumentsToJson(
+        GetUserByIdArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
 GlobalSearchArguments _$GlobalSearchArgumentsFromJson(
         Map<String, dynamic> json) =>
     GlobalSearchArguments(
