@@ -163,7 +163,16 @@ class _UserPageState extends State<UserPage> {
                         context.push('/user-posts',
                             extra: {'userId': widget.userId});
                       },
-                      child: const Text('View posts'))
+                      child: const Text('View posts')),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        context
+                            .push('/chat', extra: {'toUserId': widget.userId});
+                      },
+                      child: const Text('Send message')),
                 ],
               )),
             );
