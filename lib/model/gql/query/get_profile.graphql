@@ -1,0 +1,8 @@
+query getProfile() {
+    me {
+        loginName
+        nickname
+        about
+        avatar
+    }
+}

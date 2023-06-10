@@ -5,6 +5,8 @@ import 'package:thumuht/pages/profile.dart';
 import 'package:thumuht/pages/register.dart';
 import 'package:thumuht/pages/homepage.dart';
 
+import 'pages/profile_edit.dart';
+
 GoRouter router() {
   return GoRouter(initialLocation: '/', routes: [
     GoRoute(
@@ -26,6 +28,10 @@ GoRouter router() {
     GoRoute(
       path: '/profile',
       builder: (context, state) => const ProfilePage(),
+    ),
+    GoRoute(
+      path: '/profile-edit',
+      builder: (context, state) => const ProfileEditPage(),
     )
   ]);
 }

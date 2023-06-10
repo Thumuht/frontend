@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:thumuht/main.dart';
+import 'package:thumuht/router.dart';
 
 import '../model/gql/graphql_api.graphql.dart';
 import '../model/session.dart';
@@ -23,47 +26,81 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
-          children: [
-            Row(children: [
-              Image.asset(
-                'assets/thumuht.jpg',
-                width: 50,
-                height: 50,
-              ),
-              const SizedBox(
-                width: 16.0,
-              ),
-              Column(
-                children: const [
-                  Text("Chlamydomonos"),
-                  Text("@chlamydomonos", style: TextStyle(color: Colors.grey)),
+        child: Query(
+            options: QueryOptions(document: GET_PROFILE_QUERY_DOCUMENT),
+            builder: (result, {fetchMore, refetch}) {
+              if (result.hasException) {
+                return Text(result.exception.toString());
+              }
+
+              if (result.isLoading || result.data == null) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              return ListView(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 24.0, vertical: 24.0),
+                children: [
+                  Row(children: [
+                    result.data!['me']['avatar'] == ''
+                        ? Image.asset(
+                            'assets/thumuht.jpg',
+                            width: 50,
+                            height: 50,
+                          )
+                        : Image.network(
+                            '$backendAddress/fs/${result.data!['me']['avatar'] as String}',
+                            width: 50,
+                            height: 50,
+                          ),
+                    const SizedBox(
+                      width: 16.0,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                            result.data!['me']['nickname'] == ''
+                                ? result.data!['me']['loginName'] as String
+                                : result.data!['me']['nickname'] as String,
+                            style: const TextStyle(fontSize: 20.0)),
+                        Text('@${result.data!['me']['loginName'] as String}',
+                            style: const TextStyle(color: Colors.grey)),
+                      ],
+                    )
+                  ]),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  Text(result.data!['me']['about'] as String),
+                  const SizedBox(
+                    height: 40.0,
+                  ),
+                  Mutation(
+                    options: MutationOptions(
+                        document: LOGOUT_MUTATION_DOCUMENT,
+                        onCompleted: (data) {
+                          Provider.of<Session>(context, listen: false).logout();
+                        }),
+                    builder: (runMutation, result) => ElevatedButton(
+                      onPressed: () {
+                        runMutation({});
+                      },
+                      child: const Text('Log Out'),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        context.push('/profile-edit');
+                      },
+                      child: const Text('Edit'))
                 ],
-              )
-            ]),
-            const SizedBox(
-              height: 20.0,
-            ),
-            const Text("X'bao ! Th'wagh! Chlamydomonos xia'd tschilhib'sgn!"),
-            const SizedBox(
-              height: 40.0,
-            ),
-            Mutation(
-              options: MutationOptions(
-                  document: LOGOUT_MUTATION_DOCUMENT,
-                  onCompleted: (data) {
-                    Provider.of<Session>(context, listen: false).logout();
-                  }),
-              builder: (runMutation, result) => ElevatedButton(
-                onPressed: () {
-                  runMutation({});
-                },
-                child: const Text('Log Out'),
-              ),
-            )
-          ],
-        ),
+              );
+            }),
       ),
     );
   }
