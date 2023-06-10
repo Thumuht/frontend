@@ -80,7 +80,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                           height: 50,
                         )
                       : Image.network(
-                          '$backendAddress/fs/${avatarPath_!}',
+                          '${backendAddress}fs/${avatarPath_!}',
                           width: 50,
                           height: 50,
                         ),

@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:thumuht/main.dart';
@@ -243,9 +244,55 @@ Widget _buildList(BuildContext context) {
   );
 }
 
-ListTile _tile(int id, String title, String subtitle, int view, int like,
-        int commentsNum, String? position, String? tag, int postUserId, BuildContext context) =>
+ListTile _tile(
+        int id,
+        String title,
+        String subtitle,
+        int view,
+        int like,
+        int commentsNum,
+        String? position,
+        String? tag,
+        int postUserId,
+        BuildContext context) =>
     ListTile(
+      leading: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              context.push('/user', extra: {'userId': postUserId});
+            },
+            child: Query(
+              options: QueryOptions(
+                  document: GET_USER_BY_ID_QUERY_DOCUMENT,
+                  variables: {
+                    'id': postUserId,
+                  }),
+              builder: (result, {fetchMore, refetch}) {
+                if (result.hasException) {
+                  return Text(result.exception.toString());
+                }
+                if (result.isLoading || result.data == null) {
+                  return const Text('Loading...');
+                }
+                final user =
+                    GetUserById$Query.fromJson(result.data!).getUserById;
+                return user.avatar == ''
+                    ? Image.asset(
+                        'assets/thumuht.jpg',
+                        width: 25,
+                        height: 25,
+                      )
+                    : Image.network(
+                        '${backendAddress}fs/${user.avatar}',
+                        width: 25,
+                        height: 25,
+                      );
+              },
+            ),
+          )
+        ],
+      ),
       title: Row(children: [
         Text(
           title,

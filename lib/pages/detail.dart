@@ -333,6 +333,50 @@ class DetailPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
+                Row(
+                  children: [
+                    const Text('Author:'),
+                    const SizedBox(width: 10),
+                    Query(
+                        options: QueryOptions(
+                            document: GET_USER_BY_ID_QUERY_DOCUMENT,
+                            variables: {'id': postUserId}),
+                        builder: (result, {fetchMore, refetch}) {
+                          if (result.hasException) {
+                            return Text(result.exception.toString());
+                          }
+                          if (result.isLoading || result.data == null) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          final user = GetUserById$Query.fromJson(result.data!)
+                              .getUserById;
+
+                          if (user.nickname == '') {
+                            user.nickname = user.loginName;
+                          }
+                          return Row(
+                            children: [
+                              Text(user.nickname!),
+                              const SizedBox(width: 10),
+                              GestureDetector(
+                                  onTap: () {
+                                    context.push('/user',
+                                        extra: {'userId': postUserId});
+                                  },
+                                  child: user.avatar == ''
+                                      ? Image.asset('assets/thumuht.jpg',
+                                          width: 30, height: 30)
+                                      : Image.network(
+                                          '${backendAddress}fs/${user.avatar}',
+                                          width: 30,
+                                          height: 30))
+                            ],
+                          );
+                        }),
+                  ],
+                ),
                 Column(
                     children: MarkdownGenerator(
                   generators: [videoGeneratorWithTag],
