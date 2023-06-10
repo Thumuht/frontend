@@ -9,8 +9,8 @@ import 'package:thumuht/router.dart';
 import 'package:provider/provider.dart';
 
 //const String backendAddress = 'http://10.0.2.2:8899/';
-const String backendAddress = 'http://127.0.0.1:8899/';
-const String backendWsAddress = 'ws://127.0.0.1:8899/';
+const String backendAddress = 'http://82.156.157.153:8899/';
+const String backendWsAddress = 'ws://82.156.157.153:8899/';
 
 Map<int, List<int>> likeMap = {};
 Map<int, List<int>> markMap = {};

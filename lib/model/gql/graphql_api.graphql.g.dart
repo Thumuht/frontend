@@ -554,6 +554,24 @@ Map<String, dynamic> _$MyFollow$QueryToJson(MyFollow$Query instance) =>
       'me': instance.me.toJson(),
     };
 
+MessageNum$Query _$MessageNum$QueryFromJson(Map<String, dynamic> json) =>
+    MessageNum$Query()..messageNum = json['messageNum'] as int;
+
+Map<String, dynamic> _$MessageNum$QueryToJson(MessageNum$Query instance) =>
+    <String, dynamic>{
+      'messageNum': instance.messageNum,
+    };
+
+SendMessage$Mutation _$SendMessage$MutationFromJson(
+        Map<String, dynamic> json) =>
+    SendMessage$Mutation()..sendMessage = json['sendMessage'] as bool;
+
+Map<String, dynamic> _$SendMessage$MutationToJson(
+        SendMessage$Mutation instance) =>
+    <String, dynamic>{
+      'sendMessage': instance.sendMessage,
+    };
+
 DislikeArguments _$DislikeArgumentsFromJson(Map<String, dynamic> json) =>
     DislikeArguments(
       postId: json['postId'] as int,
@@ -580,12 +598,16 @@ GetMessagesArguments _$GetMessagesArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetMessagesArguments(
       userId: json['userId'] as int,
+      offset: json['offset'] as int,
+      limit: json['limit'] as int,
     );
 
 Map<String, dynamic> _$GetMessagesArgumentsToJson(
         GetMessagesArguments instance) =>
     <String, dynamic>{
       'userId': instance.userId,
+      'offset': instance.offset,
+      'limit': instance.limit,
     };
 
 GetPostListsArguments _$GetPostListsArgumentsFromJson(
@@ -803,4 +825,29 @@ UnfollowArguments _$UnfollowArgumentsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$UnfollowArgumentsToJson(UnfollowArguments instance) =>
     <String, dynamic>{
       'userId': instance.userId,
+    };
+
+MessageNumArguments _$MessageNumArgumentsFromJson(Map<String, dynamic> json) =>
+    MessageNumArguments(
+      id: json['id'] as int,
+    );
+
+Map<String, dynamic> _$MessageNumArgumentsToJson(
+        MessageNumArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+SendMessageArguments _$SendMessageArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    SendMessageArguments(
+      toId: json['toId'] as int,
+      content: json['content'] as String,
+    );
+
+Map<String, dynamic> _$SendMessageArgumentsToJson(
+        SendMessageArguments instance) =>
+    <String, dynamic>{
+      'toId': instance.toId,
+      'content': instance.content,
     };

@@ -52,6 +52,7 @@ class MessageList extends ChangeNotifier {
       }
       final message =
           ReceiveMessage$Subscription.fromJson(event.data!).messageToMe;
+      print(message);
       addMessage(Message(
           id: message.messageId,
           content: message.content,
@@ -62,5 +63,10 @@ class MessageList extends ChangeNotifier {
     }, onError: (error) {
       print(error.toString());
     });
+  }
+
+  void clear() {
+    messages.clear();
+    notifyListeners();
   }
 }
