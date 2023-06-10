@@ -1,0 +1,15 @@
+mutation setProfile(
+  $nickname: String
+  $password: String
+  $about: String
+  $avatar: String
+) {
+  updateUser(
+    input: {
+      nickname: $nickname
+      password: $password
+      about: $about
+      avatar: $avatar
+    }
+  ) {}
+}

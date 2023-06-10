@@ -3,9 +3,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:markdown_widget/markdown_widget.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:thumuht/components/custom_node.dart';
+import 'package:thumuht/components/video.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:thumuht/model/session.dart';
 
@@ -325,11 +327,12 @@ class DetailPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Markdown(
-                  shrinkWrap: true,
-                  data: content,
-                  imageDirectory: "${backendAddress}fs/",
-                ),
+                Column(
+                    children: MarkdownGenerator(
+                  generators: [videoGeneratorWithTag],
+                  textGenerator: (node, config, visitor) =>
+                      CustomTextNode(node.textContent, config, visitor),
+                ).buildWidgets(content)),
                 const SizedBox(height: 20),
                 if (position.isNotEmpty)
                   Text(

@@ -372,13 +372,7 @@ class _NewPostPageState extends State<NewPostPage> {
                 const SizedBox(
                   height: 12.0,
                 ),
-                TextField(
-                  controller: _controller_content,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    labelText: 'content',
-                  ),
-                ),
+                Expanded(child: niceEditor()),
                 const SizedBox(
                   height: 12.0,
                 ),
@@ -405,4 +399,22 @@ class _NewPostPageState extends State<NewPostPage> {
               ],
             )),
           ));
+
+  Widget niceEditor() {
+    return TextFormField(
+      expands: false,
+      maxLines: null,
+      textInputAction: TextInputAction.newline,
+      controller: _controller_content,
+      onChanged: (text) {
+        if (mounted) setState(() {});
+      },
+      style: TextStyle(textBaseline: TextBaseline.alphabetic),
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(10),
+          border: InputBorder.none,
+          hintText: 'Input Here...',
+          hintStyle: TextStyle(color: Colors.grey)),
+    );
+  }
 }
