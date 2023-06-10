@@ -126,6 +126,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               ),
             )),
       ),
+      MyDropdownButton(),
     ]);
   }
 }
@@ -133,7 +134,6 @@ class _SearchWidgetState extends State<SearchWidget> {
 Widget trueList(BuildContext context) {
   return Column(children: [
     const SearchWidget(),
-    MyDropdownButton(),
     Expanded(child: _buildList(context)),
   ]);
 }
