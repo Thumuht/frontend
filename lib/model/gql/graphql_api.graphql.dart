@@ -758,36 +758,6 @@ class GetCommentLists$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class MessageNum$Query extends JsonSerializable with EquatableMixin {
-  MessageNum$Query();
-
-  factory MessageNum$Query.fromJson(Map<String, dynamic> json) =>
-      _$MessageNum$QueryFromJson(json);
-
-  late int messageNum;
-
-  @override
-  List<Object?> get props => [messageNum];
-  @override
-  Map<String, dynamic> toJson() => _$MessageNum$QueryToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class SendMessage$Mutation extends JsonSerializable with EquatableMixin {
-  SendMessage$Mutation();
-
-  factory SendMessage$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$SendMessage$MutationFromJson(json);
-
-  late bool sendMessage;
-
-  @override
-  List<Object?> get props => [sendMessage];
-  @override
-  Map<String, dynamic> toJson() => _$SendMessage$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
 class GetTypePost$Query$Post extends JsonSerializable with EquatableMixin {
   GetTypePost$Query$Post();
 
@@ -831,6 +801,36 @@ class GetTypePost$Query extends JsonSerializable with EquatableMixin {
   List<Object?> get props => [posts];
   @override
   Map<String, dynamic> toJson() => _$GetTypePost$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class SendMessage$Mutation extends JsonSerializable with EquatableMixin {
+  SendMessage$Mutation();
+
+  factory SendMessage$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$SendMessage$MutationFromJson(json);
+
+  late bool sendMessage;
+
+  @override
+  List<Object?> get props => [sendMessage];
+  @override
+  Map<String, dynamic> toJson() => _$SendMessage$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class MessageNum$Query extends JsonSerializable with EquatableMixin {
+  MessageNum$Query();
+
+  factory MessageNum$Query.fromJson(Map<String, dynamic> json) =>
+      _$MessageNum$QueryFromJson(json);
+
+  late int messageNum;
+
+  @override
+  List<Object?> get props => [messageNum];
+  @override
+  Map<String, dynamic> toJson() => _$MessageNum$QueryToJson(this);
 }
 
 enum PostOrderBy {
@@ -3179,169 +3179,6 @@ class GetCommentListsQuery
 }
 
 @JsonSerializable(explicitToJson: true)
-class MessageNumArguments extends JsonSerializable with EquatableMixin {
-  MessageNumArguments({required this.id});
-
-  @override
-  factory MessageNumArguments.fromJson(Map<String, dynamic> json) =>
-      _$MessageNumArgumentsFromJson(json);
-
-  late int id;
-
-  @override
-  List<Object?> get props => [id];
-  @override
-  Map<String, dynamic> toJson() => _$MessageNumArgumentsToJson(this);
-}
-
-final MESSAGE_NUM_QUERY_DOCUMENT_OPERATION_NAME = 'messageNum';
-final MESSAGE_NUM_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'messageNum'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'messageNum'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'from'),
-            value: VariableNode(name: NameNode(value: 'id')),
-          )
-        ],
-        directives: [],
-        selectionSet: null,
-      )
-    ]),
-  )
-]);
-
-class MessageNumQuery
-    extends GraphQLQuery<MessageNum$Query, MessageNumArguments> {
-  MessageNumQuery({required this.variables});
-
-  @override
-  final DocumentNode document = MESSAGE_NUM_QUERY_DOCUMENT;
-
-  @override
-  final String operationName = MESSAGE_NUM_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final MessageNumArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  MessageNum$Query parse(Map<String, dynamic> json) =>
-      MessageNum$Query.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class SendMessageArguments extends JsonSerializable with EquatableMixin {
-  SendMessageArguments({
-    required this.toId,
-    required this.content,
-  });
-
-  @override
-  factory SendMessageArguments.fromJson(Map<String, dynamic> json) =>
-      _$SendMessageArgumentsFromJson(json);
-
-  late int toId;
-
-  late String content;
-
-  @override
-  List<Object?> get props => [toId, content];
-  @override
-  Map<String, dynamic> toJson() => _$SendMessageArgumentsToJson(this);
-}
-
-final SEND_MESSAGE_MUTATION_DOCUMENT_OPERATION_NAME = 'sendMessage';
-final SEND_MESSAGE_MUTATION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'sendMessage'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'toId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'content')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'String'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'sendMessage'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'input'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'toId'),
-                value: VariableNode(name: NameNode(value: 'toId')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'content'),
-                value: VariableNode(name: NameNode(value: 'content')),
-              ),
-            ]),
-          )
-        ],
-        directives: [],
-        selectionSet: null,
-      )
-    ]),
-  )
-]);
-
-class SendMessageMutation
-    extends GraphQLQuery<SendMessage$Mutation, SendMessageArguments> {
-  SendMessageMutation({required this.variables});
-
-  @override
-  final DocumentNode document = SEND_MESSAGE_MUTATION_DOCUMENT;
-
-  @override
-  final String operationName = SEND_MESSAGE_MUTATION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final SendMessageArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  SendMessage$Mutation parse(Map<String, dynamic> json) =>
-      SendMessage$Mutation.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
 class GetTypePostArguments extends JsonSerializable with EquatableMixin {
   GetTypePostArguments({required this.tags});
 
@@ -3471,4 +3308,167 @@ class GetTypePostQuery
   @override
   GetTypePost$Query parse(Map<String, dynamic> json) =>
       GetTypePost$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class SendMessageArguments extends JsonSerializable with EquatableMixin {
+  SendMessageArguments({
+    required this.toId,
+    required this.content,
+  });
+
+  @override
+  factory SendMessageArguments.fromJson(Map<String, dynamic> json) =>
+      _$SendMessageArgumentsFromJson(json);
+
+  late int toId;
+
+  late String content;
+
+  @override
+  List<Object?> get props => [toId, content];
+  @override
+  Map<String, dynamic> toJson() => _$SendMessageArgumentsToJson(this);
+}
+
+final SEND_MESSAGE_MUTATION_DOCUMENT_OPERATION_NAME = 'sendMessage';
+final SEND_MESSAGE_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'sendMessage'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'toId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'content')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'sendMessage'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'toId'),
+                value: VariableNode(name: NameNode(value: 'toId')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'content'),
+                value: VariableNode(name: NameNode(value: 'content')),
+              ),
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  )
+]);
+
+class SendMessageMutation
+    extends GraphQLQuery<SendMessage$Mutation, SendMessageArguments> {
+  SendMessageMutation({required this.variables});
+
+  @override
+  final DocumentNode document = SEND_MESSAGE_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName = SEND_MESSAGE_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final SendMessageArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  SendMessage$Mutation parse(Map<String, dynamic> json) =>
+      SendMessage$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class MessageNumArguments extends JsonSerializable with EquatableMixin {
+  MessageNumArguments({required this.id});
+
+  @override
+  factory MessageNumArguments.fromJson(Map<String, dynamic> json) =>
+      _$MessageNumArgumentsFromJson(json);
+
+  late int id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$MessageNumArgumentsToJson(this);
+}
+
+final MESSAGE_NUM_QUERY_DOCUMENT_OPERATION_NAME = 'messageNum';
+final MESSAGE_NUM_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'messageNum'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'messageNum'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'from'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  )
+]);
+
+class MessageNumQuery
+    extends GraphQLQuery<MessageNum$Query, MessageNumArguments> {
+  MessageNumQuery({required this.variables});
+
+  @override
+  final DocumentNode document = MESSAGE_NUM_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = MESSAGE_NUM_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final MessageNumArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  MessageNum$Query parse(Map<String, dynamic> json) =>
+      MessageNum$Query.fromJson(json);
 }
