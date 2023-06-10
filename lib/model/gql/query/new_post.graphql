@@ -1,4 +1,4 @@
-mutation newPost($userId: Int!, $title: String!, $content: String!, $tag: Int, $position: String) {
+mutation newPost($userId: Int!, $title: String!, $content: String!, $tag: String, $position: String) {
   createPost(input: {
     userId: $userId
     title: $title

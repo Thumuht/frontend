@@ -49,9 +49,9 @@ class Position extends ChangeNotifier {
 
 class Tag extends ChangeNotifier {
   Tag({required this.tag});
-  int tag;
-  int get getTag => tag;
-  void setTag(int tag_) {
+  String tag;
+  String get getTag => tag;
+  void setTag(String tag_) {
     tag = tag_;
     notifyListeners();
   }
@@ -312,23 +312,13 @@ class _selectTagState extends State<selectTag> {
         setState(() {
           _value = value!;
           if (value == '无标签') {
-            Provider.of<Tag>(context, listen: false).setTag(0);
-          }
-          if (value == '校园资讯') {
-            Provider.of<Tag>(context, listen: false).setTag(1);
-          }
-          if (value == '二手交易') {
-            Provider.of<Tag>(context, listen: false).setTag(2);
-          }
-          if (value == '学术研讨') {
-            Provider.of<Tag>(context, listen: false).setTag(3);
-          }
-          if (value == '休闲娱乐') {
-            Provider.of<Tag>(context, listen: false).setTag(4);
+            Provider.of<Tag>(context, listen: false).setTag("none");
+          } else {
+            Provider.of<Tag>(context, listen: false).setTag(value);
           }
         });
       },
-      items: TagMap.keys.map<DropdownMenuItem<String>>((String value) {
+      items: TagColor.keys.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
@@ -357,7 +347,7 @@ class _NewPostPageState extends State<NewPostPage> {
           providers: [
             ChangeNotifierProvider(create: (context) => Images(images: [])),
             ChangeNotifierProvider(create: (context) => Position(position: "")),
-            ChangeNotifierProvider(create: (context) => Tag(tag: 0)),
+            ChangeNotifierProvider(create: (context) => Tag(tag: "none")),
           ],
           child: Scaffold(
             body: SafeArea(
