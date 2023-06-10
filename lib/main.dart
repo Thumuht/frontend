@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
               create: (context) => Session(),
             ),
             ChangeNotifierProvider(
-                create: (context) => Order(orderBy: PostOrderBy.createdAt)),
+                create: (context) => OrderBy(orderBy: PostOrderBy.createdAt)),
           ],
           child: Consumer<Session>(
             builder: (context, value, child) {

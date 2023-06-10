@@ -274,7 +274,9 @@ class _PostButtonState extends State<PostButton> {
                 }
               }
               String videoUrl = "";
-              if (Provider.of<Video>(context, listen: false).getVideo != null) {
+              if (Provider.of<Video>(context, listen: false).getVideo != null &&
+                  Provider.of<Video>(context, listen: false).getVideo.path !=
+                      "") {
                 List<int> byteData =
                     await Provider.of<Video>(context, listen: false)
                         .getVideo

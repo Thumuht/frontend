@@ -10,13 +10,20 @@ import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:thumuht/pages/detail.dart';
 import 'package:thumuht/pages/search_result.dart';
 
-class Order extends ChangeNotifier {
-  Order({required this.orderBy});
+class OrderBy extends ChangeNotifier {
+  OrderBy({required this.orderBy});
   PostOrderBy orderBy;
+  Order order = Order.asc;
   Refetch? refetch;
   PostOrderBy get getOrderBy => orderBy;
+  Order get getOrder => order;
   changeOrderBy(PostOrderBy _orderBy) {
     orderBy = _orderBy;
+    notifyListeners();
+  }
+
+  changeOrder(Order _order) {
+    order = _order;
     notifyListeners();
   }
 
@@ -42,9 +49,11 @@ List<String> list = <String>[
 FetchMore? fetchMoreGlobal;
 Refetch? refetchGlobal;
 
-FetchMoreOptions getOpt(PostOrderBy order) {
+FetchMoreOptions getOpt(PostOrderBy orderBy, Order order) {
   return FetchMoreOptions(
-      variables: GetPostListsArguments(offset: 0, orderBy: order).toJson(),
+      variables:
+          GetPostListsArguments(offset: 0, orderBy: orderBy, order: order)
+              .toJson(),
       updateQuery: (previousResultData, fetchMoreResultData) {
         final List<dynamic> repos = [...fetchMoreResultData!['posts']];
         fetchMoreResultData['posts'] = repos;
@@ -66,19 +75,24 @@ class _MyDropdownButtonState extends State<MyDropdownButton> {
         setState(() {
           dropdownValue = value!;
           if (value == '按时间') {
-            Provider.of<Order>(context, listen: false)
+            Provider.of<OrderBy>(context, listen: false)
                 .changeOrderBy(PostOrderBy.createdAt);
-            fetchMoreGlobal!(getOpt(PostOrderBy.createdAt));
+            Provider.of<OrderBy>(context, listen: false)
+                .changeOrder(Order.desc);
+            fetchMoreGlobal!(getOpt(PostOrderBy.createdAt, Order.desc));
           }
           if (value == '按点赞') {
-            Provider.of<Order>(context, listen: false)
+            Provider.of<OrderBy>(context, listen: false)
                 .changeOrderBy(PostOrderBy.like);
-            fetchMoreGlobal!(getOpt(PostOrderBy.like));
+            Provider.of<OrderBy>(context, listen: false).changeOrder(Order.asc);
+            fetchMoreGlobal!(getOpt(PostOrderBy.like, Order.asc));
           }
           if (value == '按评论') {
-            Provider.of<Order>(context, listen: false)
+            Provider.of<OrderBy>(context, listen: false)
                 .changeOrderBy(PostOrderBy.commentsNum);
-            fetchMoreGlobal!(getOpt(PostOrderBy.commentsNum));
+            Provider.of<OrderBy>(context, listen: false)
+                .changeOrder(Order.desc);
+            fetchMoreGlobal!(getOpt(PostOrderBy.commentsNum, Order.desc));
           }
         });
       },
@@ -141,21 +155,23 @@ Widget trueList(BuildContext context) {
 // post list.
 Widget _buildList(BuildContext context) {
   Map<String, dynamic> _variable = <String, dynamic>{};
-  if (Provider.of<Order>(context, listen: false).getOrderBy ==
+  if (Provider.of<OrderBy>(context, listen: false).getOrderBy ==
       PostOrderBy.createdAt) {
-    _variable = GetPostListsArguments(offset: 0, orderBy: PostOrderBy.createdAt)
+    _variable = GetPostListsArguments(
+            offset: 0, orderBy: PostOrderBy.createdAt, order: Order.asc)
         .toJson();
   }
-  if (Provider.of<Order>(context, listen: false).getOrderBy ==
+  if (Provider.of<OrderBy>(context, listen: false).getOrderBy ==
       PostOrderBy.like) {
-    _variable =
-        GetPostListsArguments(offset: 0, orderBy: PostOrderBy.like).toJson();
+    _variable = GetPostListsArguments(
+            offset: 0, orderBy: PostOrderBy.like, order: Order.asc)
+        .toJson();
   }
-  if (Provider.of<Order>(context, listen: false).getOrderBy ==
+  if (Provider.of<OrderBy>(context, listen: false).getOrderBy ==
       PostOrderBy.commentsNum) {
-    _variable =
-        GetPostListsArguments(offset: 0, orderBy: PostOrderBy.commentsNum)
-            .toJson();
+    _variable = GetPostListsArguments(
+            offset: 0, orderBy: PostOrderBy.commentsNum, order: Order.desc)
+        .toJson();
   }
 
   return Query(
@@ -177,7 +193,9 @@ Widget _buildList(BuildContext context) {
                 offset: (result.data!['post'] != Null)
                     ? result.data!['posts'].length
                     : 0,
-                orderBy: Provider.of<Order>(context, listen: false).getOrderBy)
+                orderBy:
+                    Provider.of<OrderBy>(context, listen: false).getOrderBy,
+                order: Provider.of<OrderBy>(context, listen: false).getOrder)
             .toJson(),
         updateQuery: (previousResultData, fetchMoreResultData) {
           final List<dynamic> repos = [

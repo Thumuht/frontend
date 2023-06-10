@@ -386,6 +386,8 @@ GetPostListsArguments _$GetPostListsArgumentsFromJson(
       offset: json['offset'] as int,
       orderBy: $enumDecode(_$PostOrderByEnumMap, json['orderBy'],
           unknownValue: PostOrderBy.artemisUnknown),
+      order: $enumDecode(_$OrderEnumMap, json['order'],
+          unknownValue: Order.artemisUnknown),
     );
 
 Map<String, dynamic> _$GetPostListsArgumentsToJson(
@@ -393,6 +395,7 @@ Map<String, dynamic> _$GetPostListsArgumentsToJson(
     <String, dynamic>{
       'offset': instance.offset,
       'orderBy': _$PostOrderByEnumMap[instance.orderBy]!,
+      'order': _$OrderEnumMap[instance.order]!,
     };
 
 const _$PostOrderByEnumMap = {
@@ -406,6 +409,12 @@ const _$PostOrderByEnumMap = {
   PostOrderBy.updatedAt: 'updated_at',
   PostOrderBy.commentsNum: 'comments_num',
   PostOrderBy.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$OrderEnumMap = {
+  Order.asc: 'ASC',
+  Order.desc: 'DESC',
+  Order.artemisUnknown: 'ARTEMIS_UNKNOWN',
 };
 
 GlobalSearchArguments _$GlobalSearchArgumentsFromJson(

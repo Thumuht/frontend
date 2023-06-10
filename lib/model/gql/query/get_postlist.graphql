@@ -1,9 +1,9 @@
-query getPostLists($offset: Int!, $orderBy: PostOrderBy!){
+query getPostLists($offset: Int!, $orderBy: PostOrderBy!, $order: Order!){
   posts(input: {
 			limit: 10
 			offset: $offset
 			orderBy: $orderBy
-			order: ASC
+			order: $order
 		}) {
 			id
 			title
