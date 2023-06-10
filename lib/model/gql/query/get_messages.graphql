@@ -1,0 +1,8 @@
+query getMessages($userId: Int!) {
+    myMessage() {
+        messageId
+        userFrom
+        content
+        createdAt
+    }
+}

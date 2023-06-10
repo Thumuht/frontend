@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:thumuht/message_list.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:thumuht/model/session.dart';
 
@@ -90,6 +91,10 @@ class _LoginPageState extends State<LoginPage> {
                   onCompleted: (data) {
                     Provider.of<Session>(context, listen: false)
                         .login(data!['login']);
+                    Provider.of<MessageList>(context, listen: false).setClient(
+                        GraphQLProvider.of(context).value,
+                        Provider.of<Session>(context, listen: false).token_!);
+                    print(data.toString());
                   },
                 ),
                 builder: (runMutation, result) => ElevatedButton(

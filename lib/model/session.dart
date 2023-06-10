@@ -14,6 +14,7 @@ class Session extends ChangeNotifier {
 
   void logout() {
     token_ = null;
+    userId_ = null;
     login_ = false;
     notifyListeners();
   }

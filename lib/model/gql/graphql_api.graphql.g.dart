@@ -84,7 +84,7 @@ GetPostLists$Query$Post _$GetPostLists$Query$PostFromJson(
       ..like = json['like'] as int?
       ..commentsNum = json['comments_num'] as int?
       ..position = json['position'] as String?
-      ..tag = json['tag'] as int?;
+      ..tag = json['tag'] as String?;
 
 Map<String, dynamic> _$GetPostLists$Query$PostToJson(
         GetPostLists$Query$Post instance) =>
@@ -262,11 +262,13 @@ Map<String, dynamic> _$GetProfile$QueryToJson(GetProfile$Query instance) =>
 
 SetProfile$Mutation$User _$SetProfile$Mutation$UserFromJson(
         Map<String, dynamic> json) =>
-    SetProfile$Mutation$User();
+    SetProfile$Mutation$User()..id = json['id'] as int;
 
 Map<String, dynamic> _$SetProfile$Mutation$UserToJson(
         SetProfile$Mutation$User instance) =>
-    <String, dynamic>{};
+    <String, dynamic>{
+      'id': instance.id,
+    };
 
 SetProfile$Mutation _$SetProfile$MutationFromJson(Map<String, dynamic> json) =>
     SetProfile$Mutation()
@@ -277,6 +279,136 @@ Map<String, dynamic> _$SetProfile$MutationToJson(
         SetProfile$Mutation instance) =>
     <String, dynamic>{
       'updateUser': instance.updateUser.toJson(),
+    };
+
+GetFavoritePost$Query$Post _$GetFavoritePost$Query$PostFromJson(
+        Map<String, dynamic> json) =>
+    GetFavoritePost$Query$Post()
+      ..id = json['id'] as int
+      ..title = json['title'] as String?
+      ..content = json['content'] as String?
+      ..view = json['view'] as int?
+      ..like = json['like'] as int?
+      ..commentsNum = json['comments_num'] as int?
+      ..position = json['position'] as String?
+      ..tag = json['tag'] as String?;
+
+Map<String, dynamic> _$GetFavoritePost$Query$PostToJson(
+        GetFavoritePost$Query$Post instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'content': instance.content,
+      'view': instance.view,
+      'like': instance.like,
+      'comments_num': instance.commentsNum,
+      'position': instance.position,
+      'tag': instance.tag,
+    };
+
+GetFavoritePost$Query _$GetFavoritePost$QueryFromJson(
+        Map<String, dynamic> json) =>
+    GetFavoritePost$Query()
+      ..getUserFavoritePost = (json['getUserFavoritePost'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : GetFavoritePost$Query$Post.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetFavoritePost$QueryToJson(
+        GetFavoritePost$Query instance) =>
+    <String, dynamic>{
+      'getUserFavoritePost':
+          instance.getUserFavoritePost?.map((e) => e?.toJson()).toList(),
+    };
+
+ReceiveMessage$Subscription$Message
+    _$ReceiveMessage$Subscription$MessageFromJson(Map<String, dynamic> json) =>
+        ReceiveMessage$Subscription$Message()
+          ..messageId = json['messageId'] as int
+          ..userFrom = json['userFrom'] as int
+          ..userTo = json['userTo'] as int
+          ..content = json['content'] as String
+          ..createdAt = json['createdAt'] == null
+              ? null
+              : DateTime.parse(json['createdAt'] as String);
+
+Map<String, dynamic> _$ReceiveMessage$Subscription$MessageToJson(
+        ReceiveMessage$Subscription$Message instance) =>
+    <String, dynamic>{
+      'messageId': instance.messageId,
+      'userFrom': instance.userFrom,
+      'userTo': instance.userTo,
+      'content': instance.content,
+      'createdAt': instance.createdAt?.toIso8601String(),
+    };
+
+ReceiveMessage$Subscription _$ReceiveMessage$SubscriptionFromJson(
+        Map<String, dynamic> json) =>
+    ReceiveMessage$Subscription()
+      ..messageToMe = ReceiveMessage$Subscription$Message.fromJson(
+          json['messageToMe'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$ReceiveMessage$SubscriptionToJson(
+        ReceiveMessage$Subscription instance) =>
+    <String, dynamic>{
+      'messageToMe': instance.messageToMe.toJson(),
+    };
+
+GetMessages$Query$Message _$GetMessages$Query$MessageFromJson(
+        Map<String, dynamic> json) =>
+    GetMessages$Query$Message()
+      ..messageId = json['messageId'] as int
+      ..userFrom = json['userFrom'] as int
+      ..content = json['content'] as String
+      ..createdAt = json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String);
+
+Map<String, dynamic> _$GetMessages$Query$MessageToJson(
+        GetMessages$Query$Message instance) =>
+    <String, dynamic>{
+      'messageId': instance.messageId,
+      'userFrom': instance.userFrom,
+      'content': instance.content,
+      'createdAt': instance.createdAt?.toIso8601String(),
+    };
+
+GetMessages$Query _$GetMessages$QueryFromJson(Map<String, dynamic> json) =>
+    GetMessages$Query()
+      ..myMessage = (json['myMessage'] as List<dynamic>)
+          .map((e) =>
+              GetMessages$Query$Message.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetMessages$QueryToJson(GetMessages$Query instance) =>
+    <String, dynamic>{
+      'myMessage': instance.myMessage.map((e) => e.toJson()).toList(),
+    };
+
+GetUserById$Query$User _$GetUserById$Query$UserFromJson(
+        Map<String, dynamic> json) =>
+    GetUserById$Query$User()
+      ..loginName = json['loginName'] as String
+      ..nickname = json['nickname'] as String?
+      ..avatar = json['avatar'] as String?;
+
+Map<String, dynamic> _$GetUserById$Query$UserToJson(
+        GetUserById$Query$User instance) =>
+    <String, dynamic>{
+      'loginName': instance.loginName,
+      'nickname': instance.nickname,
+      'avatar': instance.avatar,
+    };
+
+GetUserById$Query _$GetUserById$QueryFromJson(Map<String, dynamic> json) =>
+    GetUserById$Query()
+      ..getUserById = GetUserById$Query$User.fromJson(
+          json['getUserById'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetUserById$QueryToJson(GetUserById$Query instance) =>
+    <String, dynamic>{
+      'getUserById': instance.getUserById.toJson(),
     };
 
 DislikeArguments _$DislikeArgumentsFromJson(Map<String, dynamic> json) =>
@@ -357,7 +489,7 @@ NewPostArguments _$NewPostArgumentsFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as int,
       title: json['title'] as String,
       content: json['content'] as String,
-      tag: json['tag'] as int?,
+      tag: json['tag'] as String?,
       position: json['position'] as String?,
     );
 
@@ -419,4 +551,40 @@ Map<String, dynamic> _$SetProfileArgumentsToJson(
       'password': instance.password,
       'about': instance.about,
       'avatar': instance.avatar,
+    };
+
+GetFavoritePostArguments _$GetFavoritePostArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetFavoritePostArguments(
+      userId: json['userId'] as int,
+    );
+
+Map<String, dynamic> _$GetFavoritePostArgumentsToJson(
+        GetFavoritePostArguments instance) =>
+    <String, dynamic>{
+      'userId': instance.userId,
+    };
+
+ReceiveMessageArguments _$ReceiveMessageArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    ReceiveMessageArguments(
+      token: json['token'] as String,
+    );
+
+Map<String, dynamic> _$ReceiveMessageArgumentsToJson(
+        ReceiveMessageArguments instance) =>
+    <String, dynamic>{
+      'token': instance.token,
+    };
+
+GetUserByIdArguments _$GetUserByIdArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetUserByIdArguments(
+      id: json['id'] as int,
+    );
+
+Map<String, dynamic> _$GetUserByIdArgumentsToJson(
+        GetUserByIdArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
     };

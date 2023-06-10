@@ -1,0 +1,7 @@
+query getUserById($id: Int!) {
+  getUserById(input: $id) {
+    loginName
+    nickname
+    avatar
+  }
+}

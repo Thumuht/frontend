@@ -1,0 +1,9 @@
+subscription receiveMessage($token: String!) {
+  messageToMe(token: $token) {
+    messageId
+    userFrom
+    userTo
+    content
+    createdAt
+  }
+}

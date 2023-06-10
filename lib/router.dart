@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:thumuht/pages/chat.dart';
 import 'package:thumuht/pages/login.dart';
 import 'package:thumuht/pages/new_post.dart';
 import 'package:thumuht/pages/profile.dart';
@@ -32,6 +33,10 @@ GoRouter router() {
     GoRoute(
       path: '/profile-edit',
       builder: (context, state) => const ProfileEditPage(),
-    )
+    ),
+    GoRoute(
+        path: '/chat',
+        builder: (context, state) =>
+            ChatPage(toUserId: (state.extra as Map<String, int>)['toUserId']!))
   ]);
 }
