@@ -65,6 +65,13 @@ class MessageList extends ChangeNotifier {
     });
   }
 
+  void stopSubscription() {
+    client = null;
+    subscription = null;
+    listener?.cancel();
+    listener = null;
+  }
+
   void clear() {
     messages.clear();
     notifyListeners();
