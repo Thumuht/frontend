@@ -33,6 +33,16 @@ class Images extends ChangeNotifier {
   }
 }
 
+class Video extends ChangeNotifier {
+  Video({required this.video});
+  XFile video;
+  XFile get getVideo => video;
+  void setVideo(XFile video_) {
+    video = video_;
+    notifyListeners();
+  }
+}
+
 class Position extends ChangeNotifier {
   Position({required this.position});
   String position;
@@ -101,6 +111,84 @@ class _imageSelectorState extends State<imageSelector> {
       alignment: Alignment.topLeft,
       icon: Icon(Icons.add_a_photo),
       onPressed: loadAssets,
+    );
+  }
+}
+
+class videoSelector extends StatefulWidget {
+  videoSelector({Key? key}) : super(key: key);
+
+  @override
+  _videoSelectorState createState() => _videoSelectorState();
+}
+
+class _videoSelectorState extends State<videoSelector> {
+  final picker = ImagePicker();
+
+  _loadVideo() async {
+    XFile? pickedFile = await picker.pickVideo(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        Provider.of<Video>(context, listen: false).setVideo(pickedFile);
+      });
+    }
+  }
+
+  //打开文件夹
+  _takeVideo() async {
+    XFile? pickedFile = await picker.pickVideo(source: ImageSource.camera);
+    if (pickedFile != null) {
+      setState(() {
+        Provider.of<Video>(context, listen: false).setVideo(pickedFile);
+        developer.log(pickedFile.path);
+      });
+    }
+  }
+
+  showPicker() {
+    //底部弹出
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext con) => Container(
+              height: 160,
+              padding: EdgeInsets.all(20),
+              color: Colors.white,
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: (() {
+                      _takeVideo();
+                    }),
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      alignment: Alignment.center,
+                      child: Text('录制'),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (() {
+                      _loadVideo();
+                    }),
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      alignment: Alignment.center,
+                      child: Text('上传'),
+                    ),
+                  )
+                ],
+              ),
+            ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.video_call),
+      onPressed: () => {
+        showPicker(),
+      },
     );
   }
 }
@@ -174,7 +262,7 @@ class _PostButtonState extends State<PostButton> {
                     in Provider.of<Images>(context, listen: false).getImages) {
                   ByteData byteData = await image.getByteData();
                   List<int> imageData = byteData.buffer.asUint8List();
-                  imageUrls += '![](${image.name}) ';
+                  imageUrls += '![](http://10.0.2.2:8899/fs/${image.name}) ';
                   MultipartFile multipartFile = MultipartFile.fromBytes(
                       imageData,
                       filename: image.name,
@@ -185,12 +273,32 @@ class _PostButtonState extends State<PostButton> {
                   print(response.data);
                 }
               }
+              String videoUrl = "";
+              if (Provider.of<Video>(context, listen: false).getVideo != null) {
+                List<int> byteData =
+                    await Provider.of<Video>(context, listen: false)
+                        .getVideo
+                        .readAsBytes();
+                videoUrl =
+                    '<video src=http://10.0.2.2:8899/fs/${Provider.of<Video>(context, listen: false).getVideo.name}>';
+                FormData formData = FormData.fromMap({
+                  "file": await MultipartFile.fromFile(
+                      Provider.of<Video>(context, listen: false).getVideo.path,
+                      filename: Provider.of<Video>(context, listen: false)
+                          .getVideo
+                          .name),
+                });
+                var response =
+                    await Dio().post('${backendAddress}upload', data: formData);
+                print(response.data);
+              }
               runMutation({
                 'userId': Provider.of<Session>(context, listen: false)
                     .userId_
                     .toString(),
                 'title': widget.controller_title.text,
-                'content': widget.controller_content.text + imageUrls,
+                'content':
+                    widget.controller_content.text + imageUrls + videoUrl,
                 'position':
                     Provider.of<Position>(context, listen: false).getPosition,
                 'tag': Provider.of<Tag>(context, listen: false).getTag,
@@ -354,6 +462,8 @@ class _NewPostPageState extends State<NewPostPage> {
             ChangeNotifierProvider(create: (context) => Images(images: [])),
             ChangeNotifierProvider(create: (context) => Position(position: "")),
             ChangeNotifierProvider(create: (context) => Tag(tag: "none")),
+            ChangeNotifierProvider(
+                create: (context) => Video(video: XFile(""))),
           ],
           child: Scaffold(
             body: SafeArea(
@@ -380,6 +490,7 @@ class _NewPostPageState extends State<NewPostPage> {
                   children: [
                     GetUserLocation(),
                     imageSelector(),
+                    videoSelector(),
                     selectTag(),
                   ],
                 ),
