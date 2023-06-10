@@ -19,6 +19,7 @@ import 'package:thumuht/main.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:dio/dio.dart';
 import "package:http_parser/http_parser.dart";
+import 'dart:developer' as developer;
 
 import '../model/session.dart';
 
@@ -194,6 +195,11 @@ class _PostButtonState extends State<PostButton> {
                     Provider.of<Position>(context, listen: false).getPosition,
                 'tag': Provider.of<Tag>(context, listen: false).getTag,
               });
+              likeMap[Provider.of<Session>(context, listen: false).userId_!] =
+                  [];
+              markMap[Provider.of<Session>(context, listen: false).userId_!] =
+                  [];
+              // developer.log(likeMap.toString());
               context.replace('/');
             },
             child: const Text('Post'),
@@ -366,13 +372,7 @@ class _NewPostPageState extends State<NewPostPage> {
                 const SizedBox(
                   height: 12.0,
                 ),
-                TextField(
-                  controller: _controller_content,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    labelText: 'content',
-                  ),
-                ),
+                Expanded(child: niceEditor()),
                 const SizedBox(
                   height: 12.0,
                 ),
@@ -399,4 +399,22 @@ class _NewPostPageState extends State<NewPostPage> {
               ],
             )),
           ));
+
+  Widget niceEditor() {
+    return TextFormField(
+      expands: false,
+      maxLines: null,
+      textInputAction: TextInputAction.newline,
+      controller: _controller_content,
+      onChanged: (text) {
+        if (mounted) setState(() {});
+      },
+      style: TextStyle(textBaseline: TextBaseline.alphabetic),
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(10),
+          border: InputBorder.none,
+          hintText: 'Input Here...',
+          hintStyle: TextStyle(color: Colors.grey)),
+    );
+  }
 }

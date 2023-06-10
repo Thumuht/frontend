@@ -19,7 +19,7 @@ Widget markList(BuildContext context) {
 
 // post list.
 Widget _buildMarkList(BuildContext context) {
-  return Provider.of<Session>(context, listen: false).userId_ == null
+  return Provider.of<Session>(context, listen: false).token_ == null
       ? Text('请先登录')
       : Query(
           options: QueryOptions(

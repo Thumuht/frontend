@@ -74,6 +74,47 @@ Map<String, dynamic> _$GetCommentLists$QueryToJson(
       'comment': instance.comment.map((e) => e.toJson()).toList(),
     };
 
+GetFavoritePost$Query$Post _$GetFavoritePost$Query$PostFromJson(
+        Map<String, dynamic> json) =>
+    GetFavoritePost$Query$Post()
+      ..id = json['id'] as int
+      ..title = json['title'] as String?
+      ..content = json['content'] as String?
+      ..view = json['view'] as int?
+      ..like = json['like'] as int?
+      ..commentsNum = json['comments_num'] as int?
+      ..position = json['position'] as String?
+      ..tag = json['tag'] as String?;
+
+Map<String, dynamic> _$GetFavoritePost$Query$PostToJson(
+        GetFavoritePost$Query$Post instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'content': instance.content,
+      'view': instance.view,
+      'like': instance.like,
+      'comments_num': instance.commentsNum,
+      'position': instance.position,
+      'tag': instance.tag,
+    };
+
+GetFavoritePost$Query _$GetFavoritePost$QueryFromJson(
+        Map<String, dynamic> json) =>
+    GetFavoritePost$Query()
+      ..getUserFavoritePost = (json['getUserFavoritePost'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : GetFavoritePost$Query$Post.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetFavoritePost$QueryToJson(
+        GetFavoritePost$Query instance) =>
+    <String, dynamic>{
+      'getUserFavoritePost':
+          instance.getUserFavoritePost?.map((e) => e?.toJson()).toList(),
+    };
+
 GetPostLists$Query$Post _$GetPostLists$Query$PostFromJson(
         Map<String, dynamic> json) =>
     GetPostLists$Query$Post()
@@ -110,6 +151,70 @@ GetPostLists$Query _$GetPostLists$QueryFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$GetPostLists$QueryToJson(GetPostLists$Query instance) =>
     <String, dynamic>{
       'posts': instance.posts?.map((e) => e?.toJson()).toList(),
+    };
+
+GetProfile$Query$User _$GetProfile$Query$UserFromJson(
+        Map<String, dynamic> json) =>
+    GetProfile$Query$User()
+      ..loginName = json['loginName'] as String
+      ..nickname = json['nickname'] as String?
+      ..about = json['about'] as String?
+      ..avatar = json['avatar'] as String?;
+
+Map<String, dynamic> _$GetProfile$Query$UserToJson(
+        GetProfile$Query$User instance) =>
+    <String, dynamic>{
+      'loginName': instance.loginName,
+      'nickname': instance.nickname,
+      'about': instance.about,
+      'avatar': instance.avatar,
+    };
+
+GetProfile$Query _$GetProfile$QueryFromJson(Map<String, dynamic> json) =>
+    GetProfile$Query()
+      ..me = GetProfile$Query$User.fromJson(json['me'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetProfile$QueryToJson(GetProfile$Query instance) =>
+    <String, dynamic>{
+      'me': instance.me.toJson(),
+    };
+
+GlobalSearch$Query$Post _$GlobalSearch$Query$PostFromJson(
+        Map<String, dynamic> json) =>
+    GlobalSearch$Query$Post()
+      ..id = json['id'] as int
+      ..title = json['title'] as String?
+      ..content = json['content'] as String?
+      ..view = json['view'] as int?
+      ..like = json['like'] as int?
+      ..commentsNum = json['comments_num'] as int?
+      ..position = json['position'] as String?
+      ..tag = json['tag'] as String?;
+
+Map<String, dynamic> _$GlobalSearch$Query$PostToJson(
+        GlobalSearch$Query$Post instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'content': instance.content,
+      'view': instance.view,
+      'like': instance.like,
+      'comments_num': instance.commentsNum,
+      'position': instance.position,
+      'tag': instance.tag,
+    };
+
+GlobalSearch$Query _$GlobalSearch$QueryFromJson(Map<String, dynamic> json) =>
+    GlobalSearch$Query()
+      ..globalSearch = (json['globalSearch'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : GlobalSearch$Query$Post.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GlobalSearch$QueryToJson(GlobalSearch$Query instance) =>
+    <String, dynamic>{
+      'globalSearch': instance.globalSearch?.map((e) => e?.toJson()).toList(),
     };
 
 Like$Mutation _$Like$MutationFromJson(Map<String, dynamic> json) =>
@@ -195,6 +300,25 @@ Map<String, dynamic> _$Register$MutationToJson(Register$Mutation instance) =>
       'createUser': instance.createUser.toJson(),
     };
 
+SetProfile$Mutation$User _$SetProfile$Mutation$UserFromJson(
+        Map<String, dynamic> json) =>
+    SetProfile$Mutation$User();
+
+Map<String, dynamic> _$SetProfile$Mutation$UserToJson(
+        SetProfile$Mutation$User instance) =>
+    <String, dynamic>{};
+
+SetProfile$Mutation _$SetProfile$MutationFromJson(Map<String, dynamic> json) =>
+    SetProfile$Mutation()
+      ..updateUser = SetProfile$Mutation$User.fromJson(
+          json['updateUser'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$SetProfile$MutationToJson(
+        SetProfile$Mutation instance) =>
+    <String, dynamic>{
+      'updateUser': instance.updateUser.toJson(),
+    };
+
 Unmark$Mutation _$Unmark$MutationFromJson(Map<String, dynamic> json) =>
     Unmark$Mutation()..unmarkPost = json['unmarkPost'] as bool;
 
@@ -234,6 +358,7 @@ Map<String, dynamic> _$Logout$MutationToJson(Logout$Mutation instance) =>
       'logout': instance.logout,
     };
 
+<<<<<<< HEAD
 GetProfile$Query$User _$GetProfile$Query$UserFromJson(
         Map<String, dynamic> json) =>
     GetProfile$Query$User()
@@ -411,6 +536,8 @@ Map<String, dynamic> _$GetUserById$QueryToJson(GetUserById$Query instance) =>
       'getUserById': instance.getUserById.toJson(),
     };
 
+=======
+>>>>>>> 1f48e8dfb6fb6b09fc6e60897983f6f6917ee46c
 DislikeArguments _$DislikeArgumentsFromJson(Map<String, dynamic> json) =>
     DislikeArguments(
       postId: json['postId'] as int,
@@ -419,6 +546,18 @@ DislikeArguments _$DislikeArgumentsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$DislikeArgumentsToJson(DislikeArguments instance) =>
     <String, dynamic>{
       'postId': instance.postId,
+    };
+
+GetFavoritePostArguments _$GetFavoritePostArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetFavoritePostArguments(
+      userId: json['userId'] as int,
+    );
+
+Map<String, dynamic> _$GetFavoritePostArgumentsToJson(
+        GetFavoritePostArguments instance) =>
+    <String, dynamic>{
+      'userId': instance.userId,
     };
 
 GetPostListsArguments _$GetPostListsArgumentsFromJson(
@@ -448,6 +587,18 @@ const _$PostOrderByEnumMap = {
   PostOrderBy.commentsNum: 'comments_num',
   PostOrderBy.artemisUnknown: 'ARTEMIS_UNKNOWN',
 };
+
+GlobalSearchArguments _$GlobalSearchArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GlobalSearchArguments(
+      keyWord: json['keyWord'] as String,
+    );
+
+Map<String, dynamic> _$GlobalSearchArgumentsToJson(
+        GlobalSearchArguments instance) =>
+    <String, dynamic>{
+      'keyWord': instance.keyWord,
+    };
 
 LikeArguments _$LikeArgumentsFromJson(Map<String, dynamic> json) =>
     LikeArguments(
@@ -514,6 +665,23 @@ Map<String, dynamic> _$RegisterArgumentsToJson(RegisterArguments instance) =>
       'password': instance.password,
     };
 
+SetProfileArguments _$SetProfileArgumentsFromJson(Map<String, dynamic> json) =>
+    SetProfileArguments(
+      nickname: json['nickname'] as String?,
+      password: json['password'] as String?,
+      about: json['about'] as String?,
+      avatar: json['avatar'] as String?,
+    );
+
+Map<String, dynamic> _$SetProfileArgumentsToJson(
+        SetProfileArguments instance) =>
+    <String, dynamic>{
+      'nickname': instance.nickname,
+      'password': instance.password,
+      'about': instance.about,
+      'avatar': instance.avatar,
+    };
+
 UnmarkArguments _$UnmarkArgumentsFromJson(Map<String, dynamic> json) =>
     UnmarkArguments(
       postId: json['postId'] as int,
@@ -535,6 +703,7 @@ Map<String, dynamic> _$LoginArgumentsToJson(LoginArguments instance) =>
       'loginName': instance.loginName,
       'password': instance.password,
     };
+<<<<<<< HEAD
 
 SetProfileArguments _$SetProfileArgumentsFromJson(Map<String, dynamic> json) =>
     SetProfileArguments(
@@ -588,3 +757,5 @@ Map<String, dynamic> _$GetUserByIdArgumentsToJson(
     <String, dynamic>{
       'id': instance.id,
     };
+=======
+>>>>>>> 1f48e8dfb6fb6b09fc6e60897983f6f6917ee46c

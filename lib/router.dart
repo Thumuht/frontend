@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thumuht/pages/chat.dart';
 import 'package:thumuht/pages/login.dart';
@@ -5,6 +6,7 @@ import 'package:thumuht/pages/new_post.dart';
 import 'package:thumuht/pages/profile.dart';
 import 'package:thumuht/pages/register.dart';
 import 'package:thumuht/pages/homepage.dart';
+import 'package:thumuht/pages/search_result.dart';
 
 import 'pages/profile_edit.dart';
 
@@ -34,6 +36,9 @@ GoRouter router() {
       path: '/profile-edit',
       builder: (context, state) => const ProfileEditPage(),
     ),
+    // GoRoute(
+    //     path: '/search?=${}',
+    //     builder: (context, state) => const searchResultPage(keyWord: keyWord)),
     GoRoute(
         path: '/chat',
         builder: (context, state) =>
