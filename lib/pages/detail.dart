@@ -77,11 +77,13 @@ class _LikeWidgetState extends State<LikeWidget> {
   @override
   void initState() {
     super.initState();
-    if (likeMap[widget.userId] == null) {
-      likeMap[widget.userId] = [];
+    if (Provider.of<Session>(context, listen: false).login_ == true) {
+      if (likeMap[widget.userId] == null) {
+        likeMap[widget.userId] = [];
+      }
+      _isLiked = likeMap[widget.userId]!.contains(widget.postId);
+      developer.log('list: ${likeMap[widget.userId]}');
     }
-    _isLiked = likeMap[widget.userId]!.contains(widget.postId);
-    developer.log('list: ${likeMap[widget.userId]}');
     _likeNum.addListener(() {});
     _likeNum.changeLike(widget.like);
   }
@@ -251,10 +253,13 @@ class _MarkPostState extends State<MarkPost> {
   @override
   void initState() {
     super.initState();
-    if (markMap[widget.userId] == null) {
-      markMap[widget.userId] = [];
+    if (Provider.of<Session>(context, listen: false).login_ == true) {
+      if (markMap[widget.userId] == null) {
+        markMap[widget.userId] = [];
+      }
+      marked = likeMap[widget.userId]!.contains(widget.postId);
     }
-    marked = likeMap[widget.userId]!.contains(widget.postId);
+
     developer.log('list: ${likeMap[widget.userId]}');
   }
 

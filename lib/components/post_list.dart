@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:thumuht/main.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:thumuht/pages/detail.dart';
+import 'package:thumuht/pages/search_result.dart';
 
 class Order extends ChangeNotifier {
   Order({required this.orderBy});
@@ -91,8 +92,47 @@ class _MyDropdownButtonState extends State<MyDropdownButton> {
   }
 }
 
+class SearchWidget extends StatefulWidget {
+  const SearchWidget({super.key});
+
+  @override
+  State<SearchWidget> createState() => _SearchWidgetState();
+}
+
+class _SearchWidgetState extends State<SearchWidget> {
+  final TextEditingController _controller = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      IconButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => searchResultPage(
+                    keyWord: _controller.text,
+                  ),
+                ));
+          },
+          icon: Icon(Icons.search)),
+      Expanded(
+        child: SizedBox(
+            height: 40.0,
+            child: TextField(
+              controller: _controller,
+              decoration: const InputDecoration(
+                hintText: '请输入搜索关键词',
+                border: OutlineInputBorder(),
+              ),
+            )),
+      ),
+    ]);
+  }
+}
+
 Widget trueList(BuildContext context) {
   return Column(children: [
+    const SearchWidget(),
     MyDropdownButton(),
     Expanded(child: _buildList(context)),
   ]);
@@ -134,7 +174,7 @@ Widget _buildList(BuildContext context) {
       refetchGlobal = refetch;
       FetchMoreOptions opt = FetchMoreOptions(
         variables: GetPostListsArguments(
-                offset: (result.data!['post'] == Null)
+                offset: (result.data!['post'] != Null)
                     ? result.data!['posts'].length
                     : 0,
                 orderBy: Provider.of<Order>(context, listen: false).getOrderBy)

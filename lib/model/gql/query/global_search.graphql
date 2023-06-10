@@ -1,0 +1,13 @@
+query globalSearch($keyWord: String!){
+    globalSearch(query: $keyWord)
+    {
+        id
+        title
+        content
+        view
+        like
+        comments_num
+        position
+        tag
+    }
+}

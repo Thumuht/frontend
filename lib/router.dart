@@ -5,6 +5,7 @@ import 'package:thumuht/pages/new_post.dart';
 import 'package:thumuht/pages/profile.dart';
 import 'package:thumuht/pages/register.dart';
 import 'package:thumuht/pages/homepage.dart';
+import 'package:thumuht/pages/search_result.dart';
 
 GoRouter router() {
   return GoRouter(initialLocation: '/', routes: [
@@ -28,6 +29,8 @@ GoRouter router() {
       path: '/profile',
       builder: (context, state) => const ProfilePage(),
     ),
-    GoRoute(path: '/search', builder: (context, state) => const Placeholder())
+    // GoRoute(
+    //     path: '/search?=${}',
+    //     builder: (context, state) => const searchResultPage(keyWord: keyWord))
   ]);
 }
