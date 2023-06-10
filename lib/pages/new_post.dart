@@ -19,6 +19,7 @@ import 'package:thumuht/main.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
 import 'package:dio/dio.dart';
 import "package:http_parser/http_parser.dart";
+import 'dart:developer' as developer;
 
 import '../model/session.dart';
 
@@ -194,6 +195,11 @@ class _PostButtonState extends State<PostButton> {
                     Provider.of<Position>(context, listen: false).getPosition,
                 'tag': Provider.of<Tag>(context, listen: false).getTag,
               });
+              likeMap[Provider.of<Session>(context, listen: false).userId_!] =
+                  [];
+              markMap[Provider.of<Session>(context, listen: false).userId_!] =
+                  [];
+              // developer.log(likeMap.toString());
               context.replace('/');
             },
             child: const Text('Post'),

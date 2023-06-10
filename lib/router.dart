@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thumuht/pages/login.dart';
 import 'package:thumuht/pages/new_post.dart';
@@ -26,6 +27,7 @@ GoRouter router() {
     GoRoute(
       path: '/profile',
       builder: (context, state) => const ProfilePage(),
-    )
+    ),
+    GoRoute(path: '/search', builder: (context, state) => const Placeholder())
   ]);
 }
