@@ -111,7 +111,7 @@ class _ChatPageState extends State<ChatPage> {
                     for (final message in messages) {
                       if (message.userFrom == widget.toUserId) {
                         Provider.of<MessageList>(context, listen: false)
-                            .removeMessage(message.messageId);
+                            .removeMessageWithoutNotify(message.messageId);
                       }
                     }
 
@@ -138,6 +138,8 @@ class _ChatPageState extends State<ChatPage> {
                           leading: IconButton(
                             icon: const Icon(Icons.arrow_back),
                             onPressed: () {
+                              Provider.of<MessageList>(context, listen: false)
+                                  .notify();
                               context.pop();
                             },
                           ),

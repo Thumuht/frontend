@@ -36,6 +36,12 @@ class MessageList extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeMessageWithoutNotify(int id) {
+    messages.remove(id);
+  }
+
+  void notify() => notifyListeners();
+
   void setClient(GraphQLClient client, String token) {
     this.client = client;
     subscription = this.client!.subscribe(SubscriptionOptions(
