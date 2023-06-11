@@ -66,6 +66,9 @@ GoRouter router() {
       redirect: (context, state) {
         if (Provider.of<Session>(context, listen: false).login_) {
           return null;
+        } else if (Provider.of<Session>(context, listen: false).userId_ ==
+            (state.extra as Map<String, int>)['userId']!) {
+          return '/';
         } else {
           return '/login';
         }
