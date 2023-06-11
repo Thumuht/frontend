@@ -11,23 +11,19 @@ import 'package:thumuht/pages/detail.dart';
 
 import '../model/session.dart';
 
-Widget LikeList(BuildContext context) {
+Widget FollowList(BuildContext context) {
   return Column(children: [
-    Expanded(child: _buildLikeList(context)),
+    Expanded(child: _buildFollowList(context)),
   ]);
 }
 
 VoidCallback? refetchGlobal;
 // post list.
-Widget _buildLikeList(BuildContext context) {
+Widget _buildFollowList(BuildContext context) {
   return Query(
     options: QueryOptions(
-        document: GET_POST_LISTS_QUERY_DOCUMENT,
-        variables: GetPostListsArguments(
-          offset: 0,
-          orderBy: PostOrderBy.like,
-          order: Order.desc,
-        ).toJson()),
+        document: GET_FOLLOW_POST_QUERY_DOCUMENT,
+        variables: GetFollowPostArguments(follow: true).toJson()),
     builder: (result, {fetchMore, refetch}) {
       if (result.hasException) {
         return Text(result.exception.toString());
@@ -38,7 +34,7 @@ Widget _buildLikeList(BuildContext context) {
         );
       }
       refetchGlobal = refetch;
-      final postlists = GetPostLists$Query.fromJson(result.data!).posts;
+      final postlists = GetFollowPost$Query.fromJson(result.data!).posts;
 
       return Column(
         children: [

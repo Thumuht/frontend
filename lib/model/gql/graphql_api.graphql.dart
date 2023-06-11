@@ -894,6 +894,70 @@ class SendMessage$Mutation extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$SendMessage$MutationToJson(this);
 }
 
+@JsonSerializable(explicitToJson: true)
+class GetFollowPost$Query$Post$User extends JsonSerializable
+    with EquatableMixin {
+  GetFollowPost$Query$Post$User();
+
+  factory GetFollowPost$Query$Post$User.fromJson(Map<String, dynamic> json) =>
+      _$GetFollowPost$Query$Post$UserFromJson(json);
+
+  late int id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$GetFollowPost$Query$Post$UserToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetFollowPost$Query$Post extends JsonSerializable with EquatableMixin {
+  GetFollowPost$Query$Post();
+
+  factory GetFollowPost$Query$Post.fromJson(Map<String, dynamic> json) =>
+      _$GetFollowPost$Query$PostFromJson(json);
+
+  late int id;
+
+  String? title;
+
+  String? content;
+
+  int? view;
+
+  int? like;
+
+  @JsonKey(name: 'comments_num')
+  int? commentsNum;
+
+  String? position;
+
+  String? tag;
+
+  GetFollowPost$Query$Post$User? user;
+
+  @override
+  List<Object?> get props =>
+      [id, title, content, view, like, commentsNum, position, tag, user];
+  @override
+  Map<String, dynamic> toJson() => _$GetFollowPost$Query$PostToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetFollowPost$Query extends JsonSerializable with EquatableMixin {
+  GetFollowPost$Query();
+
+  factory GetFollowPost$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetFollowPost$QueryFromJson(json);
+
+  List<GetFollowPost$Query$Post?>? posts;
+
+  @override
+  List<Object?> get props => [posts];
+  @override
+  Map<String, dynamic> toJson() => _$GetFollowPost$QueryToJson(this);
+}
+
 enum PostOrderBy {
   @JsonValue('post_id')
   postId,
@@ -3667,4 +3731,151 @@ class SendMessageMutation
   @override
   SendMessage$Mutation parse(Map<String, dynamic> json) =>
       SendMessage$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetFollowPostArguments extends JsonSerializable with EquatableMixin {
+  GetFollowPostArguments({required this.follow});
+
+  @override
+  factory GetFollowPostArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetFollowPostArgumentsFromJson(json);
+
+  late bool follow;
+
+  @override
+  List<Object?> get props => [follow];
+  @override
+  Map<String, dynamic> toJson() => _$GetFollowPostArgumentsToJson(this);
+}
+
+final GET_FOLLOW_POST_QUERY_DOCUMENT_OPERATION_NAME = 'getFollowPost';
+final GET_FOLLOW_POST_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'getFollowPost'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'follow')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'posts'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'followed'),
+                value: VariableNode(name: NameNode(value: 'follow')),
+              )
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'title'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'content'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'view'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'like'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'comments_num'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'position'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'tag'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'user'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+        ]),
+      )
+    ]),
+  )
+]);
+
+class GetFollowPostQuery
+    extends GraphQLQuery<GetFollowPost$Query, GetFollowPostArguments> {
+  GetFollowPostQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_FOLLOW_POST_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_FOLLOW_POST_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetFollowPostArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetFollowPost$Query parse(Map<String, dynamic> json) =>
+      GetFollowPost$Query.fromJson(json);
 }

@@ -677,6 +677,60 @@ Map<String, dynamic> _$SendMessage$MutationToJson(
       'sendMessage': instance.sendMessage,
     };
 
+GetFollowPost$Query$Post$User _$GetFollowPost$Query$Post$UserFromJson(
+        Map<String, dynamic> json) =>
+    GetFollowPost$Query$Post$User()..id = json['id'] as int;
+
+Map<String, dynamic> _$GetFollowPost$Query$Post$UserToJson(
+        GetFollowPost$Query$Post$User instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+GetFollowPost$Query$Post _$GetFollowPost$Query$PostFromJson(
+        Map<String, dynamic> json) =>
+    GetFollowPost$Query$Post()
+      ..id = json['id'] as int
+      ..title = json['title'] as String?
+      ..content = json['content'] as String?
+      ..view = json['view'] as int?
+      ..like = json['like'] as int?
+      ..commentsNum = json['comments_num'] as int?
+      ..position = json['position'] as String?
+      ..tag = json['tag'] as String?
+      ..user = json['user'] == null
+          ? null
+          : GetFollowPost$Query$Post$User.fromJson(
+              json['user'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetFollowPost$Query$PostToJson(
+        GetFollowPost$Query$Post instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'content': instance.content,
+      'view': instance.view,
+      'like': instance.like,
+      'comments_num': instance.commentsNum,
+      'position': instance.position,
+      'tag': instance.tag,
+      'user': instance.user?.toJson(),
+    };
+
+GetFollowPost$Query _$GetFollowPost$QueryFromJson(Map<String, dynamic> json) =>
+    GetFollowPost$Query()
+      ..posts = (json['posts'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : GetFollowPost$Query$Post.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetFollowPost$QueryToJson(
+        GetFollowPost$Query instance) =>
+    <String, dynamic>{
+      'posts': instance.posts?.map((e) => e?.toJson()).toList(),
+    };
+
 DislikeArguments _$DislikeArgumentsFromJson(Map<String, dynamic> json) =>
     DislikeArguments(
       postId: json['postId'] as int,
@@ -979,4 +1033,16 @@ Map<String, dynamic> _$SendMessageArgumentsToJson(
     <String, dynamic>{
       'toId': instance.toId,
       'content': instance.content,
+    };
+
+GetFollowPostArguments _$GetFollowPostArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetFollowPostArguments(
+      follow: json['follow'] as bool,
+    );
+
+Map<String, dynamic> _$GetFollowPostArgumentsToJson(
+        GetFollowPostArguments instance) =>
+    <String, dynamic>{
+      'follow': instance.follow,
     };

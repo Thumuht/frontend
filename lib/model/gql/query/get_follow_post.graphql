@@ -1,0 +1,18 @@
+query getFollowPost($follow: Boolean!){
+    posts(
+        input:{followed: $follow} 
+    )
+    {
+        id
+        title
+        content
+        view
+        like
+        comments_num
+        position
+        tag
+        user {
+            id
+        }
+    }
+}
