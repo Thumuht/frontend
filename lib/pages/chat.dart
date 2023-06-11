@@ -42,7 +42,6 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<MessageList>(context, listen: true);
     return Query(
       options: QueryOptions(
           document: MESSAGE_NUM_QUERY_DOCUMENT,
@@ -58,6 +57,9 @@ class _ChatPageState extends State<ChatPage> {
         }
         final messageCount = MessageNum$Query.fromJson(result.data!).messageNum;
         final outerRefetch = refetch;
+        Provider.of<MessageList>(context, listen: false).addListener(() {
+          outerRefetch!();
+        });
         return Query(
           options: QueryOptions(
               document: GET_USER_BY_ID_QUERY_DOCUMENT,
@@ -105,6 +107,13 @@ class _ChatPageState extends State<ChatPage> {
                         GetMessages$Query.fromJson(result.data!).myMessage;
 
                     messages.sort((a, b) => a.messageId - b.messageId);
+
+                    for (final message in messages) {
+                      if (message.userFrom == widget.toUserId) {
+                        Provider.of<MessageList>(context, listen: false)
+                            .removeMessage(message.messageId);
+                      }
+                    }
 
                     Future.delayed(const Duration(milliseconds: 50), () {
                       _scrollController
