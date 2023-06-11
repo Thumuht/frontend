@@ -224,7 +224,7 @@ Widget _buildList(BuildContext context) {
                     postlists[index]!.commentsNum!,
                     postlists[index]!.position,
                     postlists[index]!.tag,
-                    postlists[index]!.user!.id,
+                    postlists[index]!.user?.id ?? 0,
                     context);
               },
               itemCount: postlists?.length ??
