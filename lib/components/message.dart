@@ -57,7 +57,7 @@ class _MessageItemState extends State<MessageItem> {
                         height: 50,
                       )
                     : Image.network(
-                        '$backendAddress/fs/${user.avatar}',
+                        '${backendAddress}fs/${user.avatar}',
                         width: 50,
                         height: 50,
                       ),
@@ -126,7 +126,7 @@ class _ChatMessageState extends State<ChatMessage> {
                 height: 50,
               )
             : Image.network(
-                '$backendAddress/fs/${widget.avatar}',
+                '${backendAddress}fs/${widget.avatar}',
                 width: 50,
                 height: 50,
               ),

@@ -32,6 +32,9 @@ class _UserPageState extends State<UserPage> {
         }
         final user = GetUserById$Query.fromJson(result.data!).getUserById;
         user.follow ??= [];
+        user.nickname ??= user.loginName;
+        user.avatar ??= '';
+        user.about ??= '';
 
         if (user.nickname == '') {
           user.nickname = user.loginName;
@@ -78,7 +81,7 @@ class _UserPageState extends State<UserPage> {
                             height: 50,
                           )
                         : Image.network(
-                            '$backendAddress/fs/${result.data!['me']['avatar'] as String}',
+                            '${backendAddress}fs/${user.avatar}',
                             width: 50,
                             height: 50,
                           ),

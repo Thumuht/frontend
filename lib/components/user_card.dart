@@ -47,7 +47,7 @@ class _UserCardState extends State<UserCard> {
                         height: 50,
                       )
                     : Image.network(
-                        '$backendAddress/fs/${user.avatar}',
+                        '${backendAddress}fs/${user.avatar}',
                         width: 50,
                         height: 50,
                       ),
