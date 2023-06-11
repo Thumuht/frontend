@@ -8,6 +8,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:thumuht/main.dart';
 import 'package:thumuht/model/gql/graphql_api.dart';
+import 'package:thumuht/model/session.dart';
 import 'package:thumuht/pages/detail.dart';
 import 'package:thumuht/pages/search_result.dart';
 
@@ -290,7 +291,26 @@ ListTile _tile(
                       );
               },
             ),
-          )
+          ),
+          Provider.of<Session>(context, listen: false).login_
+              ? Query(
+                  options: QueryOptions(document: MY_FOLLOW_QUERY_DOCUMENT),
+                  builder: (result, {fetchMore, refetch}) {
+                    if (result.hasException) {
+                      return Text(result.exception.toString());
+                    }
+                    if (result.isLoading || result.data == null) {
+                      return const Text('Loading...');
+                    }
+                    final me = MyFollow$Query.fromJson(result.data!).me;
+                    me.follow ??= [];
+                    if (me.follow!.any((e) => e!.id == postUserId)) {
+                      return const Text('Followed');
+                    }
+                    return const SizedBox();
+                  },
+                )
+              : const SizedBox(),
         ],
       ),
       title: Row(children: [
